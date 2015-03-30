@@ -1,5 +1,6 @@
 ---
 
 - name: Setup Staging Server
+  hosts: localhost
   roles:
     - role: dosomething.base
