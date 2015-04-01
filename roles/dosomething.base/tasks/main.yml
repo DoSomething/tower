@@ -1,0 +1,12 @@
+---
+
+- name: Update software packages
+  sudo: true
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install Common Tools
+  sudo: true
+  apt: name={{ item }} state=latest
+  with_items:
+    - git
+    - curl
