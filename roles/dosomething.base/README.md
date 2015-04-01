@@ -54,6 +54,15 @@ Defaults to `app`.
 app_user: dosomething
 ```
 
+Role Files
+--------------
+This roles requires two files to be present in your playbook:
+
+- `files/app_user/ssh/authorized_keys`
+  Predefined SSH ACL to the app user in SSH `authorized_keys` file format
+- `files/app_user/ssh/known_hosts`
+  Predefined app\_users's known hosts in SSH `known_hosts` file format
+
 Example Playbook
 ----------------
 

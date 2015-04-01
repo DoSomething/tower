@@ -11,12 +11,12 @@
   sudo: yes
   authorized_key: >
     user={{ app_user }}
-    key="{{ lookup('file', 'ssh/authorized_keys') }}"
+    key="{{ lookup('file', 'files/app_user/ssh/authorized_keys') }}"
 
 - name: SSH | Populate known hosts
   remote_user: "{{ app_user }}"
   copy: >
-    src=ssh/known_hosts
+    src=files/app_user/ssh/known_hosts
     dest=.ssh/known_hosts
 
 - name: Setup sudoers for the app user
