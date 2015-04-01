@@ -1,0 +1,25 @@
+---
+
+- name: System | Check current timezone
+  shell: cat /etc/timezone
+  register: get_timezone
+  changed_when: False
+
+- name: System | Set timezone
+  sudo: yes
+  command: timedatectl set-timezone {{ timezone }}
+  when: '"{{ timezone }}" not in get_timezone.stdout'
+
+- name: System | Ensure locale exists
+  sudo: yes
+  locale_gen: name={{ locale }} state=present
+
+- name: System | Check current locale
+  shell: cat /etc/default/locale
+  register: get_locale
+  changed_when: False
+
+- name: System | Set locale
+  sudo: yes
+  command: update-locale LC_ALL={{ locale }} LANG={{ locale }}
+  when: '"LC_ALL={{ locale }}" not in get_locale.stdout'

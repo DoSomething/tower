@@ -1,0 +1,16 @@
+---
+
+- name: System | Safe Upgrade
+  sudo: yes
+  apt: >
+    upgrade=safe
+    state=latest
+    dpkg_options=force-confnew
+    update_cache=yes
+    cache_valid_time=3600
+  register: apt_upgrade
+
+- name: System | Auto Remove Leaf Packages
+  sudo: yes
+  command: apt-get -y autoremove
+  when: '"Use ''apt-get autoremove'' to remove them" in apt_upgrade.stdout'

@@ -1,0 +1,34 @@
+---
+
+- name: Create the app user
+  sudo: yes
+  user: >
+    name={{ app_user }}
+    password={{ app_user_password }}
+    shell=/bin/bash
+
+- name: SSH | Install public keys
+  sudo: yes
+  authorized_key: >
+    user={{ app_user }}
+    key="{{ lookup('file', 'ssh/authorized_keys') }}"
+
+- name: SSH | Populate known hosts
+  remote_user: "{{ app_user }}"
+  copy: >
+    src=ssh/known_hosts
+    dest=.ssh/known_hosts
+
+- name: Setup sudoers for the app user
+  sudo: yes
+  template: src=sudoers/app_user.j2 dest=/etc/sudoers.d/{{ app_user }}
+
+- name: Create ~/bin folder to store custom scripts
+  remote_user: "{{ app_user }}"
+  file: path=bin state=directory
+
+- name: Make custom scripts directory avaliable in $PATH
+  remote_user: "{{ app_user }}"
+  lineinfile: >
+    dest=.profile
+    line="export PATH=$HOME/bin:$PATH"

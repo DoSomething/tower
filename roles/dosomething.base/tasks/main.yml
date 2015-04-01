@@ -1,12 +1,8 @@
 ---
 
-- name: Update software packages
-  sudo: true
-  apt: update_cache=yes cache_valid_time=3600
-
-- name: Install Common Tools
-  sudo: true
-  apt: name={{ item }} state=latest
-  with_items:
-    - git
-    - curl
+- include: configure-system.yml
+- include: update-system.yml
+- include: install-common-tools.yml
+- include: setup-ntp.yml
+  when: ntp_servers
+- include: setup-user.yml

@@ -1,0 +1,11 @@
+---
+
+- name: Install Common Tools
+  sudo: yes
+  apt: name={{ item }} state=latest
+  with_items:
+    - ntp
+    - git
+    - curl
+    - mailutils
+    - mysql-client

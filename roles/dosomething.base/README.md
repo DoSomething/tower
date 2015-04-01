@@ -3,25 +3,46 @@ DoSomething Base Server
 
 DoSomething.org base server.
 
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
-
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+#### System timezone
 
+To see the full list of timezones, run `timedatectl list-timezones`.
+```yml
+timezone: America/New_York
+```
+
+####  System locale
+
+To see the full locales list of installed locales, run `locale -a`.
+```yml
+locale: en_US.UTF-8
+```
+
+#### Override NTP servers
+For example, here's configuration from [amazon NTP servers](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-time.html):
+
+```yml
+ntp_servers:
+ - 0.amazon.pool.ntp.org iburst
+ - 1.amazon.pool.ntp.org iburst
+ - 2.amazon.pool.ntp.org iburst
+ - 3.amazon.pool.ntp.org iburst
+```
+
+If not specified, ntp package defaults will be used.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Usage example:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yml
+- hosts: servers
+  roles:
+     - { role: dosomething.base, timezone: 'America/Los_Angeles' }
+```
 
 License
 -------

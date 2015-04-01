@@ -1,2 +1,6 @@
 ---
 # handlers file for ds-base
+
+- name: restart ntp
+  sudo: yes
+  service: name=ntp state=restarted
