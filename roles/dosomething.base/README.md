@@ -6,16 +6,29 @@ DoSomething.org base server.
 Role Variables
 --------------
 
-#### System timezone
+### Required
+#### App user password
+For generation crypted passwords for the user module see the instruction on
+[docs.ansible.com](http://docs.ansible.com/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module).
 
-To see the full list of timezones, run `timedatectl list-timezones`.
 ```yml
-timezone: America/New_York
+app_user_password: $password-hash$
+```
+
+### Optional
+#### System timezone
+To see the full list of timezones, run `timedatectl list-timezones`.  
+Defaults to `America/New_York`.
+
+```yml
+timezone: America/Los_Angeles
 ```
 
 ####  System locale
 
-To see the full locales list of installed locales, run `locale -a`.
+To see the full locales list of installed locales, run `locale -a`.  
+Defaults to `en_US.UTF-8`.
+
 ```yml
 locale: en_US.UTF-8
 ```
@@ -32,6 +45,14 @@ ntp_servers:
 ```
 
 If not specified, ntp package defaults will be used.
+
+#### App user name
+The application user name.  
+Defaults to `app`.
+
+```yml
+app_user: dosomething
+```
 
 Example Playbook
 ----------------
