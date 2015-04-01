@@ -1,6 +1,6 @@
 ---
 
 - name: Setup Staging Server
-  hosts: localhost
+  hosts: tag_Name_Staging
   roles:
     - role: dosomething.base
