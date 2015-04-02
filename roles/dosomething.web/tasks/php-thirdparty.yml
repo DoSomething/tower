@@ -1,0 +1,18 @@
+---
+
+# New Relic
+- name: PHP Third Party | New Relic | Install repository
+  sudo: yes
+  apt_repository: repo="deb http://apt.newrelic.com/debian/ newrelic non-free"
+  when: php_thirdparty_newrelic
+
+- name: PHP Third Party | New Relic | Install repository key
+  sudo: yes
+  apt_key: url=https://download.newrelic.com/548C16BF.gpg id=548C16BF
+  when: php_thirdparty_newrelic
+
+- name: PHP Third Party | New Relic | Install PHP extension
+  sudo: yes
+  apt: name=newrelic-php5 state=latest force=yes
+  notify: restart php-fpm
+  when: php_thirdparty_newrelic
