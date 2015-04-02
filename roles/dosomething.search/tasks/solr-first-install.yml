@@ -1,0 +1,43 @@
+---
+
+- name: Create solr user
+  sudo: yes
+  user: >
+    name=solr
+    password=!
+    home={{ solr_data_dir }}
+    createhome=no
+
+- name: Download
+  sudo: yes
+  get_url: >
+    url={{ solr_mirror }}/{{ solr_version }}/solr-{{ solr_version }}.tgz
+    dest=/opt/solr-{{ solr_version }}.tgz
+    sha256sum={{ solr_sha256sum }}
+
+- name: Unpack
+  sudo: yes
+  unarchive: >
+    src=/opt/solr-{{ solr_version }}.tgz
+    dest=/opt/
+    copy=no
+    creates=/opt/solr-{{ solr_version }}
+
+- name: Set solr onwer
+  sudo: yes
+  file: >
+    path=/opt/solr-{{ solr_version }}
+    owner=solr
+    group=solr
+    state=directory
+    recurse=yes
+
+- name: Install Solr
+  sudo: yes
+  command: >
+    /opt/solr-{{ solr_version }}/bin/install_solr_service.sh
+    /opt/solr-{{ solr_version }}.tgz
+    -p {{ solr_port }}
+    -d {{ solr_data_dir }}
+  args:
+    creates: /opt/solr

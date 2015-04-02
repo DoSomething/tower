@@ -2,3 +2,4 @@
 - src: dosomething.base
 - src: dosomething.db
 - src: dosomething.web
+- src: dosomething.search
