@@ -3,4 +3,4 @@
 - name: Setup Staging Server
   hosts: staging
   roles:
-    - role: dosomething.base
+    - role: dosomething.db
