@@ -1,2 +1,3 @@
 ---
 - src: dosomething.base
+- src: dosomething.db

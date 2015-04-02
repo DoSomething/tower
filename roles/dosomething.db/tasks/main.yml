@@ -1,0 +1,16 @@
+---
+
+- name: Install MySQL Server
+  apt: name=mysql-server state=latest
+  sudo: yes
+
+- name: Alter my.cnf
+  sudo: yes
+  ini_file: >
+    dest=/etc/mysql/my.cnf
+    section={{ item.section }}
+    option={{ item.option }}
+    value={{ item.value }}
+    backup=yes
+  with_items: my_cnf_settings
+  notify: restart mysql
