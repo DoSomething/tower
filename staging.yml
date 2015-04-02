@@ -4,3 +4,4 @@
   hosts: staging
   roles:
     - role: dosomething.db
+    - role: dosomething.web
