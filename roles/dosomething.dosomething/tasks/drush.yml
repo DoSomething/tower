@@ -1,0 +1,34 @@
+---
+
+- name: Drush | Make drush avaliable to the app user
+  remote_user: "{{ app_user }}"
+  file: >
+    src=~/.composer/vendor/bin/drush
+    dest=bin/drush
+    state=link
+
+# Plugins
+- name: Drush | Install Make Local plugin
+  remote_user: "{{ app_user }}"
+  shell: drush -y dl make_local-6.x-1.0 creates=.drush/make_local
+  notify: drush cc drush
+
+- name: Drush | Install Drush Language plugin
+  remote_user: "{{ app_user }}"
+  shell: drush -y dl drush_language creates=.drush/drush_language
+  notify: drush cc drush
+
+# Settings
+- name: Drush | Setup Policies
+  remote_user: "{{ app_user }}"
+  template: >
+    src=drush/policy.drush.inc.j2
+    dest=.drush/policy.drush.inc
+  notify: drush cc drush
+
+- name: Drush | Setup Aliases
+  remote_user: "{{ app_user }}"
+  template: >
+    src=drush/ds.aliases.drushrc.php.j2
+    dest=.drush/ds.aliases.drushrc.php
+  notify: drush cc drush

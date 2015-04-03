@@ -1,0 +1,19 @@
+---
+
+- name: Composer | Create app folder
+  remote_user: "{{ app_user }}"
+  file: path=.composer state=directory
+
+- name: Composer | Upload dependencies config
+  remote_user: "{{ app_user }}"
+  copy: src=composer.json dest=.composer/composer.json
+
+- name: Composer | Install Global Tools
+  remote_user: "{{ app_user }}"
+  composer: working_dir=.composer
+  when: not app_composer_update
+
+- name: Composer | Update Global Tools
+  remote_user: "{{ app_user }}"
+  composer: command=update working_dir=.composer
+  when: app_composer_update

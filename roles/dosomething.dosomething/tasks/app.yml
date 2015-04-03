@@ -1,0 +1,11 @@
+---
+
+- name: Create app root folder
+  file: path={{ app_root }} state=directory owner={{ app_user }}
+  sudo: yes
+
+- name: Make app scripts available $PATH
+  remote_user: "{{ app_user }}"
+  lineinfile: >
+    dest=.profile
+    line="export PATH={{ app_root }}/bin:$PATH"

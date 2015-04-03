@@ -1,0 +1,36 @@
+---
+
+- name: SSL | Create directory
+  sudo: yes
+  file: path=/etc/ssl/{{ app_user }} state=directory
+
+- name: SSL | Install certificates
+  sudo: yes
+  copy: >
+    src=ssl/{{ item }}
+    dest=/etc/ssl/{{ app_user }}/{{ item }}
+    mode=0600
+  with_items:
+    - "{{ app_host }}.crt"
+    - "{{ app_host }}.key"
+  notify: reload nginx
+
+# A snippet to remind how to generate seld signed cert.
+# - name: SSL | Create self signed cert
+#   sudo: yes
+#   command: >
+#     openssl req -new -nodes -x509
+#     -extensions v3_ca
+#     -days 3650
+#     -subj "/C={{ cert_country }}/ST={{ cert_state }}/L={{ cert_locality }}/O={{ cert_organization }}/CN={{ app_host }}"
+#     -keyout /etc/ssl/{{ app_user }}/{{ app_host }}.key
+#     -out /etc/ssl/{{ app_user }}/{{ app_host }}.crt
+#   args:
+#     creates: /etc/ssl/{{ app_user }}/{{ app_host }}.crt
+#   notify: reload nginx
+
+# # SSl
+# cert_country: US
+# cert_state: New York
+# cert_locality: New York
+# cert_organization: DoSomething.org

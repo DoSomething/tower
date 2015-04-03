@@ -1,0 +1,75 @@
+server {
+  listen 80;
+  listen 443 ssl;
+
+  ssl_certificate     /etc/ssl/{{ app_user }}/{{ app_host }}.crt;
+  ssl_certificate_key /etc/ssl/{{ app_user }}/{{ app_host }}.key;
+
+  server_name localhost;
+
+  access_log /var/log/nginx/{{ app_user }}-access.log;
+  error_log /var/log/nginx/{{ app_user }}-error.log;
+
+  root {{ app_root }}/html;
+  client_max_body_size 20M;
+  gzip_static on;
+
+  location = /favicon.ico {
+    log_not_found off;
+    access_log off;
+  }
+
+  location = /robots.txt {
+    allow all;
+    log_not_found off;
+    access_log off;
+  }
+
+  location / {
+    # This is cool because no php is touched for static content
+    try_files $uri @rewrite;
+  }
+
+  location @rewrite {
+    rewrite ^ /index.php;
+  }
+
+  location ~ ^/sites/.*/files/styles/ {
+    try_files $uri @rewrite;
+  }
+
+  ## Images and static content is treated different
+  location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|xml)$ {
+    access_log off;
+    expires    30d;
+  }
+
+  ## Parse all .php file in the app directory
+  location ~ \.php$ {
+    fastcgi_split_path_info ^(.+\.php)(.*)$;
+    fastcgi_pass   unix:{{ php_fpm_socket }};
+    fastcgi_index  index.php;
+    include fastcgi_params;
+    fastcgi_param  HTTPS $https;
+    fastcgi_param  SCRIPT_FILENAME  {{ app_root }}/html$fastcgi_script_name;
+    fastcgi_param  QUERY_STRING     $query_string;
+    fastcgi_param  REQUEST_METHOD   $request_method;
+    fastcgi_param  CONTENT_TYPE     $content_type;
+    fastcgi_param  CONTENT_LENGTH   $content_length;
+    fastcgi_intercept_errors        on;
+    fastcgi_ignore_client_abort     off;
+    fastcgi_connect_timeout 60;
+    fastcgi_send_timeout 180;
+    fastcgi_read_timeout 180;
+    fastcgi_buffer_size 128k;
+    fastcgi_buffers 4 256k;
+    fastcgi_busy_buffers_size 256k;
+    fastcgi_temp_file_write_size 256k;
+  }
+
+  ## Disable viewing .htaccess & .htpassword
+  location ~ /\.ht {
+    deny all;
+  }
+
+}
