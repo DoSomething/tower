@@ -1,0 +1,19 @@
+
+# Environment
+
+app_environment:
+  - { option: DS_ENVIRONMENT, value: stage }
+  - { option: DS_APP_ROOT, value: "{{ app_root }}" }
+  - { option: DS_DB_MASTER_NAME, value: "{{ app_user }}" }
+  - { option: DS_DB_MASTER_USER, value: "root" }
+  - { option: DS_DB_MASTER_HOST, value: 127.0.0.1 }
+  - { option: DS_HOSTNAME, value: "{{ app_host }}" }
+  - { option: DS_INSECURE_PORT, value: 80 }
+  - { option: DS_SECURE_PORT, value: 443 }
+
+  - { option: DS_REDIS_HOST, value: 127.0.0.1 }
+  - { option: DS_REDIS_PORT, value: 6379 }
+
+  - { option: DS_APACHESOLR_HOST, value: 127.0.0.1 }
+  - { option: DS_APACHESOLR_PORT, value: "{{ solr_port }}" }
+  - { option: DS_APACHESOLR_READ_ONLY, value: 0 }
