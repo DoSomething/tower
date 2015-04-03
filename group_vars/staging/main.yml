@@ -2,5 +2,5 @@
 
 # App
 app_user: dosomething
-app_host: dev.dosomething.org
+app_host: staging.beta.dosomething.org
 app_root: /var/www/{{ app_host }}/current
