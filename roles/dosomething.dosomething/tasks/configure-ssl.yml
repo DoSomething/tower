@@ -7,7 +7,7 @@
 - name: SSL | Install certificates
   sudo: yes
   copy: >
-    src=ssl/{{ item }}
+    src=files/ssl/{{ item }}
     dest=/etc/ssl/{{ app_user }}/{{ item }}
     mode=0600
   with_items:
