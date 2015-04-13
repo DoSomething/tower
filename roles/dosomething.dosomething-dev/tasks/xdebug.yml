@@ -1,0 +1,19 @@
+---
+
+- name: Xdebug | Install
+  sudo: yes
+  apt: name=php5-xdebug state=latest
+
+- name: Xdebug | Setup
+  sudo: yes
+  lineinfile: >
+    dest=/etc/php5/fpm/conf.d/20-xdebug.ini
+    line={{ item }}
+  with_items:
+    - "xdebug.var_display_max_depth=32"
+    - "xdebug.cli_color=2"
+    - "xdebug.var_display_max_data=-1"
+    - "xdebug.idekey='vagrant'"
+    - "xdebug.remote_enable=1"
+    - "xdebug.remote_connect_back=1"
+  notify: restart php-fpm

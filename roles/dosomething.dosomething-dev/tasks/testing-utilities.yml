@@ -1,0 +1,8 @@
+---
+
+- name: Install testing utilities using NPM
+  npm: name={{ item }} global=yes state=latest
+  sudo: yes
+  with_items:
+    - mocha-phantomjs
+    - casperjs

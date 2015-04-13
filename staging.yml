@@ -7,3 +7,4 @@
     - role: dosomething.web
     - role: dosomething.search
     - role: dosomething.dosomething
+    - role: dosomething.dosomething-dev

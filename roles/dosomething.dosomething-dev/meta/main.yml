@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: Sergii Tkachenko
+  description: Development and testing suite for DoSomething.org website
+  company: DoSomething.org
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  categories:
+  - system
+dependencies:
+  - { role: "dosomething.base" }
+  - { role: "dosomething.web" }
+  - { role: "dosomething.dosomething" }
