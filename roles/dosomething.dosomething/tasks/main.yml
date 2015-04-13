@@ -1,5 +1,6 @@
 ---
 
+- include: utilities.yml
 - include: composer.yml
 - include: drush.yml
 - include: nodejs.yml

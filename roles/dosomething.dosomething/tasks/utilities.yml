@@ -1,0 +1,7 @@
+---
+
+- name: Install software utilities
+  apt: name={{ item }} state=latest
+  sudo: yes
+  with_items:
+    - mariadb-client

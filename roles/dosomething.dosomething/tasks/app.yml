@@ -1,7 +1,11 @@
 ---
 
-- name: Create app root folder
-  file: path={{ app_root }} state=directory owner={{ app_user }}
+- name: Ensure app root folder
+  file: >
+    path={{ app_root }}
+    state=directory
+    owner={{ app_user }}
+    follow=yes
   sudo: yes
 
 - name: Make app scripts available $PATH

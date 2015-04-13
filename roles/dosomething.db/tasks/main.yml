@@ -1,7 +1,7 @@
 ---
 
-- name: Install MySQL Server
-  apt: name=mysql-server state=latest
+- name: Install MariaDB Server
+  apt: name=mariadb-server state=latest
   sudo: yes
 
 - name: Alter my.cnf
