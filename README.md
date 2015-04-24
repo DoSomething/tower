@@ -6,10 +6,20 @@ Ansible playbooks for DoSomething.org Tower Playbooks
 Usage
 ================
 
+#### In Tower
+
+- Setup a git project linked to this repo:  
+  `https://github.com/DoSomething/tower.git`
+- Specify the valut password in your Machine Credential
+- Use one of playbooks provided in your Job Template
+
+#### Manually
+
 - Clone the repository
 - Create `.vault.txt` with shared password to decrypt Ansible Vaults
 - Download playbooks:  
   `ansible-galaxy install -r requirements.yml -p roles/ --force`
+- Run ansible as usual
 
 Contribution
 ================
