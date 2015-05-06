@@ -5,8 +5,8 @@ app_environment:
   - { option: DS_ENVIRONMENT, value: stage }
   - { option: DS_APP_ROOT, value: "{{ app_root }}" }
   - { option: DS_DB_MASTER_NAME, value: "{{ app_user }}" }
-  - { option: DS_DB_MASTER_USER, value: "root" }
-  - { option: DS_DB_MASTER_HOST, value: 127.0.0.1 }
+  - { option: DS_DB_MASTER_USER, value: "stage" }
+  - { option: DS_DB_MASTER_HOST, value: "stage.c9ajz690mens.us-east-1.rds.amazonaws.com" }
   - { option: DS_HOSTNAME, value: "{{ app_host }}" }
   - { option: DS_INSECURE_PORT, value: 80 }
   - { option: DS_SECURE_PORT, value: 443 }
