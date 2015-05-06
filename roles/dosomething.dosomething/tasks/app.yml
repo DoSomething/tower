@@ -13,3 +13,10 @@
   lineinfile: >
     dest=.profile
     line="export PATH={{ app_root }}/bin:$PATH"
+
+- name: Make app scripts available $PATH in non-interactive bash
+  remote_user: "{{ app_user }}"
+  lineinfile: >
+    dest=.bashrc
+    line="export PATH={{ app_root }}/bin:$PATH"
+    insertbefore="# If not running"
