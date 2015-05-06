@@ -27,7 +27,14 @@
   remote_user: "{{ app_user }}"
   file: path=bin state=directory
 
-- name: Make custom scripts directory avaliable in $PATH
+- name: Make custom scripts directory available in $PATH in non-interactive bash
+  remote_user: "{{ app_user }}"
+  lineinfile: >
+    dest=.bashrc
+    line="export PATH=$HOME/bin:$PATH"
+    insertbefore="# If not running"
+
+- name: Make custom scripts directory available in $PATH
   remote_user: "{{ app_user }}"
   lineinfile: >
     dest=.profile
