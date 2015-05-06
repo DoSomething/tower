@@ -3,7 +3,6 @@
 - name: Setup Staging Server
   hosts: staging
   roles:
-    - role: dosomething.db
     - role: dosomething.web
     - role: dosomething.search
     - role: dosomething.dosomething
