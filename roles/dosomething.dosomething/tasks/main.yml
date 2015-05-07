@@ -4,7 +4,6 @@
 - include: composer.yml
 - include: drush.yml
 - include: nodejs.yml
-- include: cache.yml
 - include: app.yml
 - include: configure-ssl.yml
 - include: configure-vhost.yml
