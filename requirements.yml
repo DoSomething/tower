@@ -2,5 +2,6 @@
 - src: dosomething.base
 - src: dosomething.web
 - src: dosomething.search
+- src: dosomething.redis
 - src: dosomething.dosomething
 - src: dosomething.dosomething-dev

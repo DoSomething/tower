@@ -3,3 +3,4 @@
 - name: Install Redis
   sudo: yes
   apt: name=redis-server state=latest
+

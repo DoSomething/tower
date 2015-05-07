@@ -39,3 +39,11 @@
   lineinfile: >
     dest=.profile
     line="export PATH=$HOME/bin:$PATH"
+
+# See http://askubuntu.com/questions/247738/why-is-etc-profile-not-invoked-for-non-login-shells
+- name: Make /etc/profile.d/* scripts available in non-login bash
+  remote_user: "{{ app_user }}"
+  lineinfile: >
+    dest=.bashrc
+    line="source /etc/profile"
+    insertbefore="# If not running"
