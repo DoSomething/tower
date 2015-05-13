@@ -17,3 +17,7 @@
   remote_user: "{{ app_user }}"
   composer: command=update working_dir=.composer
   when: app_composer_update
+
+- name: Composer | Setup GitHub access token
+  remote_user: "{{ app_user }}"
+  template: src=composer/auth.json.j2 dest=.composer/auth.json
