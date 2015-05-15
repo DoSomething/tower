@@ -1,0 +1,9 @@
+---
+
+- name: Setup International Production
+  hosts: international-production
+  roles:
+    - role: dosomething.web
+    - role: dosomething.search
+    - role: dosomething.redis
+    - role: dosomething.dosomething
