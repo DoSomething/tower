@@ -1,0 +1,21 @@
+---
+
+- name: Checkout default solr core
+  sudo: yes
+  sudo_user: solr
+  git: >
+    repo={{ item.repo }}
+    version={{ item.version }}
+    dest=/var/solr/data/{{ item.name }}
+  with_items: solr_cores
+
+- name: Enable default solr core
+  sudo: yes
+  sudo_user: solr
+  command: >
+    /opt/solr/bin/solr create_core
+    -c {{ item.name }}
+    -p {{ solr_port }}
+  args:
+    creates: /var/solr/data/{{ item.name }}/core.properties
+  with_items: solr_cores

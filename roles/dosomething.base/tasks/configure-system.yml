@@ -23,3 +23,11 @@
   sudo: yes
   command: update-locale LC_ALL={{ locale }} LANG={{ locale }}
   when: '"LC_ALL={{ locale }}" not in get_locale.stdout'
+
+# https://www.percona.com/blog/2014/04/28/oom-relation-vm-swappiness0-new-kernel/
+- name: System | Set vm.swappiness
+  sudo: yes
+  sysctl: >
+    name="vm.swappiness"
+    value=1
+    sysctl_set=yes

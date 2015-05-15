@@ -13,20 +13,5 @@
 - include: solr-first-install.yml
   when: solr_dir.stat.isdir is not defined
 
-- name: Checkout default solr core
-  sudo: yes
-  sudo_user: solr
-  git: >
-    repo={{ solr_core_repo }}
-    version={{ solr_core_version }}
-    dest=/var/solr/data/{{ solr_core_name }}
+- include: solr-install-core.yml
 
-- name: Enable default solr core
-  sudo: yes
-  sudo_user: solr
-  command: >
-    /opt/solr/bin/solr create_core
-    -c {{ solr_core_name }}
-    -p {{ solr_port }}
-  args:
-    creates: /var/solr/data/{{ solr_core_name }}/core.properties
