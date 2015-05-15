@@ -8,8 +8,3 @@ solr_sha256sum: 48c77aede40fceda73cf4e13e08e328899685446f80f76f2e893eaffea714297
 
 solr_port: 8983
 solr_data_dir: /var/solr
-
-# @todo: Refactor to support multiple cores
-solr_core_name: collection1
-solr_core_repo: https://github.com/DoSomething/solr-core-drupal.git
-solr_core_version: v1.0.alpha2-7.x-1.7-solr-5.x

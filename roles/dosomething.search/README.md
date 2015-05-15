@@ -41,13 +41,15 @@ Defaults to `/var/solr`.
 ```yml
 solr_data_dir: /home/app/solr
 ```
+
 #### Solr Core
-Unification in progress.
+A list of solr cores to install and enable.
 
 ```yml
-solr_core_name: collection1
-solr_core_repo: https://github.com/DoSomething/solr-core-drupal.git
-solr_core_version: v1.0.alpha2-7.x-1.7-solr-5.x
+solr_cores:
+  - name:    collection1
+    repo:    https://github.com/DoSomething/solr-core-drupal.git
+    version: v1.0.alpha2-7.x-1.7-solr-5.x
 ```
 
 
