@@ -6,5 +6,6 @@
 - include: nodejs.yml
 - include: app.yml
 - include: configure-ssl.yml
+  when: app_ssl_enabled
 - include: configure-vhost.yml
 - include: configure-env.yml
