@@ -1,12 +1,12 @@
 ---
 
 - name: Setup Drupal Redis
-  hosts: drupal-redis
+  hosts: tag_Role_Drupal-Redis
   roles:
     - role: dosomething.redis
 
 - name: Setup Drupal WebApp
-  hosts: drupal-webapp
+  hosts: tag_Role_Drupal-WebApp
   roles:
     - role: dosomething.web
     - role: dosomething.dosomething
