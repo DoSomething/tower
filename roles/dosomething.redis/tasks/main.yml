@@ -4,3 +4,15 @@
   sudo: yes
   apt: name=redis-server state=latest
 
+- name: Setup redus
+  sudo: yes
+  lineinfile: >
+    dest=/etc/redis/redis.conf
+    regexp="{{ item.regexp }}"
+    line="{{ item.line }}"
+  with_items:
+    - regexp: '^port'
+      line: "port {{ redis_port }}"
+    - regexp: '^bind'
+      line: "bind {{ redis_bind }}"
+  notify: restart redis-server
