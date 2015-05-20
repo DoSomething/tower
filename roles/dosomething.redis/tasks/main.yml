@@ -4,7 +4,7 @@
   sudo: yes
   apt: name=redis-server state=latest
 
-- name: Setup redus
+- name: Setup Redis
   sudo: yes
   lineinfile: >
     dest=/etc/redis/redis.conf

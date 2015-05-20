@@ -6,5 +6,5 @@
 
 - name: Nginx | Disable default vhost
   sudo: yes
-  file: path=/etc/nginx/sites-available/default state=absent
+  file: path=/etc/nginx/sites-enabled/default state=absent
   notify: restart nginx

@@ -1,9 +1,13 @@
 ---
 # handlers file for web
 
+# Temporary. See issue
+# https://github.com/ansible/ansible-modules-core/issues/1170
+# When ansible is upgraded, restore the following command:
+# service: name=php5-fpm state=restarted
 - name: restart php-fpm
   sudo: yes
-  service: name=php5-fpm state=restarted
+  command: service php5-fpm restart
 
 - name: restart nginx
   sudo: yes

@@ -3,9 +3,8 @@
 
 # PHP
 php_fpm_defaults:
-  - { option: listen,                 value: "{{ php_fpm_socket }}" }
+  - { option: listen,                 value: "{{ php_fpm_listen }}" }
   - { option: listen.allowed_clients, value: "127.0.0.1" }
-  - { option: listen.mode,            value: "0600" }
 
 # PHP Extensions
 php_extensions_defaults:
