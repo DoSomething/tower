@@ -7,7 +7,7 @@ composer_path: '/usr/local/bin'
 
 # PHP
 php_ini_settings: []
-php_fpm_socket: /var/run/php5-fpm.sock
+php_fpm_listen: 127.0.0.1:9000
 php_fpm_settings: []
 
 # PHP Extensions

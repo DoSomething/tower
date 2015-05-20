@@ -49,7 +49,7 @@ server {
   ## Parse all .php file in the app directory
   location ~ \.php$ {
     fastcgi_split_path_info ^(.+\.php)(.*)$;
-    fastcgi_pass   unix:{{ php_fpm_socket }};
+    fastcgi_pass   {{ php_fpm_listen }};
     fastcgi_index  index.php;
     include fastcgi_params;
 

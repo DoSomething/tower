@@ -53,12 +53,12 @@ php_fpm_settings:
   - { option: group,  value: "app" }
 ```
 
-#### FPM Socket
-A path to PHP-fpm socket.  
+#### FPM Listen
+A path to PHP-fpm socket or an address to bind server to.  
 Defaults to `/var/run/php5-fpm.sock`.
 
 ```yml
-php_fpm_socket: /var/run/application.sock
+php_fpm_listen: /var/run/php5-fpm.sock
 ```
 
 ### PHP Extensions
