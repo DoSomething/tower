@@ -9,6 +9,7 @@ app_environment:
   - { option: DS_DB_MASTER_HOST, value: "drupal-prod.c9ajz690mens.us-east-1.rds.amazonaws.com" }
   - { option: DS_HOSTNAME, value: "{{ app_host }}" }
   - { option: DS_INSECURE_PORT, value: 80 }
+  - { option: DS_SECURE_PORT, value: 443 }
 
   - { option: DS_REDIS_HOST, value: 10.100.26.107 }
   - { option: DS_REDIS_PORT, value: 6379 }
