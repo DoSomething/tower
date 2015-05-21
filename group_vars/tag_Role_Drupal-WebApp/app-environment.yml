@@ -15,5 +15,5 @@ app_environment:
   - { option: DS_REDIS_PORT, value: 6379 }
 
   - { option: DS_APACHESOLR_HOST, value: 10.100.30.122 }
-  - { option: DS_APACHESOLR_PORT, value: "8983" }
+  - { option: DS_APACHESOLR_PORT, value: "8080" }
   - { option: DS_APACHESOLR_READ_ONLY, value: 0 }
