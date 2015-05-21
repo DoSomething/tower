@@ -4,7 +4,11 @@
 app_user: dosomething
 app_host: www.dosomething.org
 app_root: /var/www/{{ app_host }}/current
-app_ssl_enabled: no
 
+# Https
+app_ssl_enabled: no
+app_fastcgi_param_https: "on"
+
+# Shared
 app_create_shared: yes
 app_shared: /var/www/{{ app_host }}/shared
