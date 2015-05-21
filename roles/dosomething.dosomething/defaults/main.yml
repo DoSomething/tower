@@ -6,6 +6,7 @@ app_composer_update: no
 
 # SSL
 app_ssl_enabled: yes
+app_fastcgi_param_https: "$https"
 
 # Other
 app_create_shared: no
