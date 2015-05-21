@@ -8,6 +8,20 @@
     follow=yes
   sudo: yes
 
+- name: Create shared folder
+  file: >
+    path={{ app_shared }}
+    state=directory
+    owner={{ app_user }}
+    follow=yes
+  sudo: yes
+  when: app_create_shared
+
+- name: Install status.php
+  remote_user: "{{ app_user }}"
+  copy: src=status.php dest={{ app_shared }}/status.php
+  when: app_create_shared
+
 - name: Make app scripts available $PATH
   remote_user: "{{ app_user }}"
   lineinfile: >

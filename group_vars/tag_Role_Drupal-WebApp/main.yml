@@ -5,3 +5,4 @@ app_user: dosomething
 app_host: www.dosomething.org
 app_root: /var/www/{{ app_host }}/current
 app_ssl_enabled: no
+app_create_shared: yes

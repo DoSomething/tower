@@ -6,3 +6,6 @@ app_composer_update: no
 
 # SSL
 app_ssl_enabled: yes
+
+# Other
+app_create_shared: no

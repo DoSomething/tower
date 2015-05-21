@@ -5,6 +5,7 @@ app_user: dosomething
 app_host: international.dosomething.org
 app_root: /var/www/{{ app_host }}/current
 app_ssl_enabled: no
+app_create_shared: yes
 
 # Redis
 redis_bind: 0.0.0.0
