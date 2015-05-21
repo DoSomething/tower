@@ -4,4 +4,7 @@
 app_user: dosomething
 app_host: staging.beta.dosomething.org
 app_root: /var/www/{{ app_host }}/current
+
 app_create_shared: yes
+app_shared: /var/www/{{ app_host }}/shared
+
