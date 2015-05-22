@@ -2,7 +2,7 @@
 # Environment
 
 app_environment_variables:
-  - { option: DS_ENVIRONMENT, value: stage }
+  - { option: DS_ENVIRONMENT, value: "{{ app_environment }}" }
   - { option: DS_DB_MASTER_NAME, value: "{{ app_user }}" }
   - { option: DS_DB_MASTER_USER, value: "stage" }
   - { option: DS_DB_MASTER_HOST, value: "stage.c9ajz690mens.us-east-1.rds.amazonaws.com" }
