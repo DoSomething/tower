@@ -1,0 +1,19 @@
+---
+
+- name: Create shared folder
+  file: >
+    path={{ app_shared }}
+    state=directory
+    owner={{ app_user }}
+    follow=yes
+  sudo: yes
+
+- name: Install status.php
+  remote_user: "{{ app_user }}"
+  copy: src=status.php dest={{ app_shared }}/status.php
+
+- name: Install settings.php
+  remote_user: "{{ app_user }}"
+  template: >
+    src=settings/settings.{{ app_environment }}.php.j2
+    dest={{ app_shared }}/settings.{{ app_environment }}.php

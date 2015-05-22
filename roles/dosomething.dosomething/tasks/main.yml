@@ -5,6 +5,8 @@
 - include: drush.yml
 - include: nodejs.yml
 - include: app.yml
+- include: app-shared.yml
+  when: app_create_shared
 - include: configure-ssl.yml
   when: app_ssl_enabled
 - include: configure-vhost.yml
