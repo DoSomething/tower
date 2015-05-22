@@ -10,3 +10,13 @@
   roles:
     - role: dosomething.web
     - role: dosomething.dosomething
+
+# sudo mount -t nfs -o nolock 10.100.20.6:/drupal-static-files /mnt
+- name: Mount shared folder to Drupal WebApp
+  hosts: tag_Role_Drupal-WebApp
+  mount: >
+    name=/var/www/www.dosomething.org/shared/files
+    src='10.100.20.6:/drupal-static-files'
+    fstype=nfs
+    opts=nolock
+    state=mounted
