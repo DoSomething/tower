@@ -2,7 +2,7 @@
 # Environment
 
 app_environment:
-  - { option: DS_ENVIRONMENT, value: {{ app_environment }} }
+  - { option: DS_ENVIRONMENT, value: "{{ app_environment }}" }
   - { option: DS_DB_MASTER_NAME, value: "{{ app_user }}" }
   - { option: DS_DB_MASTER_USER, value: "dsroot" }
   - { option: DS_DB_MASTER_PASS, value: "{{ app_db_password }}" }
