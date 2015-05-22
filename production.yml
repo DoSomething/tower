@@ -15,6 +15,9 @@
 - name: Mount shared folder to Drupal WebApp
   hosts: tag_Role_Drupal-WebApp
   tasks:
+  - name: Install nfs-common
+    sudo: yes
+    apt: name=nfs-common state=latest
   - name: Mount NFS
     sudo: yes
     mount: >
