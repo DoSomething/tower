@@ -8,6 +8,20 @@
     follow=yes
   sudo: yes
 
+- name: Make app scripts available $PATH
+  remote_user: "{{ app_user }}"
+  lineinfile: >
+    dest=.profile
+    line="export PATH={{ app_root }}/bin:$PATH"
+
+- name: Make app scripts available $PATH in non-interactive bash
+  remote_user: "{{ app_user }}"
+  lineinfile: >
+    dest=.bashrc
+    line="export PATH={{ app_root }}/bin:$PATH"
+    insertbefore="# If not running"
+
+# Shared folder
 - name: Create shared folder
   file: >
     path={{ app_shared }}
@@ -22,15 +36,9 @@
   copy: src=status.php dest={{ app_shared }}/status.php
   when: app_create_shared
 
-- name: Make app scripts available $PATH
+- name: Install settings.php
   remote_user: "{{ app_user }}"
-  lineinfile: >
-    dest=.profile
-    line="export PATH={{ app_root }}/bin:$PATH"
-
-- name: Make app scripts available $PATH in non-interactive bash
-  remote_user: "{{ app_user }}"
-  lineinfile: >
-    dest=.bashrc
-    line="export PATH={{ app_root }}/bin:$PATH"
-    insertbefore="# If not running"
+  template: >
+    src=settings/settings.{{ app_environment }}.php.j2
+    dest={{ app_shared }}/settings.{{ app_environment }}.php
+  when: app_create_shared

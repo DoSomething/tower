@@ -1,6 +1,9 @@
 ---
 # defaults file for dosomething
 
+# App
+app_environment: local
+
 # Composer
 app_composer_update: no
 

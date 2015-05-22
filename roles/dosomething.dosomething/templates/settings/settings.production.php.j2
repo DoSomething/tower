@@ -1,0 +1,24 @@
+<?php
+
+$conf['reverse_proxy'] = TRUE;
+$conf['reverse_proxy_addresses'] = array(
+  // Self
+  '127.0.0.1',
+
+  // VPC NAT/Admin
+  '10.100.60.124',
+  '52.1.92.62',
+
+  // Varnish
+  '10.100.40.10',
+  '10.100.41.10',
+);
+$conf['reverse_proxy_header'] = 'HTTP_X_FORWARDED_FOR';
+
+$conf['varnish_control_terminal'] = '10.100.40.10:6082 10.100.41.10:6082';
+$conf['varnish_control_key'] = '{{ app_varnish_control_key }}';
+
+$conf['file_public_path'] = 'sites/default/files';
+$conf['file_temporary_path'] = '{{ app_shared }}/tmp';
+
+$conf['dosomething_search_finder_url'] = 'https://search.dosomething.org/solr/';
