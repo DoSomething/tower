@@ -15,7 +15,9 @@
 - name: Mount shared folder to Drupal WebApp
   hosts: tag_Role_Drupal-WebApp
   tasks:
-  - mount: >
+  - name: Mount NFS
+    sudo: yes
+    mount: >
       name=/var/www/www.dosomething.org/shared/files
       src='10.100.20.6:/drupal-static-files'
       fstype=nfs
