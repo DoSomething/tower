@@ -18,11 +18,13 @@
   - name: Install nfs-common
     sudo: yes
     apt: name=nfs-common state=latest
-  - name: Mount NFS
+  - name: Ensure mount directory exists
     sudo: yes
-    mount: >
-      name=/var/www/www.dosomething.org/shared/files
-      src='10.100.20.6:/drupal-static-files'
-      fstype=nfs
-      opts=nolock
-      state=mounted
+    file: >
+      path={{ app_shared }}/files
+      state=directory
+      owner={{ app_user }}
+      follow=yes
+  - name: Mount NFS
+    remote_user: "{{ app_user }}"
+    command: mount -t nfs -o nolock 10.100.20.6:/drupal-static-files {{ app_shared }}/files
