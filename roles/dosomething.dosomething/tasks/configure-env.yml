@@ -7,7 +7,7 @@
     section=www
     option=env[{{ item.option }}]
     value={{ item.value }}
-  with_items: app_environment
+  with_items: app_environment_variables
   notify: restart php-fpm
 
 - name: Environment | Setup Shell Environment
@@ -16,4 +16,4 @@
     create=yes
     dest=/etc/profile.d/{{ app_user }}.sh
     line="export {{ item.option }}={{ item.value }}"
-  with_items: app_environment
+  with_items: app_environment_variables

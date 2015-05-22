@@ -1,7 +1,7 @@
 
 # Environment
 
-app_environment:
+app_environment_variables:
   - { option: DS_ENVIRONMENT, value: stage }
   - { option: DS_DB_MASTER_NAME, value: "{{ app_user }}" }
   - { option: DS_DB_MASTER_USER, value: "stage" }
