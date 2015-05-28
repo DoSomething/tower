@@ -16,3 +16,26 @@
   apt: name=newrelic-php5 state=latest force=yes
   notify: restart php-fpm
   when: php_thirdparty_newrelic
+
+- name: PHP Third Party | New Relic | Install New Relic server agent
+  sudo: yes
+  apt: name=newrelic-sysmond state=latest
+  when: php_thirdparty_newrelic
+
+- name: PHP Third Party | New Relic | Setup New Relic Server Monitor License
+  sudo: yes
+  lineinfile: >
+    dest=/etc/newrelic/nrsysmond.cfg
+    regexp="^license_key"
+    line='license_key={{ php_thirdparty_newrelic_license }}'
+  notify: restart newrelic-sysmond
+  when: php_thirdparty_newrelic
+
+- name: PHP Third Party | New Relic | Setup New Relic PHP Agent License
+  sudo: yes
+  lineinfile: >
+    dest=/etc/php5/fpm/conf.d/20-newrelic.ini
+    regexp="^newrelic.license"
+    line='newrelic.license = "{{ php_thirdparty_newrelic_license }}"'
+  notify: restart php-fpm
+  when: php_thirdparty_newrelic
