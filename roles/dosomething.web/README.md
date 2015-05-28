@@ -74,11 +74,19 @@ php_extensions:
 ### PHP Third Party Extensions
 #### New Relic
 Install [PHP New Relic](https://docs.newrelic.com/docs/agents/php-agent/getting-started/new-relic-php)
-extenstion.  
+extension and the system deamon.  
 Defaults to `no`.
 
 ```yml
 php_thirdparty_newrelic: yes
+```
+
+Setup New Relic license.
+40-character hexadecimal string provided by New Relic.  
+Defaults to an empty string.
+
+```yml
+php_thirdparty_newrelic_license: "your_license"
 ```
 
 Dependencies

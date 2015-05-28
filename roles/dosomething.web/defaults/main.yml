@@ -15,3 +15,4 @@ php_extensions: []
 
 # PHP Third Party Extensions
 php_thirdparty_newrelic: no
+php_thirdparty_newrelic_license: ""
