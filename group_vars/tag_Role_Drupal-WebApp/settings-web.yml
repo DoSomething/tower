@@ -13,7 +13,7 @@ php_fpm_settings:
   - { option: user,   value: "{{ app_user }}" }
   - { option: group,  value: "{{ app_user }}" }
   - { option: listen.backlog,        value: 128 }
-  - { option: pm.max_children,       value: 24 }
+  - { option: pm.max_children,       value: 16 }
   - { option: pm.max_spare_servers,  value: 4 }
 
 php_extensions:
