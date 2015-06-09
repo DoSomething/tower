@@ -7,16 +7,12 @@
 - name: Composer | Upload dependencies config
   remote_user: "{{ app_user }}"
   copy: src=composer.json dest=.composer/composer.json
+  register: app_composer_config_status
 
-- name: Composer | Install Global Tools
-  remote_user: "{{ app_user }}"
-  composer: working_dir=.composer
-  when: not app_composer_update
-
-- name: Composer | Update Global Tools
+- name: Composer | Install/Update Global Tools
   remote_user: "{{ app_user }}"
   composer: command=update working_dir=.composer
-  when: app_composer_update
+  when: app_composer_config_status.changed or app_composer_force_update
 
 - name: Composer | Setup GitHub access token
   remote_user: "{{ app_user }}"

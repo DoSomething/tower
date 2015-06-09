@@ -19,7 +19,7 @@
 
 - name: PHP Third Party | New Relic | Install New Relic server agent
   sudo: yes
-  apt: name=newrelic-sysmond state=latest
+  apt: name=newrelic-sysmond state=latest force=yes
   when: php_thirdparty_newrelic
 
 - name: PHP Third Party | New Relic | Setup New Relic Server Monitor License
@@ -29,7 +29,7 @@
     regexp="^license_key"
     line='license_key={{ php_thirdparty_newrelic_license }}'
   notify: restart newrelic-sysmond
-  when: php_thirdparty_newrelic
+  when: php_thirdparty_newrelic and php_thirdparty_newrelic_license
 
 - name: PHP Third Party | New Relic | Setup New Relic PHP Agent License
   sudo: yes
@@ -38,4 +38,4 @@
     regexp="^newrelic.license"
     line='newrelic.license = "{{ php_thirdparty_newrelic_license }}"'
   notify: restart php-fpm
-  when: php_thirdparty_newrelic
+  when: php_thirdparty_newrelic and php_thirdparty_newrelic_license

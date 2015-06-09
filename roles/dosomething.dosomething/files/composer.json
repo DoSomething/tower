@@ -1,5 +1,5 @@
 {
   "require": {
-    "drush/drush": "6.*"
+    "drush/drush": "7.*"
   }
 }
