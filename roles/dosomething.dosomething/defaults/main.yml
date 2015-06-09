@@ -5,7 +5,7 @@
 app_environment: local
 
 # Composer
-app_composer_update: no
+app_composer_force_update: no
 
 # SSL
 app_ssl_enabled: yes
