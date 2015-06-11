@@ -1,0 +1,6 @@
+---
+
+- name: Setup vagrant
+  hosts: all
+  roles:
+    - { role: dosomething.vagrant }

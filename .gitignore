@@ -1,2 +1,7 @@
-.vault.txt
 *.DS_Store
+
+.vault.txt
+
+.vagrant
+package.box
+

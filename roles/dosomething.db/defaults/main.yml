@@ -1,0 +1,5 @@
+---
+# defaults file for db
+
+# MySQL
+my_cnf_settings: []

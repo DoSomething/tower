@@ -1,0 +1,19 @@
+---
+
+# MySQL
+my_cnf_settings:
+  - section: mysqld
+    option: max_allowed_packet
+    value: 128M
+  - section: mysqld
+    option: character_set_server
+    value: utf8
+  - section: mysqld
+    option: collation_server
+    value: utf8_general_ci
+  - section: mysqld
+    option: innodb_file_per_table
+    value: "ON"
+  - section: mysqldump
+    option: max_allowed_packet
+    value: 128M
