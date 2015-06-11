@@ -11,11 +11,18 @@ Vagrant.configure("2") do |config|
   # SSH Agent forwarding
   config.ssh.forward_agent = true
 
+  # Hostname
+  config.vm.hostname = "dev.dosomething.org"
+
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = :v
     ansible.playbook = "vagrant.yml"
-    # ansible.ask_vault_pass = true
     ansible.vault_password_file = ".vault.txt"
+
+    ansible.groups = {
+      "vagrant" => ["default"],
+    }
+
   end
 
   # Http and https.

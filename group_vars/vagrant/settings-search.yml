@@ -1,0 +1,38 @@
+---
+
+# Cores
+solr_core_repo: https://github.com/DoSomething/solr-core-drupal.git
+solr_core_version:  v1.0.alpha2-7.x-1.7-solr-5.x
+
+solr_cores:
+  - name:    collection1
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+  - name:    botswana
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+  - name:    canada
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+  - name:    congo
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+  - name:    ghana
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+  - name:    kenya
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+  - name:    indonesia
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+  - name:    nigeria
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+  - name:    training
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+  - name:    uk
+    repo:    "{{ solr_core_repo }}"
+    version: "{{ solr_core_version }}"
+

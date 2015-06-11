@@ -1,0 +1,23 @@
+---
+
+# PHP
+php_ini_settings:
+  - section: PHP
+    option: upload_max_filesize
+    value: 11M
+  - section: PHP
+    option: display_errors
+    value: "On"
+  - section: Date
+    option: date.timezone
+    value: "{{ timezone }}"
+
+php_fpm_settings:
+  - { option: user,   value: "{{ app_user }}" }
+  - { option: group,  value: "{{ app_user }}" }
+
+php_extensions:
+  - php5-mysql
+  - php5-gd
+
+php_thirdparty_newrelic: yes
