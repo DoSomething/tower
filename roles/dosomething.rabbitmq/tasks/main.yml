@@ -1,0 +1,6 @@
+---
+
+- include: install.yml
+  tags: [rabbitmq]
+- include: configure.yml
+  tags: [rabbitmq]

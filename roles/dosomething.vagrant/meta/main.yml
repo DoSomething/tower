@@ -19,3 +19,4 @@ dependencies:
   - { role: "dosomething.web" }
   - { role: "dosomething.dosomething" }
   - { role: "dosomething.dosomething-dev" }
+  - { role: "dosomething.rabbitmq" }

@@ -1,0 +1,35 @@
+---
+
+- name: RabbitMQ | Configure /etc/default/rabbitmq-server
+  sudo: yes
+  template: >
+    src=etc/default/rabbitmq-server.j2
+    dest=/etc/default/rabbitmq-server
+  notify: reload rabbitmq-server
+
+- name: RabbitMQ | Remove guest user
+  sudo: yes
+  rabbitmq_user: user=guest state=absent
+
+- name: RabbitMQ | Cleanup default vhosts
+  sudo: yes
+  rabbitmq_vhost: name=/ state=absent
+
+- name: RabbitMQ | Create vhosts
+  sudo: yes
+  rabbitmq_vhost: name="{{ item }}"
+  with_items: rabbitmq_vhosts
+
+- name: RabbitMQ | Create users
+  sudo: yes
+  rabbitmq_user:
+    user:           "{{ item.0.user }}"
+    password:       "{{ item.0.password }}"
+    vhost:          "{{ item.1 }}"
+    tags:           "{{ item.0.tags | default('none') }}"
+    configure_priv: "{{ item.0.configure_priv | default('.*') }}"
+    read_priv:      "{{ item.0.read_priv | default('.*') }}"
+    write_priv:     "{{ item.0.write_priv | default('.*') }}"
+  with_subelements:
+    - rabbitmq_users
+    - vhosts
