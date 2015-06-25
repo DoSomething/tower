@@ -1,0 +1,6 @@
+---
+
+- name: Refresh Stage RDS DB from Prod
+  hosts: localhost
+  roles:
+    - role: dosomething.rds-refresh

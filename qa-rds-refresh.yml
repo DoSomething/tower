@@ -1,0 +1,6 @@
+---
+
+- name: Refresh QA RDS DB from Prod
+  hosts: localhost
+  roles:
+    - role: dosomething.rds-refresh
