@@ -1,0 +1,69 @@
+- name: Delete Current RDS Instance to Replace from Prod
+  rds:
+    command: delete
+    instance_name: "{{ rds_refreshed }}"
+    aws_access_key: "{{ rds_aws_key }}"
+    aws_secret_key: "{{ rds_secret_key }}"
+    region: us-east-1
+  ignore_errors: yes
+
+- name: Delete Last RDS Snapshot
+  rds:
+    command: delete
+    snapshot: "{{ rds_refreshed }}"
+    aws_access_key: "{{ rds_aws_key }}"
+    aws_secret_key: "{{ rds_secret_key }}"
+    region: us-east-1
+    wait: yes
+    wait_timeout: 1200
+
+- name: Create Snapshot of Prod DB
+  rds:
+    command: snapshot
+    instance_name: "{{ rds_origin }}"
+    snapshot: "{{ rds_refreshed }}"
+    aws_access_key: "{{ rds_aws_key }}"
+    aws_secret_key: "{{ rds_secret_key }}"
+    region: us-east-1
+    wait: yes
+    wait_timeout: 1200
+
+- name: Create New DB Instance
+  rds:
+    command: restore
+    instance_name: "{{ rds_refreshed }}"
+    snapshot: "{{ rds_refreshed }}"
+    instance_type: "{{ rds_instance_size }}"
+    upgrade: yes
+    size: 100
+    subnet: "{{ rds_subnet }}"
+    aws_access_key: "{{ rds_aws_key }}"
+    aws_secret_key: "{{ rds_secret_key }}"
+    region: us-east-1
+    wait: yes
+    wait_timeout: 1200
+
+- name: Change Root Password
+  rds:
+    command: modify
+    apply_immediately: yes
+    instance_name: "{{ rds_refreshed }}"
+    password: "{{ rds_refreshed_pass }}"
+    vpc_security_groups: sg-c0da85a4
+    region: us-east-1
+    aws_access_key: "{{ rds_aws_key }}"
+    aws_secret_key: "{{ rds_secret_key }}"
+    wait: yes
+    wait_timeout: 900
+
+- name: Change Security Group
+  rds:
+    command: modify
+    apply_immediately: yes
+    instance_name: "{{ rds_refreshed }}"
+    vpc_security_groups: "{{ rds_sec_group }}"
+    region: us-east-1
+    aws_access_key: "{{ rds_aws_key }}"
+    aws_secret_key: "{{ rds_secret_key }}"
+    wait: yes
+    wait_timeout: 900
