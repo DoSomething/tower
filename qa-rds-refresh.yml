@@ -2,5 +2,7 @@
 
 - name: Refresh QA RDS DB from Prod
   hosts: localhost
+  connection: local
+  gather_facts: False
   roles:
     - role: dosomething.rds-refresh
