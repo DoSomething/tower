@@ -1,0 +1,10 @@
+---
+# handlers file for rabbitmq
+
+- name: restart rabbitmq-server
+  sudo: yes
+  service: name=rabbitmq-server state=restarted
+
+- name: reload rabbitmq-server
+  sudo: yes
+  service: name=rabbitmq-server state=reloaded

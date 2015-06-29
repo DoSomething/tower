@@ -23,11 +23,15 @@ Vagrant.configure("2") do |config|
       "vagrant" => ["default"],
     }
 
+    ansible.tags = ENV['tag'] if ENV['tag']
   end
 
   # Http and https.
   config.vm.network :forwarded_port, guest: 80, host: 8888
   config.vm.network :forwarded_port, guest: 443, host: 8889
+
+  # Rabbit
+  config.vm.network :forwarded_port, guest: 15672, host: 15672
 
   # Solr.
   config.vm.network :forwarded_port, guest: 8983, host: 8983

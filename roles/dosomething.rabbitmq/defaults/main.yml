@@ -1,0 +1,8 @@
+---
+# defaults file for rabbitmq
+
+rabbitmq_ulimit_max_open_files: 1024
+rabbitmq_plugins:
+  - rabbitmq_management
+rabbitmq_vhosts: []
+rabbitmq_users: []
