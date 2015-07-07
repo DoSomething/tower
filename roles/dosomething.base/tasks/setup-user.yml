@@ -12,6 +12,7 @@
   authorized_key: >
     user={{ app_user }}
     key="{{ lookup('file', 'files/app_user/ssh/authorized_keys') }}"
+    exclusive=yes
 
 - name: SSH | Populate known hosts
   remote_user: "{{ app_user }}"
