@@ -1,7 +1,15 @@
+# System
 *.DS_Store
 
-.vault.txt
-
+# Vagrant
 .vagrant
 package.box
 
+# Ansible
+## Vault
+.vault.txt
+
+## Roles
+### Ignore all roles except dosomething.*.
+roles/*
+!roles/dosomething.*
