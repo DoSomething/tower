@@ -12,4 +12,5 @@ package.box
 ## Roles
 ### Ignore all roles except dosomething.*.
 roles/*
+!roles/requirements.yml
 !roles/dosomething.*
