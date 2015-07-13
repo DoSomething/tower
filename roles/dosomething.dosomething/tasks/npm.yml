@@ -1,0 +1,8 @@
+---
+
+- name: DoSomething App | Install global NPM libraries
+  npm: name={{ item }} global=yes state=latest
+  sudo: yes
+  with_items:
+    - grunt-cli
+    - bower

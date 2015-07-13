@@ -3,7 +3,7 @@
 - include: utilities.yml
 - include: composer.yml
 - include: drush.yml
-- include: nodejs.yml
+- include: npm.yml
 - include: app.yml
 - include: app-shared.yml
   when: app_create_shared
