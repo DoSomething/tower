@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Sergii Tkachenko
+  description: DoSomething NodeJS PM2 Server metapackage
+  company: DoSomething.org
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  categories:
+  - system
+dependencies:
+  - { role: "franklinkim.pm2", sudo: yes }
