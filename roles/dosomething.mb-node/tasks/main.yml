@@ -1,0 +1,7 @@
+---
+
+- include: install.yml
+  tags: ["mb-node"]
+
+- include: apps.yml
+  tags: ["mb-node"]

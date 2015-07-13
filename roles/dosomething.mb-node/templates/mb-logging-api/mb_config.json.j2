@@ -1,0 +1,12 @@
+{
+  "default":
+    {
+      "port": "4733"
+    }
+  ,
+  "mongo":
+    {
+      "development" : "mongodb://localhost/mb-logging",
+      "production" : "{{ mb_node_logging_api_mongo_prod_connection }}"
+    }
+}

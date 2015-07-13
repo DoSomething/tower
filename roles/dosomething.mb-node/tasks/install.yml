@@ -1,0 +1,6 @@
+---
+
+# Todo: move to own role or reuse galaxy role.
+- name: MB Node | Install Mongodb server
+  sudo: yes
+  apt: name=mongodb-server state=latest
