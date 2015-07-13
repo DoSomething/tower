@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Sergii Tkachenko
-  description: DoSomething.org Website
+  description: DoSomething NodeJS metapackage role
   company: DoSomething.org
   license: MIT
   min_ansible_version: 1.2
@@ -13,5 +13,4 @@ galaxy_info:
   - system
 dependencies:
   - { role: "dosomething.base" }
-  - { role: "dosomething.nodejs" }
-  - { role: "dosomething.web" }
+  - { role: "franklinkim.nodejs", sudo: yes }

@@ -1,0 +1,6 @@
+---
+# defaults file for nodejs
+
+# Nodejs
+nodejs_version: "0.10"
+nodejs_packages_update: no
