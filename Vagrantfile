@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "dev.dosomething.org"
 
   config.vm.provision :host_shell do |host|
-    host.inline = 'ansible-galaxy install -r roles/requirements.yml -f'
+    host.inline = 'ansible-galaxy install -r roles/requirements.yml -p roles/ -f'
   end
 
   config.vm.provision "ansible" do |ansible|
