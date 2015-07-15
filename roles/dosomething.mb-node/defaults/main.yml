@@ -1,0 +1,8 @@
+---
+# defaults file for nodejs
+
+# Mb
+mb_node_root: /var/www/mb-node
+mb_node_apps:
+  - name:    mb-logging-api
+    repo:    https://github.com/DoSomething/mb-logging-api.git

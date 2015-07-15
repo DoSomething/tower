@@ -1,0 +1,48 @@
+---
+
+- name: MB Node | Ensure app root folder
+  file: >
+    path={{ mb_node_root }}
+    state=directory
+    owner={{ app_user }}
+  sudo: yes
+
+- name: MB Node | Checkout Apps
+  remote_user: "{{ app_user }}"
+  git: >
+    repo={{ item.repo }}
+    version="{{ item.version | default(omit) }}"
+    dest={{ mb_node_root }}/{{ item.name }}
+  with_items: mb_node_apps
+
+- name: MB Node | Install Apps
+  remote_user: "{{ app_user }}"
+  npm: path={{ mb_node_root }}/{{ item.name }}
+  with_items: mb_node_apps
+
+- name: MB Node | Configure Apps | Create config folder
+  remote_user: "{{ app_user }}"
+  file: >
+    path={{ mb_node_root }}/{{ item.name }}/config
+    state=directory
+    owner={{ app_user }}
+  with_items: mb_node_apps
+
+- name: MB Node | Configure Apps | Copy mb_config
+  remote_user: "{{ app_user }}"
+  template: >
+    src={{ item.name }}/mb_config.json.j2
+    dest={{ mb_node_root }}/{{ item.name }}/config/mb_config.json
+  with_items: mb_node_apps
+
+- name: MB Node | Configure Apps | Copy PM2 configuration
+  remote_user: "{{ app_user }}"
+  template: >
+    src={{ item.name }}/pm2.json.j2
+    dest={{ mb_node_root }}/{{ item.name }}/config/pm2.json
+  with_items: mb_node_apps
+
+- name: MB Node | Configure Apps | Start Apps
+  remote_user: "{{ app_user }}"
+  command: pm2 start {{ mb_node_root }}/{{ item.name }}/config/pm2.json
+  with_items: mb_node_apps
