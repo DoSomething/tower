@@ -13,3 +13,6 @@ app_fastcgi_param_https: "on"
 # Redis
 redis_bind: 0.0.0.0
 redis_port: 6379
+
+# Other
+composer_self_update: yes

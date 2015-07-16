@@ -10,3 +10,5 @@ app_environment: stage
 app_create_shared: yes
 app_shared: /var/www/{{ app_host }}/shared
 
+# Other
+composer_self_update: yes
