@@ -13,3 +13,6 @@ app_fastcgi_param_https: "on"
 # Shared
 app_create_shared: yes
 app_shared: /var/www/{{ app_host }}/shared
+
+# Other
+composer_self_update: yes
