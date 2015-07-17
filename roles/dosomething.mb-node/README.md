@@ -1,7 +1,7 @@
-DoSomething NodeJS.
+DoSomething MB NodeJS App server.
 =========
 
-DoSomething.org Message Broker Consumer Node Server.
+DoSomething.org Message Broker NodeJS App Server.
 
 License
 -------

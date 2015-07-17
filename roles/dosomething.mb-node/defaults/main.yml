@@ -1,5 +1,5 @@
 ---
-# defaults file for nodejs
+# defaults file for mb-node
 
 # Mb
 mb_node_root: /var/www/mb-node
