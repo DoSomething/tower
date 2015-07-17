@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Sergii Tkachenko
-  description: DoSomething MB NodeJS App Server metapackage
+  description: DoSomething MB NodeJS App Server
   company: DoSomething.org
   license: MIT
   min_ansible_version: 1.2
