@@ -21,3 +21,4 @@ dependencies:
   - { role: "dosomething.dosomething-dev" }
   - { role: "dosomething.rabbitmq" }
   - { role: "dosomething.mb-node" }
+  - { role: "dosomething.mb-php" }
