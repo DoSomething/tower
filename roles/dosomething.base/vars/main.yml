@@ -1,7 +1,2 @@
 ---
 # vars file for ds-base
-
-devops_users:
-  - mrich
-  - sergii
-  - sheydari
