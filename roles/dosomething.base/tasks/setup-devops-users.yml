@@ -11,7 +11,7 @@
   sudo: yes
   authorized_key: >
     user={{ item }}
-    key="{{ lookup('file', item + '-authorized_keys') }}"
+    key="{{ lookup('file', 'files/devops_users/' + item + '-authorized_keys') }}"
     exclusive=yes
   with_items:
     - "{{ devops_users }}"
