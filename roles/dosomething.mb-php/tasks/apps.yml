@@ -1,0 +1,69 @@
+---
+
+- name: MB PHP | Ensure app root folder
+  sudo: yes
+  file: >
+    path={{ mb_php_root }}
+    state=directory
+    owner={{ app_user }}
+  sudo: yes
+
+- name: MB PHP | Ensure log folder
+  sudo: yes
+  file: >
+    path={{ mb_php_log_path }}
+    state=directory
+    owner={{ app_user }}
+  sudo: yes
+
+- name: MB PHP | Checkout configuration
+  remote_user: "{{ app_user }}"
+  git: repo={{ mb_php_config_repo }} dest={{ mb_php_config_path }}
+
+# Todo: manage secure config.
+
+- name: MB PHP | Checkout Apps
+  remote_user: "{{ app_user }}"
+  git: >
+    repo={{ item.repo }}
+    version="{{ item.version | default(omit) }}"
+    dest={{ mb_php_root }}/{{ item.name }}
+  with_items: mb_php_apps
+
+- name: MB PHP | Create app log folders
+  remote_user: "{{ app_user }}"
+  file: >
+    path={{ mb_php_log_path }}/{{ item.name }}
+    state=directory
+    owner={{ app_user }}
+  with_items: mb_php_apps
+
+- name: MB PHP | Install Composer Dependencies
+  remote_user: "{{ app_user }}"
+  composer: command=install working_dir={{ mb_php_root }}/{{ item.name }}
+  with_items: mb_php_apps
+  when: item.composer is not defined or item.composer
+
+- name: MB PHP | Configure Apps
+  sudo: yes
+  file: >
+    src={{ mb_php_config_path }}
+    dest={{ mb_php_root }}/{{ item.name }}/{{ mb_php_config_name }}
+    state=link
+    owner={{ app_user }}
+    group={{ app_user }}
+  with_items: mb_php_apps
+
+- name: MB PHP | Install App Startup Sripts
+  sudo: yes
+  template: >
+    src={{ item.name }}/init.conf.j2
+    dest=/etc/init/{{ item.name }}.conf
+  with_items: mb_php_apps
+  when: item.init is not defined or item.init
+
+- name: MB PHP | Start apps
+  sudo: yes
+  service: name={{ item.name }} state=started
+  with_items: mb_php_apps
+  when: item.init is not defined or item.init
