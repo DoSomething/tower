@@ -6,3 +6,4 @@
 - include: setup-ntp.yml
   when: ntp_servers
 - include: setup-user.yml
+- include: setup-devops-users.yml
