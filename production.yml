@@ -1,19 +1,19 @@
 ---
 
 - name: Setup Drupal Redis
-  hosts: tag_Role_Drupal-Redis
+  hosts: tag_Role_Drupal_Redis
   roles:
     - role: dosomething.redis
 
 - name: Setup Drupal WebApp
-  hosts: tag_Role_Drupal-WebApp
+  hosts: tag_Role_Drupal_WebApp
   roles:
     - role: dosomething.web
     - role: dosomething.dosomething
 
 # sudo mount -t nfs -o nolock 10.100.20.6:/drupal-static-files /mnt
 - name: Mount shared folder to Drupal WebApp
-  hosts: tag_Role_Drupal-WebApp
+  hosts: tag_Role_Drupal_WebApp
   tasks:
   - name: Install nfs-common
     sudo: yes
