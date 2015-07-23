@@ -14,15 +14,15 @@
     key="{{ lookup('file', 'files/app_user/ssh/authorized_keys') }}"
     exclusive=yes
 
+- name: Setup sudoers for the app user
+  sudo: yes
+  template: src=sudoers/app_user.j2 dest=/etc/sudoers.d/{{ app_user }}
+
 - name: SSH | Populate known hosts
   remote_user: "{{ app_user }}"
   copy: >
     src=files/app_user/ssh/known_hosts
     dest=.ssh/known_hosts
-
-- name: Setup sudoers for the app user
-  sudo: yes
-  template: src=sudoers/app_user.j2 dest=/etc/sudoers.d/{{ app_user }}
 
 - name: Create ~/bin folder to store custom scripts
   remote_user: "{{ app_user }}"

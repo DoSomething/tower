@@ -1,0 +1,6 @@
+---
+
+- name: Setup Thor HA Proxy
+  hosts: haproxy
+  roles:
+    - role: dosomething.haproxy

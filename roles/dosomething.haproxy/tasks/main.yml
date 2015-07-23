@@ -1,0 +1,19 @@
+- name: Add HA Proxy PPA
+  become: yes
+  apt_repository: repo='ppa:vbernat/haproxy-1.5' update_cache=yes
+
+- name: Install HA Proxy
+  become: yes
+  apt: name=haproxy state=latest
+
+- name: Put Sysctl.conf Settings In Place
+  become: yes
+  sysctl: name={{ item.setting }} value={{ item.value }} sysctl_set=yes reload=yes
+  with_items: sysctl_tweaks
+  notify: restart haproxy
+
+- name: Add Security File Limits
+  become: yes
+  lineinfile: dest=/etc/security/limits.conf line="{{ item.line }}"
+  with_items: limits_tweaks
+  notify: restart haproxy
