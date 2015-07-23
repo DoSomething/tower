@@ -1,0 +1,34 @@
+- name: Add HA Proxy PPA
+  apt_repository: repo='ppa:vbernat/haproxy-1.5' update_cache=yes
+
+- name: Install HA Proxy
+  apt: name=haproxy state=latest
+
+- name: Put Sysctl.conf Settings In Place
+  sysctl: name={{ item.setting }} value={{ item.value }} sysctl_set=yes reload=yes
+  with_items:
+    - { setting: 'net.ipv4.tcp_syncookies', value: '1' }
+    - { setting: 'net.ipv4.tcp_max_syn_backlog', value: '40000' }
+    - { setting: 'net.core.somaxconn', value: '4000' }
+    - { setting: 'net.ipv4.tcp_timestamps', value: '0' }
+    - { setting: 'net.ipv4.tcp_sack', value: '1' }
+    - { setting: 'net.ipv4.tcp_window_scaling', value: '1' }
+    - { setting: 'net.ipv4.tcp_fin_timeout', value: '15' }
+    - { setting: 'net.ipv4.tcp_keepalive_intvl', value: '30' }
+    - { setting: 'net.ipv4.tcp_tw_reuse', value: '1' }
+    - { setting: 'net.core.rmem_default', value: '8388608' }
+    - { setting: 'net.core.rmem_max', value: '8388608' }
+    - { setting: 'net.core.wmem_default', value: '388608' }
+    - { setting: 'net.core.wmem_max', value: '8388608' }
+    - { setting: 'net.core.netdev_max_backlog', value: '10000' }
+    - { setting: 'net.unix.max_dgram_qlen', value: '100' }
+  notify: restart haproxy
+
+- name: Add Security File Limits
+  lineinfile: dest=/etc/security/limits.conf line="{{ item.line }}"
+  with_items:
+    - { line: '*	soft	nofile	1000000' }
+    - { line: '*	hard	nofile	1500000' }
+    - { line: '*	soft	nproc	10000' }
+    - { line: '*	hard	nproc	15000' }
+  notify: restart haproxy
