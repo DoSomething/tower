@@ -6,5 +6,5 @@
     - role: dosomething.web
     - role: dosomething.search
     - role: dosomething.redis
-    - role: dosomething.dosomething
-    - role: dosomething.dosomething-dev
+    - role: dosomething.phoenix
+    - role: dosomething.phoenix-dev

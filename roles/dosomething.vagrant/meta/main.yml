@@ -17,8 +17,8 @@ dependencies:
   - { role: "dosomething.redis" }
   - { role: "dosomething.search" }
   - { role: "dosomething.web" }
-  - { role: "dosomething.dosomething" }
-  - { role: "dosomething.dosomething-dev" }
+  - { role: "dosomething.phoenix" }
+  - { role: "dosomething.phoenix-dev" }
   - { role: "dosomething.rabbitmq" }
   - { role: "dosomething.mb-node" }
   - { role: "dosomething.mb-php" }
