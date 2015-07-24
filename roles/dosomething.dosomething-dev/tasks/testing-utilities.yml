@@ -7,4 +7,5 @@
     - name: mocha-phantomjs
       version: 3.*
     - name: casperjs
-      version: 1.*
+      # node 1.2 requires caspser 1.1 branch
+      version: 1.1.0-beta3
