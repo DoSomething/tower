@@ -1,0 +1,6 @@
+---
+
+- name: Setup Thor Jenkins
+  hosts: jenkins
+  roles:
+    - role: dosomething.jenkins
