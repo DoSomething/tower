@@ -1,10 +1,13 @@
 - name: Add Jenkins Repo Key
   become: yes
-  apt_key: url=https://jenkins-ci.org/debian/jenkins-ci.org.key
+  apt_key: url=https://jenkins-ci.org/debian/jenkins-ci.org.key id=D50582E6
 
 - name: Add Jenkins Repo
   become: yes
-  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' state=present update_cache=yes
+  apt_repository: >
+     repo='deb http://pkg.jenkins-ci.org/debian binary/'
+     state=present 
+     update_cache=yes
 
 - name: Install Jenkins
   become: yes
