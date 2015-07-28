@@ -1,0 +1,5 @@
+---
+
+varnish_repo:
+  - deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-3.0
+  - deb-src https://repo.varnish-cache.org/ubuntu/ trusty varnish-3.0

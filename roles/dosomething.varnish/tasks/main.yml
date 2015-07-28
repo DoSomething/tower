@@ -1,0 +1,77 @@
+- name: Install Apt HTTPS Transport and Source Handling
+  become: yes
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - apt-transport-https
+    - dpkg-dev
+    - automake
+    - libtool
+    - pkg-config
+    - libpcre3-dev
+    - libedit-dev
+    - libproxy-dev
+    - libnotify-dev
+    - python-docutils
+
+- name: Import Varnish Apt Repo Key
+  become: yes
+  apt_key: url=https://repo.varnish-cache.org/GPG-key.txt id=C4DEFFEB state=present
+  
+- name: Add Varnish Apt Repo
+  become: yes
+  apt_repository: repo='{{ item }}' state=present update_cache=yes
+  with_items: varnish_repo
+
+- name: Install Varnish
+  become: yes
+  apt: name=varnish state=latest update_cache=yes
+
+- name: Checkout Varnish Source from Apt Repo
+  become: yes
+  command: /usr/bin/apt-get source varnish chdir=/tmp/
+
+- name: Git Checkout BoltSort
+  become: yes
+  git: repo=https://github.com/vimeo/libvmod-boltsort.git dest=/tmp/boltsort
+
+- name: Configure Varnish Source
+  become: yes
+  command: ./configure chdir=/tmp/varnish-3.0.7
+
+- name: Build Varnish Source
+  become: yes
+  command: make chdir=/tmp/varnish-3.0.7
+
+- name: Autogen BoltSort Source
+  become: yes
+  command: ./autogen.sh chdir=/tmp/boltsort
+
+- name: Configure BoltSort Source
+  become: yes
+  command: >
+     ./configure VARNISHSRC=/tmp/varnish-3.0.7 VMODDIR=/usr/lib/varnish/vmods 
+      chdir=/tmp/boltsort
+
+- name: Build BoltSort Source
+  become: yes
+  command: make chdir=/tmp/boltsort
+
+- name: Install BoltSort
+  become: yes
+  command: make install chdir=/tmp/boltsort
+
+- name: Put Varnish Defaults in Place
+  become: yes
+  template: src=varnish-default.j2 dest=/etc/default/varnish owner=root group=root mode=644
+  notify: restart varnish
+
+- name: Copy Varnish Conf Files Into Place
+  become: yes
+  copy: src='files/varnish/{{ item }}' dest=/etc/varnish/{{ item }} owner=root group=root mode=644
+  with_items: varnish_files
+  notify: restart varnish
+    
+- name: Put Secrets File in Place
+  become: yes
+  template: src=varnish-secret.j2 dest=/etc/varnish/secret owner=root group=root mode=644
+  notify: restart varnish
