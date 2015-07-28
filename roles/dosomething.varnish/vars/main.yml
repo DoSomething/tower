@@ -1,17 +1,5 @@
 ---
 
-varnish_prereqs:
-    - apt-transport-https
-    - dpkg-dev
-    - automake
-    - libtool
-    - pkg-config
-    - libpcre3-dev
-    - libedit-dev
-    - libproxy-dev
-    - libnotify-dev
-    - python-docutils
-
 varnish_repo:
-    - deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-3.0
-    - deb-src https://repo.varnish-cache.org/ubuntu/ trusty varnish-3.0
+  - deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-3.0
+  - deb-src https://repo.varnish-cache.org/ubuntu/ trusty varnish-3.0

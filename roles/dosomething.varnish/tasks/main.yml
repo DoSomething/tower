@@ -1,7 +1,17 @@
 - name: Install Apt HTTPS Transport and Source Handling
   become: yes
   apt: name={{ item }} state=latest update_cache=yes
-  with_items: varnish_prereqs
+  with_items:
+    - apt-transport-https
+    - dpkg-dev
+    - automake
+    - libtool
+    - pkg-config
+    - libpcre3-dev
+    - libedit-dev
+    - libproxy-dev
+    - libnotify-dev
+    - python-docutils
 
 - name: Import Varnish Apt Repo Key
   become: yes
@@ -38,9 +48,9 @@
 
 - name: Configure BoltSort Source
   become: yes
-  command: > 
-      ./configure VARNISHSRC=/tmp/varnish-3.0.7 VMODDIR=/usr/lib/varnish/vmods
-       chdir=/tmp/boltsort
+  command: >
+     ./configure VARNISHSRC=/tmp/varnish-3.0.7 VMODDIR=/usr/lib/varnish/vmods 
+      chdir=/tmp/boltsort
 
 - name: Build BoltSort Source
   become: yes
@@ -52,13 +62,13 @@
 
 - name: Put Varnish Defaults in Place
   become: yes
-  copy: src=varnish-default dest=/etc/default/varnish owner=root group=root mode=644
+  template: src=varnish-default.j2 dest=/etc/default/varnish owner=root group=root mode=644
+  notify: restart varnish
 
 - name: Copy Varnish Conf Files Into Place
   become: yes
-  copy: src={{ item }} dest=/etc/varnish/{{ item }} owner=root group=root mode=644
-  with_items:
-    - 503.html
+  copy: src='files/varnish/{{ item }}' dest=/etc/varnish/{{ item }} owner=root group=root mode=644
+  with_items: varnish_files
   notify: restart varnish
     
 - name: Put Secrets File in Place
