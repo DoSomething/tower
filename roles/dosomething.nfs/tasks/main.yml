@@ -1,0 +1,43 @@
+- name: Partition /dev/sdb volume
+  become: yes
+  shell: (echo o; echo n; echo p; echo 1; echo ; echo; echo w) | fdisk /dev/xvdb
+  args:
+    creates: /dev/xvdb1
+
+- name: Make Ext4 Volume
+  become: yes
+  filesystem: fstype=ext4 dev=/dev/xvdb1
+
+- name: Create NFS Root Dir
+  become: yes
+  file: path=/drupal-static-files state=directory owner=dosomething group=dosomething mode=775
+
+- name: Mount /dev/sdb to NFS Root Dir
+  become: yes
+  mount: name=/drupal-static-files src=/dev/xvdb1 fstype=ext4 opts=defaults,noatime state=mounted
+
+- name: Add NFS Root Dir fstab Entry
+  become: yes
+  mount: name=/drupal-static-files src=/dev/xvdb1 fstype=ext4 opts=defaults,noatime state=present
+
+- name: Set Correct Dir Perms
+  become: yes
+  file: path=/drupal-static-files state=directory owner=dosomething group=dosomething mode=775
+
+- name: Install NFS Server Packages
+  become: yes
+  apt: name=nfs-kernel-server state=latest
+
+- name: Create Exports File
+  become: yes
+  lineinfile: >
+    dest=/etc/exports
+    line="{{ lookup('file', 'files/nfs/exports') }}"
+
+- name: Create Exports Table
+  become: yes
+  command: exportfs -a
+
+- name: Start NFS Server
+  become: yes
+  service: name=nfs-kernel-server state=restarted enabled=yes

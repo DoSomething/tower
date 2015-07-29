@@ -1,0 +1,6 @@
+---
+
+- name: Setup Thor NFS Server
+  hosts: nfs
+  roles:
+    - role: dosomething.nfs
