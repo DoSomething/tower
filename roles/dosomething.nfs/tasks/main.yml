@@ -1,4 +1,4 @@
-- name: Partition /dev/sdb volume
+- name: Partition /dev/xvdb volume
   become: yes
   shell: (echo o; echo n; echo p; echo 1; echo ; echo; echo w) | fdisk /dev/xvdb
   args:
@@ -10,7 +10,7 @@
 
 - name: Create NFS Root Dir
   become: yes
-  file: path=/drupal-static-files state=directory owner=dosomething group=dosomething mode=775
+  file: path=/drupal-static-files state=directory owner="{{ app_user }}" group="{{ app_user }}" mode=775
 
 - name: Mount /dev/sdb to NFS Root Dir
   become: yes
@@ -22,7 +22,7 @@
 
 - name: Set Correct Dir Perms
   become: yes
-  file: path=/drupal-static-files state=directory owner=dosomething group=dosomething mode=775
+  file: path=/drupal-static-files state=directory owner="{{ app_user }}" group="{{ app_user }}" mode=775
 
 - name: Install NFS Server Packages
   become: yes
