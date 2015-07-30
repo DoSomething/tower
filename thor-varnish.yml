@@ -1,6 +1,6 @@
 ---
 
-- name: Setup Thor Varnish
+- name: Setup Varnish
   hosts: varnish
   roles:
     - role: dosomething.varnish
