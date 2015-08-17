@@ -1,0 +1,19 @@
+
+# Environment
+
+app_environment_variables:
+  - { option: DS_ENVIRONMENT, value: "{{ app_environment }}" }
+  - { option: DS_DB_MASTER_NAME, value: "{{ app_user }}" }
+  - { option: DS_DB_MASTER_USER, value: "{{ app_db_master_user }}" }
+  - { option: DS_DB_MASTER_PASS, value: "{{ app_db_password }}" }
+  - { option: DS_DB_MASTER_HOST, value: "{{ app_db_host }}" }
+  - { option: DS_HOSTNAME, value: "{{ app_host }}" }
+  - { option: DS_INSECURE_PORT, value: 80 }
+  - { option: DS_SECURE_PORT, value: 443 }
+
+  - { option: DS_REDIS_HOST, value: 10.100.26.107 }
+  - { option: DS_REDIS_PORT, value: 6379 }
+
+  - { option: DS_APACHESOLR_HOST, value: 10.100.30.122 }
+  - { option: DS_APACHESOLR_PORT, value: "8080" }
+  - { option: DS_APACHESOLR_READ_ONLY, value: 0 }
