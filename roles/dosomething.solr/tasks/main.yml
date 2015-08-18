@@ -1,0 +1,17 @@
+---
+
+- name: Update Java
+  sudo: yes
+  apt: name=java7-jdk state=latest
+  register: java_update
+  changed_when: '"is already the newest version" not in java_update.stdout'
+
+- name: Check if Solr installed
+  stat: path=/opt/solr-{{ solr_version }}
+  register: solr_dir
+
+- include: solr-first-install.yml
+  when: solr_dir.stat.isdir is not defined
+
+- include: solr-install-core.yml
+

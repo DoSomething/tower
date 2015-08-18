@@ -1,0 +1,10 @@
+---
+
+# App
+app_user: dosomething
+
+# Solr
+solr_cores:
+  - name:    collection1
+    repo:    https://github.com/DoSomething/solr-core-drupal.git
+    version: 7.x-1.7-solr-5.x

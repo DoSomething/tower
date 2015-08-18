@@ -1,0 +1,6 @@
+---
+
+- name: Setup Thor Solr Server
+  hosts: solr
+  roles:
+    - role: dosomething.solr
