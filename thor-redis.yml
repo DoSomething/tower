@@ -1,0 +1,6 @@
+---
+
+- name: Setup Thor Redis Server
+  hosts: redis
+  roles:
+    - role: dosomething.redis
