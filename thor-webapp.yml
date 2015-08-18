@@ -1,0 +1,21 @@
+- name: Setup Drupal WebApp
+  hosts: webapp
+  roles:
+    - role: dosomething.web
+    - role: dosomething.phoenix
+
+# sudo mount -t nfs -o nolock 172.20.100.20:/drupal-static-files /mnt
+#- name: Mount shared folder to Drupal WebApp
+#  hosts: tag_Role_Thor_WebApp
+#  tasks:
+#  - name: Install nfs-common
+#    sudo: yes
+#    apt: name=nfs-common state=latest
+#  - name: Mount NFS
+#    sudo: yes
+#    mount: >
+#      name=/var/www/www.dosomething.org/shared/files
+#      src='172.20.100.20:/drupal-static-files'
+#      fstype=nfs
+#      opts=nolock
+#      state=mounted
