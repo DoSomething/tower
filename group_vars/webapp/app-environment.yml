@@ -11,9 +11,9 @@ app_environment_variables:
   - { option: DS_INSECURE_PORT, value: 80 }
   - { option: DS_SECURE_PORT, value: 443 }
 
-  - { option: DS_REDIS_HOST, value: 10.100.26.107 }
+  - { option: DS_REDIS_HOST, value: 172.20.100.40 }
   - { option: DS_REDIS_PORT, value: 6379 }
 
-  - { option: DS_APACHESOLR_HOST, value: 10.100.30.122 }
+  - { option: DS_APACHESOLR_HOST, value: 172.20.100.50 }
   - { option: DS_APACHESOLR_PORT, value: "8080" }
   - { option: DS_APACHESOLR_READ_ONLY, value: 0 }
