@@ -1,6 +1,0 @@
----
-# handlers file for search
-
-- name: restart solr
-  sudo: yes
-  service: name=solr state=restarted

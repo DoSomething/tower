@@ -23,7 +23,7 @@
     copy=no
     creates=/opt/solr-{{ solr_version }}
 
-- name: Set solr onwer
+- name: Set solr owner
   sudo: yes
   file: >
     path=/opt/solr-{{ solr_version }}
