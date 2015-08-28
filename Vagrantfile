@@ -11,6 +11,13 @@ Vagrant.configure("2") do |config|
   # SSH Agent forwarding
   config.ssh.forward_agent = true
 
+  # Use multiple ssh keys, see https://github.com/DoSomething/tower/issues/106
+  config.ssh.private_key_path = [
+    '~/.vagrant.d/insecure_private_key',
+    '~/.ssh/id_rsa'
+  ]
+  config.ssh.insert_key = false
+
   # Hostname
   config.vm.hostname = "dev.dosomething.org"
 
