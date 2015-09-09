@@ -1,0 +1,6 @@
+---
+
+- name: Setup Thor Rabbit MQ Server
+  hosts: rabbit
+  roles:
+    - role: dosomething.rabbitmq
