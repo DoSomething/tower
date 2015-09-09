@@ -1,0 +1,6 @@
+---
+
+- name: Install Thor MongoDB Servers for NS and MB
+  hosts: thor-mongo-servers
+  roles:
+    - role: dosomething.mongo

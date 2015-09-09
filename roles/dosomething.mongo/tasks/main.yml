@@ -1,0 +1,16 @@
+- name: Import MongoDB Apt Key
+  become: yes
+  apt_key: keyserver=keyserver.ubuntu.com id=0x9ecbec467f0ceb10 state=present
+
+- name: Add MongoDB Apt Repository
+  become: yes
+  apt_repository: repo='deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse' state=present
+
+- name: Install MongoDB
+  become: yes
+  apt: name=mongodb-org state=latest update_cache=yes
+
+- name: Make Listen on All Interfaces
+  become: yes
+  replace: dest=/etc/mongod.conf regexp='^bind_ip = 127.0.0.1' replace='#bind_ip = 127.0.0.1' backup=yes
+  notify: restart mongodb
