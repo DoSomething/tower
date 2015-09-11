@@ -1,0 +1,36 @@
+---
+
+- name: PHP | Install PHP
+  apt: name={{ item }} state=latest
+  sudo: yes
+  with_items:
+    - php5
+    - php5-fpm
+    - php5-cli
+
+- name: PHP | Install extensions
+  apt: name={{ item }} state=latest
+  sudo: yes
+  with_items: php_extensions_defaults + php_extensions
+  notify: restart php-fpm
+
+- name: PHP | Alter php.ini
+  sudo: yes
+  ini_file: >
+    dest=/etc/php5/fpm/php.ini
+    section={{ item.section }}
+    option={{ item.option }}
+    value={{ item.value }}
+    backup=yes
+  with_items: php_ini_settings
+  notify: restart php-fpm
+
+- name: PHP | Setup FPM pool
+  sudo: yes
+  ini_file: >
+    dest=/etc/php5/fpm/pool.d/www.conf
+    section=www
+    option={{ item.option }}
+    value={{ item.value }}
+  with_items: php_fpm_defaults + php_fpm_settings
+  notify: restart php-fpm

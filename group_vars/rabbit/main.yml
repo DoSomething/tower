@@ -2,3 +2,20 @@
 
 # App
 app_user: dosomething
+
+# RabbitMQ
+rabbitmq_vhosts:
+  - dosomething
+  - sandbox
+
+rabbitmq_users:
+  - user: admin
+    tags: administrator
+    password: "{{ dosometing_rabbitmq_admin_password }}"
+    vhosts:   "{{ rabbitmq_vhosts }}"
+  - user: dosomething
+    password: "{{ dosometing_rabbitmq_admin_password }}"
+    vhosts:   "{{ rabbitmq_vhosts }}"
+  - user: sandbox
+    password: "{{ dosometing_rabbitmq_admin_password }}"
+    vhosts: [sandbox]
