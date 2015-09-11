@@ -1,0 +1,11 @@
+---
+# vars file for web
+
+# PHP
+php_fpm_defaults:
+  - { option: listen,                 value: "{{ php_fpm_listen }}" }
+  - { option: listen.allowed_clients, value: "127.0.0.1" }
+
+# PHP Extensions
+php_extensions_defaults:
+  - php5-curl

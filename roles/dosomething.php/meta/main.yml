@@ -1,7 +1,7 @@
 ---
 galaxy_info:
-  author: Sergii Tkachenko
-  description: DoSomething MB PHP App Server
+  author: Sena Heydari
+  description: DoSomething Web server
   company: DoSomething.org
   license: MIT
   min_ansible_version: 1.2
@@ -13,8 +13,3 @@ galaxy_info:
   - system
 dependencies:
   - { role: "dosomething.base" }
-  - { role: "dosomething.php" }
-
-
-
-# - { role: "dosomething.composer" }

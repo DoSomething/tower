@@ -1,0 +1,7 @@
+---
+
+- name: Setup Thor MBC
+  hosts: mbc
+  roles:
+    - role: dosomething.mb-php
+    - role: dosomething.mb-node

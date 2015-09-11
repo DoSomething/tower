@@ -4,7 +4,7 @@ galaxy_info:
   description: DoSomething NodeJS PM2 Server metapackage
   company: DoSomething.org
   license: MIT
-  min_ansible_version: 1.2
+  min_ansible_version: 1.9
   platforms:
   - name: Ubuntu
     versions:
@@ -12,4 +12,5 @@ galaxy_info:
   categories:
   - system
 dependencies:
+  - { role: "dosomething.nodejs", sudo: yes }
   - { role: "franklinkim.pm2", sudo: yes }
