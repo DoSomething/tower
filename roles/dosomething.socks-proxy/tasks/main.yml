@@ -1,0 +1,18 @@
+- name: Modify Socks TCP Services Port Entries
+  become: yes
+  replace: >
+    dest=/etc/services 
+    regexp='^socks           1080/tcp'
+    replace='socks           1999/tcp                        # socks proxy server'
+
+- name: Modify Socks UDP Services Port Entries
+  become: yes
+  replace: >
+    dest=/etc/services 
+    regexp='^socks           1080/udp' 
+    replace='socks           1999/udp'
+
+- name: Put Socks Init Script In Place
+  become: yes
+  copy: src=socks-init dest=/etc/init.d/socks owner=root group=root mode=755
+  notify: restart socks

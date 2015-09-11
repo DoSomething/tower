@@ -1,0 +1,5 @@
+---
+
+- name: restart socks
+  become: yes
+  service: name=socks state=restarted

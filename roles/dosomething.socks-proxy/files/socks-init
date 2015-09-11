@@ -1,0 +1,35 @@
+#!/bin/bash
+
+PROCRUN=`ps auxww | grep -v grep | grep "ssh -f" | awk '{print $2}'`
+
+case "$1" in
+       start)
+           if [ "$PROCRUN" != '' ]; then
+             echo "Socks Proxy is Already Running!"
+           else    
+             sudo -u ubuntu ssh -f -N -D 0.0.0.0:1999 localhost
+             echo "Socks Proxy Started!"
+           fi
+           ;;
+       stop)
+           if [ "$PROCRUN" = '' ]; then
+             echo "Socks Proxy is Not Running!"
+           else
+             ps auxww | grep -v grep | grep "ssh -f" | awk '{print $2}' | /usr/bin/xargs kill
+             echo "Socks Proxy Stopped!"
+           fi
+           ;;
+       restart)
+           if [ "$PROCRUN" == '' ]; then
+             echo "Socks Proxy is Not Running!"
+             sudo -u ubuntu ssh -f -N -D 0.0.0.0:1999 localhost
+             echo "Socks Proxy Started!"
+           else
+             ps auxww | grep -v grep | grep "ssh -f" | awk '{print $2}' | /usr/bin/xargs kill
+             echo "Socks Proxy Stopped!"
+             sleep 1
+             sudo -u ubuntu ssh -f -N -D 0.0.0.0:1999 localhost
+             echo "Socks Proxy Started!"
+           fi
+           ;;
+esac
