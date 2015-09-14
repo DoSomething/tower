@@ -1,4 +1,4 @@
 - name: Copy HA Proxy File Into Place
   become: yes
-  copy: src=files/haproxy/haproxy dest=/etc/haproxy/haproxy.cfg owner=root group=root owner=644 backup=yes
+  copy: src=files/haproxy/haproxy dest=/etc/haproxy/haproxy.cfg owner=root group=root mode=644 backup=yes
   notify: restart haproxy
