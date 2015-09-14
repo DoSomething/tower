@@ -1,0 +1,6 @@
+---
+
+- name: Setup HA Proxy LB's
+  hosts: tag_Role_HAProxy_Fastly
+  roles:
+    - role: dosomething.haproxy-fastly
