@@ -16,4 +16,5 @@
     restart haproxy
 
 - name: Remove Repo Checkout
+  become: yes
   file: path=/tmp/ServerConfig state=absent force=yes
