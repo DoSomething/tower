@@ -1,6 +1,20 @@
 ---
 
+- name: Checkout ServerConfig Repo Locally
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: Checkout Repo    
+      git: repo=ssh://git@github.com:DoSomething/ServerConfig.git dest=files/
+
 - name: Setup HA Proxy LB's
   hosts: tag_Role_HAProxy_Fastly
   roles:
     - role: dosomething.haproxy-fastly
+
+ - name: Remove ServerConfig Repo
+   hosts: 127.0.0.1
+   connection: local
+   tasks:
+     - name: Remove Repo Checkout
+       file: path=files/ServerConfig state=absent force=yes
