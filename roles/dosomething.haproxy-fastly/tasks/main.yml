@@ -1,9 +1,6 @@
 - name: Checkout ServerConfig Repo Locally
-  hosts: 127.0.0.1
-  connection: local
-  tasks:
-    - name: Checkout ServerConfig Repo
-      git: repo=ssh://git@github.com:DoSomething/ServerConfig.git dest=files/
+  git: repo=ssh://git@github.com:DoSomething/ServerConfig.git dest=files/
+  delegate_to: 127.0.0.1
 
 - name: Copy HA Proxy Config Into Place
   become: yes
@@ -12,8 +9,5 @@
     restart haproxy
 
 - name: Remove ServerConfig Repo
-  hosts: 127.0.0.1
-  connection: local
-  tasks:
-    - name: Remove ServerConfig Repo Checkout
-      file: path=files/ServerConfig state=absent force=yes
+  file: path=files/ServerConfig state=absent force=yes
+  delegate_to: 127.0.0.1
