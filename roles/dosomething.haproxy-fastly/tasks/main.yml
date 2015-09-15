@@ -11,7 +11,7 @@
 
 - name: Copy HA Proxy Config Into Place
   become: yes
-  command: cp -a /tmp/ServerConfig/haproxy-prod/haproxy dest=/etc/haproxy/haproxy.cfg
+  command: cp -a /tmp/ServerConfig/haproxy-prod/haproxy /etc/haproxy/haproxy.cfg
   notify:
     restart haproxy
 
