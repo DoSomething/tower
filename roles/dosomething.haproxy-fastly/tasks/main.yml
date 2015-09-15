@@ -1,4 +1,4 @@
 - name: Copy HA Proxy File Into Place
   become: yes
-  copy: content="{{ lookup('file', 'files/haproxy/haproxy') }}" dest=/etc/haproxy/haproxy.cfg owner=root group=root mode=644 backup=yes
+  copy: content=haproxy_config.split('\n') dest=/etc/haproxy/haproxy.cfg.test owner=root group=root mode=644 backup=yes
   notify: restart haproxy
