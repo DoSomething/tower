@@ -1,4 +1,5 @@
 - name: Create ServerConfig Dir
+  become: yes
   file: path=/tmp/ServerConfig state=directory owner=root group=root mode=777
 
 - name: Checkout ServerConfig Repo
