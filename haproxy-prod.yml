@@ -5,7 +5,7 @@
   connection: local
   tasks:
     - name: Checkout Repo    
-      git: repo=ssh://git@github.com:DoSomething/ServerConfig.git dest=files/
+      git: repo=ssh://git@github.com:DoSomething/ServerConfig.git dest=files/ accept_hostkey=yes
 
 - name: Setup HA Proxy LB's
   hosts: tag_Role_HAProxy_Fastly
