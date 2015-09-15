@@ -3,7 +3,7 @@
   file: path=/tmp/ServerConfig state=directory owner=root group=root mode=777
 
 - name: Checkout ServerConfig Repo
-  git: repo=https://github.com/DoSomething/ServerConfig.git dest=/tmp/ServerConfig
+  git: repo=git@github.com:DoSomething/ServerConfig.git dest=/tmp/ServerConfig accept_hostkey=yes
 
 - name: Set File Perms
   become: yes
