@@ -1,5 +1,15 @@
+- name: Checkout ServerConfig Repo
+  git: repo=ssh://git@github.com:DoSomething/ServerConfig.git dest=/tmp accept_hostkey=yes
+
+- name: Set File Perms
+  become: yes
+  file: path=/tmp/ServerConfig/haproxy-prod/haproxy owner=root group=root mode=644
+
 - name: Copy HA Proxy Config Into Place
   become: yes
-  copy: src=files/ServerConfig/haproxy-prod/haproxy dest=/etc/haproxy/haproxy.cfg onwer=root group=root mode=644 backup=yes
+  command: cp -a /tmp/ServerConfig/haproxy-prod/haproxy dest=/etc/haproxy/haproxy.cfg
   notify:
     restart haproxy
+
+- name: Remove Repo Checkout
+  file: path=/tmp/ServerConfig state=absent force=yes
