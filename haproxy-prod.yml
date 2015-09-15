@@ -1,6 +1,8 @@
 ---
 
 - name: Checkout ServerConfig Repo Locally
+  become: true
+  become_user: awx
   hosts: 127.0.0.1
   connection: local
   tasks:
@@ -13,6 +15,8 @@
     - role: dosomething.haproxy-fastly
 
 - name: Remove ServerConfig Repo
+  become: true
+  become_user: awx
   hosts: 127.0.0.1
   connection: local
   tasks:
