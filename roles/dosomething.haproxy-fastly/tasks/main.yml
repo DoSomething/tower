@@ -1,5 +1,5 @@
 - name: Checkout ServerConfig Repo
-  git: repo=https://github.com/DoSomething/tower.git dest=/tmp
+  git: repo=https://github.com/DoSomething/ServerConfig.git dest=/tmp
 
 - name: Set File Perms
   become: yes
