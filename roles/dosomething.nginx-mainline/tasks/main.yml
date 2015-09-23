@@ -1,0 +1,11 @@
+- name: Import PPA Key
+  become: yes
+  apt_key: keyserver=keyserver.ubuntu.com id=0x8b3981e7a6852f782cc4951600a6f0a3c300ee8c
+
+- name: Add Nginx Mainline PPA
+  become: yes
+  apt_repository: repo='ppa:nginx/development' state=present
+
+- name: Install Nginx
+  become: yes
+  apt: name=nginx state=latest update_cache=yes
