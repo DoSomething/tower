@@ -1,0 +1,6 @@
+---
+
+- name: Setup Thor Northstar App
+  hosts: northstar-app
+  roles:
+    - role: dosomething.base

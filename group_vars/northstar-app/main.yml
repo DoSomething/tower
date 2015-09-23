@@ -1,0 +1,11 @@
+---
+
+# App
+app_user: dosomething
+
+# Https
+app_ssl_enabled: no
+app_fastcgi_param_https: "on"
+
+# Other
+composer_self_update: yes
