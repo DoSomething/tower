@@ -30,6 +30,10 @@ server {
   location / {
     # This is cool because no php is touched for static content
     try_files $uri @rewrite;
+    # This will direct Nginx 404's to the app, as it has a PHP extension, and will be handled
+    # by the php directive below.You can use any location that doesn't exist in your app to 
+    # generate a 404. Alternately, you can direct it to an actual 404 page if you have one.
+    error_page 404 = @rewrite;
   }
 
   location @rewrite {
