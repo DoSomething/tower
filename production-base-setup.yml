@@ -1,0 +1,11 @@
+---
+
+##########################
+# This playbook is to setup all of our hosts with their default settings
+# as well as to ensure we can run complete updates on the boxes on a regular basis.
+##########################
+
+- name: Base Setup and Update for All Hosts
+  hosts: tag_Environment_Production
+  roles:
+    - role: dosomething.base
