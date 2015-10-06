@@ -10,6 +10,10 @@
   become: yes
   apt_repository: repo='deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx' state=present update_cache=yes
 
+- name: Install Nginx
+  become: yes
+  apt: name=nginx state=latest
+
 - name: Put Sysctl.conf Settings In Place
   become: yes
   sysctl: name={{ item.setting }} value={{ item.value }} sysctl_set=yes reload=yes
