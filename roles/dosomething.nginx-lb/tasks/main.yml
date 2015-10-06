@@ -23,27 +23,6 @@
   become: yes
   command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096 creates=/etc/ssl/certs/dhparam.pem
 
-- name: Remove Existing DS Certificate
-  become: yes
-  file: path=/etc/ssl/certs/ds.org.crt state=absent
-
-- name: Install DS Private Key
-  become: yes
-  copy: content="{{ ds_priv_key }}" dest=/etc/ssl/certs/ds.org.key owner=root group=root mode=600
-
-- name: Install DS Certificate
-  become: yes
-  copy: content="{{ ds_cert }}" dest=/etc/ssl/certs/ds.org.crt owner=root group=root mode=600
-
-- name: Copy Intermediate CA
-  become: yes
-  copy: src=intermediate-ca.crt dest=/tmp/intermediate-ca.crt owner=root group=root mode=664
-
-- name: Append Intermediate CA to Cert
-  become: yes
-  command: cat /tmp/intermediate-ca.crt >> /etc/ssl/certs/ds.org.crt owner=root group=root mode=600
-  notify: restart nginx
-
 - name: Put Sysctl.conf Settings In Place
   become: yes
   sysctl: name={{ item.setting }} value={{ item.value }} sysctl_set=yes reload=yes
