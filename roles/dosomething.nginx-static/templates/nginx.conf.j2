@@ -3,8 +3,8 @@ server {
 
    server_name default_server {{ server_list }};
 
-   root /var/www/static
-   index index.html
+   root /var/www/static;
+   index index.html;
 
    location / {
       try_files $uri $uri/ = 404;
