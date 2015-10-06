@@ -1,6 +1,6 @@
 - name: Create Static Files Dir
   become: yes
-  file: path=/var/www/static owner=nginx group=nginx mode=755
+  file: path=/var/www/static state=directory owner=nginx group=nginx mode=755
 
 - name: Remove Existing Default Sites Files
   become: yes
