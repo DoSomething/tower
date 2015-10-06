@@ -23,6 +23,10 @@
   become: yes
   command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096 creates=/etc/ssl/certs/dhparam.pem
 
+- name: Lock Down Permission on dhparam file
+  become: yes
+  file: path=/etc/ssl/certs/dhparam.pem owner=root group=root mode=600
+
 - name: Put Sysctl.conf Settings In Place
   become: yes
   sysctl: name={{ item.setting }} value={{ item.value }} sysctl_set=yes reload=yes
