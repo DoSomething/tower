@@ -1,0 +1,6 @@
+---
+
+- name: Setup HA Proxy LB's
+  hosts: tag_Role_Nginx_LB
+  roles:
+    - role: dosomething.nginx-lb
