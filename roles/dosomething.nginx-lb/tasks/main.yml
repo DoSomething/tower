@@ -38,3 +38,28 @@
   lineinfile: dest=/etc/security/limits.conf line="{{ item.line }}"
   with_items: limits_tweaks
   notify: restart nginx
+
+- name: Remove Existing Default Sites Files
+  become: yes
+  file: path=/etc/nginx/conf.d/default.conf state=absent
+
+- name: Create ServerConfig Dir
+  become: yes
+  file: path=/tmp/ServerConfig state=directory owner=root group=root mode=777
+
+- name: Checkout ServerConfig Repo
+  git: repo=git@github.com:DoSomething/ServerConfig.git dest=/tmp/ServerConfig accept_hostkey=yes
+
+- name: Set File Perms
+  become: yes
+  file: path=/tmp/ServerConfig/nginx-prod/nginx-lb.conf owner=root group=root mode=644
+
+- name: Copy Nginx LB Config Into Place
+  become: yes
+  command: cp -a /tmp/ServerConfig/nginx-prod/nginx-lb.conf /etc/nginx/conf.d/lb.conf
+  notify:
+    restart nginx
+
+- name: Remove Repo Checkout
+  become: yes
+  file: path=/tmp/ServerConfig state=absent force=yes
