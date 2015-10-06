@@ -1,0 +1,6 @@
+---
+
+- name: Setup Nginx Static Servers
+  hosts: tag_Role_Nginx_Static
+  roles:
+    - role: dosomething.nginx-static

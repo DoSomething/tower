@@ -1,11 +1,20 @@
-- name: Import PPA Key
+- name: Add Nginx Repo Apt Key
   become: yes
-  apt_key: keyserver=keyserver.ubuntu.com id=0x8b3981e7a6852f782cc4951600a6f0a3c300ee8c
+  apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
 
-- name: Add Nginx Mainline PPA
+- name: Add Nginx Mainline Repo
   become: yes
-  apt_repository: repo='ppa:nginx/development' state=present
+  apt_repository: repo='deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx' state=present update_cache=yes
+
+- name: Add Nginx Mainline Source Repo
+  become: yes
+  apt_repository: repo='deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx' state=present update_cache=yes
 
 - name: Install Nginx
   become: yes
-  apt: name=nginx state=latest update_cache=yes
+  apt: name=nginx state=latest
+
+- name: Install Nginx Base Conf
+  become: yes
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf owner=root group=root mode=644
+  notify: restart nginx
