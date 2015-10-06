@@ -14,6 +14,11 @@
   become: yes
   apt: name=nginx state=latest
 
+- name: Install Nginx Base LB Conf
+  become: yes
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf user=root group=root mode=644
+  notify: restart nginx
+
 - name: Put Sysctl.conf Settings In Place
   become: yes
   sysctl: name={{ item.setting }} value={{ item.value }} sysctl_set=yes reload=yes
