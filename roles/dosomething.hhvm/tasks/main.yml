@@ -1,6 +1,6 @@
 - name: Install Pre-req packages
   become: yes
-  apt: name=sortware-properties-common state=latest
+  apt: name=software-properties-common state=latest
 
 - name: Add HHVM Apt Key
   become: yes
