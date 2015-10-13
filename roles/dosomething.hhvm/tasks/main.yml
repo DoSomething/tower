@@ -1,0 +1,14 @@
+- name: Add HHVM Apt Key
+  become: yes
+  apt_key: keyserver=keyserver.ubuntu.com id=0x5a16e7281be7a449
+
+- name: Add HHVM Apt Repo
+  become: yes
+  apt_repository: repo='deb http://dl.hhvm.com/ubuntu trusty main' state=present
+
+- name: Install HHVM
+  become: yes
+  apt: name={{ item }} state=latest
+  with_items:
+    - software-properties-common
+    - hhvm
