@@ -1,6 +1,10 @@
+- name: Install Pre-req packages
+  become: yes
+  apt: name=sortware-properties-common state=latest
+
 - name: Add HHVM Apt Key
   become: yes
-  apt_key: keyserver=https://keyserver.ubuntu.com id=0x5a16e7281be7a449
+  apt_key: keyserver=keyserver.ubuntu.com:80 id=0x5a16e7281be7a449
 
 - name: Add HHVM Apt Repo
   become: yes
@@ -8,7 +12,4 @@
 
 - name: Install HHVM
   become: yes
-  apt: name={{ item }} state=latest
-  with_items:
-    - software-properties-common
-    - hhvm
+  apt: name=hhvm state=latest
