@@ -1,6 +1,6 @@
 - name: Add HHVM Apt Key
   become: yes
-  apt_key: keyserver=keyserver.ubuntu.com id=0x5a16e7281be7a449
+  apt_key: keyserver=keyserver.ubuntu.com:80 id=0x5a16e7281be7a449
 
 - name: Add HHVM Apt Repo
   become: yes
