@@ -4,7 +4,7 @@ server {
    server_name default_server {{ server_list }};
 
    root /var/www/static;
-   index index.html;
+   index index.php;
 
    location / {
       try_files $uri @rewrite $uri/ =404;
