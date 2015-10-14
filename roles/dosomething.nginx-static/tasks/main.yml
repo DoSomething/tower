@@ -1,6 +1,9 @@
-- name: Create Static Files Dir
+- name: Create Static Files Directories
   become: yes
-  file: path=/var/www/static state=directory owner=nginx group=nginx mode=755
+  file: path={{ item }} state=directory owner=nginx group=nginx mode=755
+  with_items:
+    - /var/www/static
+    - /var/www/forge
 
 - name: Remove Existing Default Sites Files
   become: yes
