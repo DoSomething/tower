@@ -23,3 +23,16 @@ server {
   }
 
 }
+
+server {
+   listen 80;
+
+   server_name adamantium.dosomething.org;
+
+   root /var/www/forge/dist;
+
+   location / {
+      try_files $uri $uri/ = 404;
+   }
+  
+}
