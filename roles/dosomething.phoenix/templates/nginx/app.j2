@@ -45,7 +45,7 @@ server {
   }
 
   ## Images and static content is treated different
-  location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|xml)$ {
+  location ~* ^.+\.(jpg|jpeg|gif|css|png|js|ico|xml)$ {
     access_log off;
     expires    30d;
   }
