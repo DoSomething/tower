@@ -2,4 +2,4 @@
 # defaults file for nodejs
 
 # Nodejs
-nodejs_version: "0.12"
+nodejs_version: "4.x"
