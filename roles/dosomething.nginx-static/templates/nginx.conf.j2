@@ -4,14 +4,14 @@ server {
    server_name default_server {{ server_list }};
 
    root /var/www/static;
-   index index.php;
+   index index.html;
 
    location / {
       try_files $uri @rewrite $uri/ =404;
    }
   
    location @rewrite {
-      rewrite ^ /index.php;
+      rewrite ^ /index.html;
   }
 
   location ~ \.(hh|php)$ {
