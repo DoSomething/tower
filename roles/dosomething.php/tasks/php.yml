@@ -13,7 +13,7 @@
 - name: PHP | Install extensions
   apt: name={{ item }} state=latest
   sudo: yes
-  with_items: php_extensions_defaults + php_extensions
+  with_items: "{{ php_extensions_defaults }} + {{ php_extensions }}"
   notify: restart php-fpm
 
 - name: PHP | Alter php.ini
@@ -34,5 +34,5 @@
     section=www
     option={{ item.option }}
     value={{ item.value }}
-  with_items: php_fpm_defaults + php_fpm_settings
+  with_items: "{{ php_fpm_defaults }} + {{ php_fpm_settings }}"
   notify: restart php-fpm

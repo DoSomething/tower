@@ -1,14 +1,14 @@
 ---
 
-- name: RabbitMQ | Add rabbitmq.com APT Repository
-  sudo: yes
-  apt_repository: repo="deb http://www.rabbitmq.com/debian/ testing main"
-
 - name: RabbitMQ | Add rabbitmq.com public key
   sudo: yes
   apt_key: >
-    url=http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+    url=https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
     id=056E8E56
+
+- name: RabbitMQ | Add rabbitmq.com APT Repository
+  sudo: yes
+  apt_repository: repo="deb http://www.rabbitmq.com/debian/ testing main"
 
 - name: RabbitMQ | Install
   sudo: yes

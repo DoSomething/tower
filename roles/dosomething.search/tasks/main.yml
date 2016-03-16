@@ -2,9 +2,7 @@
 
 - name: Update Java
   sudo: yes
-  apt: name=java7-jdk state=latest
-  register: java_update
-  changed_when: '"is already the newest version" not in java_update.stdout'
+  apt: name=openjdk-7-jdk state=latest
 
 - name: Check if Solr installed
   stat: path=/opt/solr-{{ solr_version }}

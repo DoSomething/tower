@@ -4,5 +4,5 @@
 # PM2
 pm2_startup: ubuntu
 pm2_service_enabled: yes
-pm2_service_state: started
-version: 0.14.*
+pm2_service_state: stopped
+pm2_version: 1.0.*
