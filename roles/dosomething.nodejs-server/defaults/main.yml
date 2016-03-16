@@ -2,7 +2,4 @@
 # defaults file for nodejs
 
 # PM2
-pm2_startup: ubuntu
-pm2_service_enabled: yes
-pm2_service_state: stopped
 pm2_version: 1.0.*

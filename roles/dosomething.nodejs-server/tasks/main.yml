@@ -1,1 +1,20 @@
 ---
+
+- name: Node.js server | Install PM2
+  become: yes
+  npm:
+    name: pm2
+    global: yes
+    version: "{{ pm2_version | default(omit) }}"
+
+- name:  Node.js server | Installing PM2 startup script
+  become: yes
+  command: >
+    pm2 startup ubuntu
+
+- name: Node.js server | Configuring service
+  become: yes
+  service:
+    name: "pm2-init.sh"
+    state: "stopped"
+    enabled: "yes"
