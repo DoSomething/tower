@@ -6,7 +6,6 @@
     path={{ mb_php_root }}
     state=directory
     owner={{ app_user }}
-  sudo: yes
 
 - name: MB PHP | Ensure log folder
   sudo: yes
@@ -14,7 +13,6 @@
     path={{ mb_php_log_path }}
     state=directory
     owner={{ app_user }}
-  sudo: yes
 
 - name: MB PHP | Checkout configuration
   remote_user: "{{ app_user }}"

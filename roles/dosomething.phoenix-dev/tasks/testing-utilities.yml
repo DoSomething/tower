@@ -1,7 +1,9 @@
 ---
 
 - name: Install testing utilities using NPM
-  npm: name={{ item.name }} version={{ item.version }} global=yes state=latest
+  # Changed from latest to present due to bug, see
+  # https://github.com/ansible/ansible-modules-extras/issues/1375
+  npm: name={{ item.name }} version={{ item.version }} global=yes state=present
   sudo: yes
   with_items:
     - name: mocha-phantomjs

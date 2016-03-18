@@ -13,4 +13,3 @@ galaxy_info:
   - system
 dependencies:
   - { role: "dosomething.nodejs", sudo: yes }
-  - { role: "franklinkim.pm2", sudo: yes }

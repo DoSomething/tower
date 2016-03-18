@@ -1,7 +1,9 @@
 ---
 
 - name: DoSomething App | Install global NPM libraries
-  npm: name={{ item }} global=yes state=latest
+  # Changed from latest to present due to bug, see
+  # https://github.com/ansible/ansible-modules-extras/issues/1375
+  npm: name={{ item }} global=yes state=present
   sudo: yes
   with_items:
     - grunt-cli
