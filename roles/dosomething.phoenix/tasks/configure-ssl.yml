@@ -15,7 +15,7 @@
     - "{{ app_host }}.key"
   notify: reload nginx
 
-# A snippet to remind how to generate seld signed cert.
+# A snippet to remind how to generate self signed cert.
 # - name: SSL | Create self signed cert
 #   become: yes
 #   command: >
