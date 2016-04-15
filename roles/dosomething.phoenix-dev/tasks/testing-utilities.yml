@@ -7,7 +7,7 @@
   become: yes
   with_items:
     - name: mocha-phantomjs
-      version: 3.*
+      version: 4.*
     - name: casperjs
       # node 1.2 requires caspser 1.1 branch
       version: 1.1.0-beta3
