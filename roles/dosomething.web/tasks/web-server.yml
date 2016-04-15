@@ -2,9 +2,9 @@
 
 - name: Install Web Server nginx
   apt: name=nginx state=latest
-  sudo: yes
+  become: yes
 
 - name: Nginx | Disable default vhost
-  sudo: yes
+  become: yes
   file: path=/etc/nginx/sites-enabled/default state=absent
   notify: restart nginx

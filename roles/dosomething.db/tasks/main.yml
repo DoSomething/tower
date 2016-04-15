@@ -2,10 +2,10 @@
 
 - name: Install MySQL Server
   apt: name=mysql-server-5.6 state=latest
-  sudo: yes
+  become: yes
 
 - name: Alter my.cnf
-  sudo: yes
+  become: yes
   ini_file: >
     dest=/etc/mysql/my.cnf
     section={{ item.section }}

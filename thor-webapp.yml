@@ -9,10 +9,10 @@
 #  hosts: tag_Role_Thor_WebApp
 #  tasks:
 #  - name: Install nfs-common
-#    sudo: yes
+#    become: yes
 #    apt: name=nfs-common state=latest
 #  - name: Mount NFS
-#    sudo: yes
+#    become: yes
 #    mount: >
 #      name=/var/www/www.dosomething.org/shared/files
 #      src='172.20.100.20:/drupal-static-files'

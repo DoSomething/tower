@@ -1,11 +1,11 @@
 ---
 
 - name: Xdebug | Install
-  sudo: yes
+  become: yes
   apt: name=php5-xdebug state=latest
 
 - name: Xdebug | Setup
-  sudo: yes
+  become: yes
   lineinfile: >
     dest=/etc/php5/fpm/conf.d/20-xdebug.ini
     line={{ item }}

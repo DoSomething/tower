@@ -2,28 +2,28 @@
 
 # New Relic
 - name: PHP Third Party | New Relic | Install repository
-  sudo: yes
+  become: yes
   apt_repository: repo="deb http://apt.newrelic.com/debian/ newrelic non-free"
   when: php_thirdparty_newrelic
 
 - name: PHP Third Party | New Relic | Install repository key
-  sudo: yes
+  become: yes
   apt_key: url=https://download.newrelic.com/548C16BF.gpg id=548C16BF
   when: php_thirdparty_newrelic
 
 - name: PHP Third Party | New Relic | Install PHP extension
-  sudo: yes
+  become: yes
   apt: name=newrelic-php5 state=latest force=yes
   notify: restart php-fpm
   when: php_thirdparty_newrelic
 
 - name: PHP Third Party | New Relic | Install New Relic server agent
-  sudo: yes
+  become: yes
   apt: name=newrelic-sysmond state=latest force=yes
   when: php_thirdparty_newrelic
 
 - name: PHP Third Party | New Relic | Setup New Relic Server Monitor License
-  sudo: yes
+  become: yes
   lineinfile: >
     dest=/etc/newrelic/nrsysmond.cfg
     regexp="^license_key"
@@ -32,7 +32,7 @@
   when: php_thirdparty_newrelic and php_thirdparty_newrelic_license
 
 - name: PHP Third Party | New Relic | Setup New Relic PHP Agent License
-  sudo: yes
+  become: yes
   lineinfile: >
     dest=/etc/php5/fpm/conf.d/20-newrelic.ini
     regexp="^newrelic.license"

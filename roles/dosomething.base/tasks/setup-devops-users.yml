@@ -1,14 +1,14 @@
 ---
 
 - name: Create DevOps Users
-  sudo: yes
+  become: yes
   user: >
     name={{ item }}
     shell=/bin/bash
   with_items: devops_users
 
 - name: SSH | Install public keys
-  sudo: yes
+  become: yes
   authorized_key: >
     user={{ item }}
     key="{{ lookup('file', 'files/devops_users/' + item + '-authorized_keys') }}"
@@ -17,7 +17,7 @@
     - "{{ devops_users }}"
 
 - name: Setup Sudoers for DevOps Users
-  sudo: yes
+  become: yes
   template: src=sudoers/devops_user.j2 dest=/etc/sudoers.d/{{ item }}_devops
   with_items:
     - "{{ devops_users }}"

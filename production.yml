@@ -16,10 +16,10 @@
   hosts: tag_Role_Drupal_WebApp
   tasks:
   - name: Install nfs-common
-    sudo: yes
+    become: yes
     apt: name=nfs-common state=latest
   - name: Mount NFS
-    sudo: yes
+    become: yes
     mount: >
       name=/var/www/www.dosomething.org/shared/files
       src='10.100.20.6:/drupal-static-files'

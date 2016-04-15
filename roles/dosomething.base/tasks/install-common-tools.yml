@@ -1,7 +1,7 @@
 ---
 
 - name: Install Common Tools
-  sudo: yes
+  become: yes
   apt: name={{ item }} state=latest
   with_items:
     - ntp

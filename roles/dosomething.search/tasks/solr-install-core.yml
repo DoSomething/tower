@@ -1,8 +1,8 @@
 ---
 
 - name: Checkout default solr core
-  sudo: yes
-  sudo_user: solr
+  become: yes
+  become_user: solr
   git: >
     repo={{ item.repo }}
     version={{ item.version }}
@@ -10,8 +10,8 @@
   with_items: solr_cores
 
 - name: Enable default solr core
-  sudo: yes
-  sudo_user: solr
+  become: yes
+  become_user: solr
   command: >
     /opt/solr/bin/solr create_core
     -c {{ item.name }}

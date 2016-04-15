@@ -1,12 +1,12 @@
 ---
 
 - name: Vhost | Install app vhost configuration file
-  sudo: yes
+  become: yes
   template: src=nginx/app.j2 dest=/etc/nginx/sites-available/{{ app_user }}
   notify: restart nginx
 
 - name: Vhost | Enable app vhost
-  sudo: yes
+  become: yes
   file: >
     src=/etc/nginx/sites-available/{{ app_user }}
     dest=/etc/nginx/sites-enabled/{{ app_user }}

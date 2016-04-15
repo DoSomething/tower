@@ -1,7 +1,7 @@
 ---
 
 - name: System | Safe Upgrade
-  sudo: yes
+  become: yes
   apt: >
     upgrade=safe
     state=latest
@@ -11,6 +11,6 @@
   register: apt_upgrade
 
 - name: System | Auto Remove Leaf Packages
-  sudo: yes
+  become: yes
   command: apt-get -y autoremove
   when: '"Use ''apt-get autoremove'' to remove them" in apt_upgrade.stdout'

@@ -1,12 +1,12 @@
 ---
 
 - name: NTP | Check configuration cleanup lock
-  sudo: yes
+  become: yes
   stat: path=/etc/ntp.conf.lock
   register: ntp_lock
 
 - name: NTP | Cleanup configuration from default servers
-  sudo: yes
+  become: yes
   lineinfile: >
     dest=/etc/ntp.conf
     regexp=^server
@@ -16,12 +16,12 @@
   register: ntp_conf_cleaned
 
 - name: NTP | Lock configuration cleanup
-  sudo: yes
+  become: yes
   file: path=/etc/ntp.conf.lock state=touch
   when: ntp_conf_cleaned.changed
 
 - name: NTP | Configure provided NTP servers
-  sudo: yes
+  become: yes
   lineinfile: >
     dest=/etc/ntp.conf
     line="server {{ item }}"

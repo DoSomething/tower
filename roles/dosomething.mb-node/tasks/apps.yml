@@ -5,7 +5,7 @@
     path={{ mb_node_root }}
     state=directory
     owner={{ app_user }}
-  sudo: yes
+  become: yes
 
 - name: MB Node | Checkout Apps
   remote_user: "{{ app_user }}"

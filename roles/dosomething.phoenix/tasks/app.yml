@@ -6,7 +6,7 @@
     state=directory
     owner={{ app_user }}
     follow=yes
-  sudo: yes
+  become: yes
 
 - name: Make app scripts available $PATH
   remote_user: "{{ app_user }}"
