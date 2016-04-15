@@ -2,7 +2,7 @@
 
 - name: Install software utilities
   apt: name={{ item }} state=latest
-  sudo: yes
+  become: yes
   with_items:
     - mysql-client-5.6
     - imagemagick

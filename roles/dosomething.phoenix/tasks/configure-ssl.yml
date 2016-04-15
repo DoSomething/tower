@@ -1,11 +1,11 @@
 ---
 
 - name: SSL | Create directory
-  sudo: yes
+  become: yes
   file: path=/etc/ssl/{{ app_user }} state=directory
 
 - name: SSL | Install certificates
-  sudo: yes
+  become: yes
   copy: >
     src=files/ssl/{{ item }}
     dest=/etc/ssl/{{ app_user }}/{{ item }}
@@ -17,7 +17,7 @@
 
 # A snippet to remind how to generate seld signed cert.
 # - name: SSL | Create self signed cert
-#   sudo: yes
+#   become: yes
 #   command: >
 #     openssl req -new -nodes -x509
 #     -extensions v3_ca

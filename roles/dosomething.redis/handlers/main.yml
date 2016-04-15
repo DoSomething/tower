@@ -2,5 +2,5 @@
 # handlers file for redis
 
 - name: restart redis-server
-  sudo: yes
+  become: yes
   service: name=redis-server state=restarted

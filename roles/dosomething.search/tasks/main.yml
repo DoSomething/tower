@@ -1,7 +1,7 @@
 ---
 
 - name: Update Java
-  sudo: yes
+  become: yes
   apt: name=openjdk-7-jdk state=latest
 
 - name: Check if Solr installed

@@ -1,14 +1,14 @@
 ---
 
 - name: MB PHP | Ensure app root folder
-  sudo: yes
+  become: yes
   file: >
     path={{ mb_php_root }}
     state=directory
     owner={{ app_user }}
 
 - name: MB PHP | Ensure log folder
-  sudo: yes
+  become: yes
   file: >
     path={{ mb_php_log_path }}
     state=directory
@@ -43,7 +43,7 @@
   when: item.composer is not defined or item.composer
 
 - name: MB PHP | Configure Apps
-  sudo: yes
+  become: yes
   file: >
     src={{ mb_php_config_path }}
     dest={{ mb_php_root }}/{{ item.name }}/{{ mb_php_config_name }}
@@ -53,7 +53,7 @@
   with_items: mb_php_apps
 
 - name: MB PHP | Install App Startup Sripts
-  sudo: yes
+  become: yes
   template: >
     src={{ item.name }}/init.conf.j2
     dest=/etc/init/{{ item.name }}.conf
@@ -61,7 +61,7 @@
   when: item.init is not defined or item.init
 
 - name: MB PHP | Start apps
-  sudo: yes
+  become: yes
   service: name={{ item.name }} state=started
   with_items: mb_php_apps
   when: item.init is not defined or item.init

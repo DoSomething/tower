@@ -1,7 +1,7 @@
 ---
 
 - name: Environment | Setup PHP Environment
-  sudo: yes
+  become: yes
   ini_file: >
     dest=/etc/php5/fpm/pool.d/www.conf
     section=www
@@ -11,7 +11,7 @@
   notify: restart php-fpm
 
 - name: Environment | Setup Shell Environment
-  sudo: yes
+  become: yes
   lineinfile:
     create=yes
     dest=/etc/profile.d/{{ app_user }}.sh

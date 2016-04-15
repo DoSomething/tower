@@ -2,5 +2,5 @@
 # handlers file for search
 
 - name: restart solr
-  sudo: yes
+  become: yes
   service: name=solr state=restarted

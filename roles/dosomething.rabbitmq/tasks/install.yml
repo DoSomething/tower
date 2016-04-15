@@ -1,21 +1,21 @@
 ---
 
 - name: RabbitMQ | Add rabbitmq.com public key
-  sudo: yes
+  become: yes
   apt_key: >
     url=https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
     id=056E8E56
 
 - name: RabbitMQ | Add rabbitmq.com APT Repository
-  sudo: yes
+  become: yes
   apt_repository: repo="deb http://www.rabbitmq.com/debian/ testing main"
 
 - name: RabbitMQ | Install
-  sudo: yes
+  become: yes
   apt: name=rabbitmq-server state=latest force=yes
 
 - name: RabbitMQ | Install plugins
-  sudo: yes
+  become: yes
   rabbitmq_plugin: names="{{ item }}"
   with_items: rabbitmq_plugins
   notify: reload rabbitmq-server

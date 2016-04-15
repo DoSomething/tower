@@ -6,7 +6,7 @@
     state=directory
     owner={{ app_user }}
     follow=yes
-  sudo: yes
+  become: yes
 
 - name: Install status.php
   remote_user: "{{ app_user }}"

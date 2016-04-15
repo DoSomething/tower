@@ -1,7 +1,7 @@
 ---
 
 - name: Create solr user
-  sudo: yes
+  become: yes
   user: >
     name=solr
     password=!
@@ -9,14 +9,14 @@
     createhome=no
 
 - name: Download
-  sudo: yes
+  become: yes
   get_url: >
     url={{ solr_mirror }}/{{ solr_version }}/solr-{{ solr_version }}.tgz
     dest=/opt/solr-{{ solr_version }}.tgz
     sha256sum={{ solr_sha256sum }}
 
 - name: Unpack
-  sudo: yes
+  become: yes
   unarchive: >
     src=/opt/solr-{{ solr_version }}.tgz
     dest=/opt/
@@ -24,7 +24,7 @@
     creates=/opt/solr-{{ solr_version }}
 
 - name: Set solr owner
-  sudo: yes
+  become: yes
   file: >
     path=/opt/solr-{{ solr_version }}
     owner=solr
@@ -33,7 +33,7 @@
     recurse=yes
 
 - name: Install Solr
-  sudo: yes
+  become: yes
   command: >
     /opt/solr-{{ solr_version }}/bin/install_solr_service.sh
     /opt/solr-{{ solr_version }}.tgz

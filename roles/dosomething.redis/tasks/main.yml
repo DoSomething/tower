@@ -1,11 +1,11 @@
 ---
 
 - name: Install Redis
-  sudo: yes
+  become: yes
   apt: name=redis-server state=latest
 
 - name: Setup Redis
-  sudo: yes
+  become: yes
   lineinfile: >
     dest=/etc/redis/redis.conf
     regexp="{{ item.regexp }}"

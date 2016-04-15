@@ -8,14 +8,14 @@
     mode="u=rwx,g=r,o=r"
 
 - name: Setup welcome message
-  sudo: yes
+  become: yes
   template: >
     src=etc/motd.j2
     dest=/etc/update-motd.d/60-dosomething
     mode="u=rwx,g=rx,o=rx"
 
 - name: Add custom vagrant hosts
-  sudo: yes
+  become: yes
   lineinfile: >
     dest=/etc/hosts
     line="{{ item }}"

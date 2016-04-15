@@ -1,27 +1,27 @@
 ---
 
 - name: RabbitMQ | Configure /etc/default/rabbitmq-server
-  sudo: yes
+  become: yes
   template: >
     src=etc/default/rabbitmq-server.j2
     dest=/etc/default/rabbitmq-server
   notify: reload rabbitmq-server
 
 - name: RabbitMQ | Remove guest user
-  sudo: yes
+  become: yes
   rabbitmq_user: user=guest state=absent
 
 - name: RabbitMQ | Cleanup default vhosts
-  sudo: yes
+  become: yes
   rabbitmq_vhost: name=/ state=absent
 
 - name: RabbitMQ | Create vhosts
-  sudo: yes
+  become: yes
   rabbitmq_vhost: name="{{ item }}"
   with_items: rabbitmq_vhosts
 
 - name: RabbitMQ | Create users
-  sudo: yes
+  become: yes
   rabbitmq_user:
     user:           "{{ item.0.user }}"
     password:       "{{ item.0.password }}"

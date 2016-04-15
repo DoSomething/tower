@@ -12,4 +12,4 @@ galaxy_info:
   categories:
   - system
 dependencies:
-  - { role: "dosomething.nodejs", sudo: yes }
+  - { role: "dosomething.nodejs", become: yes }

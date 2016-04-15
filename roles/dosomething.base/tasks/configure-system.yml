@@ -6,12 +6,12 @@
   changed_when: False
 
 - name: System | Set timezone
-  sudo: yes
+  become: yes
   command: timedatectl set-timezone {{ timezone }}
   when: '"{{ timezone }}" not in get_timezone.stdout'
 
 - name: System | Ensure locale exists
-  sudo: yes
+  become: yes
   locale_gen: name={{ locale }} state=present
 
 - name: System | Check current locale
@@ -20,13 +20,13 @@
   changed_when: False
 
 - name: System | Set locale
-  sudo: yes
+  become: yes
   command: update-locale LC_ALL={{ locale }} LANG={{ locale }}
   when: '"LC_ALL={{ locale }}" not in get_locale.stdout'
 
 # https://www.percona.com/blog/2014/04/28/oom-relation-vm-swappiness0-new-kernel/
 - name: System | Set vm.swappiness
-  sudo: yes
+  become: yes
   sysctl: >
     name="vm.swappiness"
     value=1
