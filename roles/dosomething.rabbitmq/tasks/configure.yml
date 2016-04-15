@@ -32,4 +32,4 @@
     write_priv:     "{{ item.0.write_priv | default('.*') }}"
   with_subelements:
     - "{{ rabbitmq_users }}"
-    - "{{ vhosts }}"
+    - vhosts
