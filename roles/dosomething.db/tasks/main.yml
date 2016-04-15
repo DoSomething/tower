@@ -12,5 +12,5 @@
     option={{ item.option }}
     value={{ item.value }}
     backup=yes
-  with_items: my_cnf_settings
+  with_items: "{{ my_cnf_settings }}"
   notify: restart mysql

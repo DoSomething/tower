@@ -22,7 +22,7 @@
     option={{ item.option }}
     value={{ item.value }}
     backup=yes
-  with_items: php_ini_settings
+  with_items: "{{ php_ini_settings }}"
   notify: restart php-fpm
 
 - name: PHP | Setup FPM pool
