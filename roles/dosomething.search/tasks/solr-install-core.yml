@@ -7,7 +7,7 @@
     repo={{ item.repo }}
     version={{ item.version }}
     dest=/var/solr/data/{{ item.name }}
-  with_items: solr_cores
+  with_items: "{{ solr_cores }}"
 
 - name: Enable default solr core
   become: yes
@@ -18,4 +18,4 @@
     -p {{ solr_port }}
   args:
     creates: /var/solr/data/{{ item.name }}/core.properties
-  with_items: solr_cores
+  with_items: "{{ solr_cores }}"

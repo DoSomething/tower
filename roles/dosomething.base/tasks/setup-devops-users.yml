@@ -5,7 +5,7 @@
   user: >
     name={{ item }}
     shell=/bin/bash
-  with_items: devops_users
+  with_items: "{{ devops_users }}"
 
 - name: SSH | Install public keys
   become: yes

@@ -18,7 +18,7 @@
 - name: RabbitMQ | Create vhosts
   become: yes
   rabbitmq_vhost: name="{{ item }}"
-  with_items: rabbitmq_vhosts
+  with_items: "{{ rabbitmq_vhosts }}"
 
 - name: RabbitMQ | Create users
   become: yes
@@ -31,5 +31,5 @@
     read_priv:      "{{ item.0.read_priv | default('.*') }}"
     write_priv:     "{{ item.0.write_priv | default('.*') }}"
   with_subelements:
-    - rabbitmq_users
-    - vhosts
+    - "{{ rabbitmq_users }}"
+    - "{{ vhosts }}"

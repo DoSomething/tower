@@ -17,5 +17,5 @@
 - name: RabbitMQ | Install plugins
   become: yes
   rabbitmq_plugin: names="{{ item }}"
-  with_items: rabbitmq_plugins
+  with_items: "{{ rabbitmq_plugins }}"
   notify: reload rabbitmq-server
