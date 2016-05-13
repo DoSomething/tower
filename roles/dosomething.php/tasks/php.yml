@@ -1,25 +1,30 @@
 ---
 
-- name: PHP | Install PHP
+- name: PHP | Adding APT Repo
+  become: yes
+  apt_repository: repo='ppa:ondrej/php'
+
+- name: PHP | Install PHP 7.0
   apt: name={{ item }} state=latest
   become: yes
   with_items:
-    - php5
-    - php5-fpm
-    - php5-cli
-    - php5-mcrypt
-    - php5-dev
+    - php7.0
+    - php7.0-fpm
+    - php7.0-cli
+    - php7.0-dev
+  no_log: yes
 
 - name: PHP | Install extensions
   apt: name={{ item }} state=latest
   become: yes
   with_items: "{{ php_extensions_defaults }} + {{ php_extensions }}"
+  no_log: yes
   notify: restart php-fpm
 
 - name: PHP | Alter php.ini
   become: yes
   ini_file: >
-    dest=/etc/php5/fpm/php.ini
+    dest=/etc/php/7.0/fpm/php.ini
     section={{ item.section }}
     option={{ item.option }}
     value={{ item.value }}
@@ -30,7 +35,7 @@
 - name: PHP | Setup FPM pool
   become: yes
   ini_file: >
-    dest=/etc/php5/fpm/pool.d/www.conf
+    dest=/etc/php/7.0/fpm/pool.d/www.conf
     section=www
     option={{ item.option }}
     value={{ item.value }}

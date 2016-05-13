@@ -12,3 +12,4 @@
     - screen
     - bind9utils
     - sysstat
+  no_log: yes

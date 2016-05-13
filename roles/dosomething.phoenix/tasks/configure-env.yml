@@ -3,7 +3,7 @@
 - name: Environment | Setup PHP Environment
   become: yes
   ini_file: >
-    dest=/etc/php5/fpm/pool.d/www.conf
+    dest=/etc/php/7.0/fpm/pool.d/www.conf
     section=www
     option=env[{{ item.option }}]
     value={{ item.value }}

@@ -22,6 +22,7 @@
     dest=/opt/
     copy=no
     creates=/opt/solr-{{ solr_version }}
+  no_log: yes
 
 - name: Set solr owner
   become: yes

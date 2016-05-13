@@ -13,6 +13,7 @@
 - name: RabbitMQ | Install
   become: yes
   apt: name=rabbitmq-server state=latest force=yes
+  no_log: yes
 
 - name: RabbitMQ | Install plugins
   become: yes

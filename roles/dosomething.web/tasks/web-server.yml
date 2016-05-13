@@ -3,6 +3,7 @@
 - name: Install Web Server nginx
   apt: name=nginx state=latest
   become: yes
+  no_log: yes
 
 - name: Nginx | Disable default vhost
   become: yes

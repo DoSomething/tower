@@ -1,6 +1,4 @@
 ---
 
-- include: php.yml
 - include: php-thirdparty.yml
-- include: php-composer.yml
 - include: web-server.yml

@@ -3,6 +3,7 @@
 
 # Composer
 composer_self_update: no
+composer_disable_xdebug: no
 composer_path: '/usr/local/bin'
 
 # PHP

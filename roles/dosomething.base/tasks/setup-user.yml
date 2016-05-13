@@ -13,6 +13,7 @@
     user={{ app_user }}
     key="{{ lookup('file', 'files/app_user/ssh/authorized_keys') }}"
     exclusive=yes
+  no_log: yes
 
 - name: Setup sudoers for the app user
   become: yes

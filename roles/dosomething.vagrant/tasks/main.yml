@@ -1,5 +1,9 @@
 ---
 
+# https://github.com/mitchellh/vagrant/issues/1673
+# /root/.profile
+# tty -s && mesg n
+
 - name: Create setup-www script
   remote_user: "{{ app_user }}"
   template: >
@@ -28,3 +32,4 @@
   with_items:
     - nfs-common
     - nfs-kernel-server
+  no_log: yes

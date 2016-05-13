@@ -26,7 +26,7 @@ composer_self_update: yes
 ### PHP
 #### php.ini settings
 
-You can override `/etc/php5/fpm/php.ini` settings
+You can override `/etc/php/7.0/fpm/php.ini` settings
 (or introduce new configuration statements) using the following format:
 
 ```yml
@@ -44,7 +44,7 @@ php_ini_settings:
 
 #### FPM Pool
 
-You can override `/etc/php5/fpm/pool.d/www.conf` settings
+You can override `/etc/php/7.0/fpm/pool.d/www.conf` settings
 (or introduce new configuration statements) using the following format:
 
 ```yml
@@ -55,20 +55,20 @@ php_fpm_settings:
 
 #### FPM Listen
 A path to PHP-fpm socket or an address to bind server to.  
-Defaults to `/var/run/php5-fpm.sock`.
+Defaults to `/var/run/php/php7.0-fpm.sock`.
 
 ```yml
-php_fpm_listen: /var/run/php5-fpm.sock
+php_fpm_listen: /var/run/php/php7.0-fpm.sock
 ```
 
 ### PHP Extensions
-By default, only `php5-curl` is installed. To include additional extensions,
+By default, only `php7.0-curl` is installed. To include additional extensions,
 override `php_extensions`:
 
 ```yml
 php_extensions:
-  - php5-mysql
-  - php5-gd
+  - php7.0-mysql
+  - php7.0-gd
 ```
 
 ### PHP Third Party Extensions

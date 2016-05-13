@@ -2,12 +2,12 @@
 
 - name: Xdebug | Install
   become: yes
-  apt: name=php5-xdebug state=latest
+  apt: name=php7.0-xdebug state=latest
 
 - name: Xdebug | Setup
   become: yes
   lineinfile: >
-    dest=/etc/php5/fpm/conf.d/20-xdebug.ini
+    dest=/etc/php/7.0/fpm/conf.d/20-xdebug.ini
     line={{ item }}
   with_items:
     - "xdebug.var_display_max_depth=32"

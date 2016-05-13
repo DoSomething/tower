@@ -8,4 +8,8 @@ php_fpm_defaults:
 
 # PHP Extensions
 php_extensions_defaults:
-  - php5-curl
+  - php7.0-curl
+  - php7.0-mcrypt
+  - php7.0-bcmath
+  - php7.0-mbstring
+  - php7.0-zip
