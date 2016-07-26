@@ -1,7 +1,7 @@
 ---
 
 - name: PHP | Add Ondrej Multi-Version PPA
-  apt_repository: name="ppa:ondrej/php"
+  apt_repository: repo="ppa:ondrej/php"
 
 - name: PHP | Install PHP
   apt: name={{ item }} state=latest
