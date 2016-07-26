@@ -1,0 +1,6 @@
+---
+
+- name: Setup Northstar Mobile Commons Daemon
+  hosts: Northstar-MobileCommons-Daemon
+  roles:
+    - role: dosomething.php7

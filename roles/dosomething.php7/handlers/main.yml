@@ -1,0 +1,10 @@
+---
+# handlers file for web
+
+- name: restart php-fpm
+  become: yes
+  service: name=php7.0-fpm state=restarted
+
+- name: restart newrelic-sysmond
+  become: yes
+  service: name=newrelic-sysmond state=restarted
