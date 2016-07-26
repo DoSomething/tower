@@ -1,2 +1,5 @@
 ---
 # vars file for ds-base
+
+# App
+app_user: dosomething
