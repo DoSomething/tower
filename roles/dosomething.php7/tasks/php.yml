@@ -1,0 +1,42 @@
+---
+
+- name: PHP | Add Ondrej Multi-Version PPA
+  apt_repository: name="ppa:ondrej/php"
+
+- name: PHP | Install PHP
+  apt: name={{ item }} state=latest
+  become: yes
+  with_items:
+    - php7.0
+    - php7.0-fpm
+    - php7.0-cli
+    - php7.0-mcrypt
+    - php7.0-dev
+    - php7.0-xml
+
+- name: PHP | Install extensions
+  apt: name={{ item }} state=latest
+  become: yes
+  with_items: "{{ php_extensions_defaults }} + {{ php_extensions }}"
+  notify: restart php-fpm
+
+- name: PHP | Alter php.ini
+  become: yes
+  ini_file: >
+    dest=/etc/php/7.0/fpm/php.ini
+    section={{ item.section }}
+    option={{ item.option }}
+    value={{ item.value }}
+    backup=yes
+  with_items: "{{ php_ini_settings }}"
+  notify: restart php-fpm
+
+- name: PHP | Setup FPM pool
+  become: yes
+  ini_file: >
+    dest=/etc/php/7.0/fpm/pool.d/www.conf
+    section=www
+    option={{ item.option }}
+    value={{ item.value }}
+  with_items: "{{ php_fpm_defaults }} + {{ php_fpm_settings }}"
+  notify: restart php-fpm

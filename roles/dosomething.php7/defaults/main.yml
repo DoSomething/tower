@@ -1,0 +1,18 @@
+---
+# defaults file for web
+
+# Composer
+composer_self_update: yes
+composer_path: '/usr/local/bin'
+
+# PHP
+php_ini_settings: []
+php_fpm_listen: 127.0.0.1:9000
+php_fpm_settings: []
+
+# PHP Extensions
+php_extensions: []
+
+# PHP Third Party Extensions
+php_thirdparty_newrelic: no
+php_thirdparty_newrelic_license: ""

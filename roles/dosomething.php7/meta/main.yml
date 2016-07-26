@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Sena Heydari
+  description: DoSomething Web server
+  company: DoSomething.org
+  license: MIT
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  categories:
+  - system
+dependencies:
+  - { role: "dosomething.base" }
