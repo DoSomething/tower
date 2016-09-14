@@ -12,3 +12,7 @@
     - screen
     - bind9utils
     - sysstat
+
+- name: Disable AppArmor
+  sudo: yes
+  apt: name=apparmor state=absent

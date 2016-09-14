@@ -4,3 +4,7 @@
 - name: restart ntp
   become: yes
   service: name=ntp state=restarted
+
+- name: restart server
+  sudo: yes
+  shell: /sbin/reboot 
