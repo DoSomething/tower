@@ -1,0 +1,10 @@
+---
+
+- hosts: quasar-jump
+  gather_facts: yes
+  become: yes
+  vars:
+     servername: quasar-jump
+  roles:
+    - quasar.base
+    - quasar-hosts
