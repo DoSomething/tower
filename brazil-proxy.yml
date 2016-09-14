@@ -1,0 +1,6 @@
+---
+
+- name: Setup Brazil Socks Proxy
+  hosts: brazil-proxy
+  roles:
+    - role: dosomething.socks-proxy
