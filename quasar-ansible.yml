@@ -1,0 +1,11 @@
+---
+
+- hosts: quasar-ansible
+  gather_facts: yes
+  become: yes
+  vars:
+     servername: quasar-ansible
+  roles:
+    - quasar-hosts
+    - quasar.java
+    - quasar.ansible
