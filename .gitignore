@@ -14,3 +14,4 @@ package.box
 roles/*
 !roles/requirements.yml
 !roles/dosomething.*
+!roles/quasar.*
