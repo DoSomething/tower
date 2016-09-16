@@ -1,0 +1,5 @@
+- name: Add HA Proxy PPA
+  apt_repository: repo='ppa:vbernat/haproxy-1.6' update_cache=yes state=present
+
+- name: Install HA Proxy
+  apt: name=haproxy state=present

@@ -1,0 +1,10 @@
+---
+
+- hosts: quasar-haproxy
+  gather_facts: yes
+  become: yes
+  vars:
+     servername: quasar-haproxy
+  roles:
+    - quasar.haproxy
+    - quasar-hosts
