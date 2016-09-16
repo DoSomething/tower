@@ -7,5 +7,5 @@
      servername: quasar-ansible
   roles:
     - quasar-hosts
-    - quasar.java
     - quasar.ansible
+    - quasar.jenkins

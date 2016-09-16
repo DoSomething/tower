@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  description: DoSomething.org Quasar Platform Jenkins Setup
+  company: DoSomething.org
+  license: MIT
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  categories:
+  - system
+dependencies:
+  - quasar.base
+  - quasar.java
