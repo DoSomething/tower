@@ -1,5 +1,117 @@
-- name: Add HA Proxy PPA
+- name: HA Proxy | Add HA Proxy PPA
   apt_repository: repo='ppa:vbernat/haproxy-1.6' update_cache=yes state=present
 
-- name: Install HA Proxy
+- name: HA Proxy | Install HA Proxy
   apt: name=haproxy state=present
+
+- name: HA Proxy | Set TCP IPv4 SYN Backlog
+  become: yes
+  sysctl: >
+    name=net.ipv4.tcp_max_syn_backlog
+    value=40000
+    sysctl_set=yes
+
+- name: HA Proxy | Set Network Core Max Connections
+  become: yes
+  sysctl: >
+    name=net.core.somaxconn
+    value=4000
+    sysctl_set=yes
+
+- name: HA Proxy | Disable TCP IPv4 Timestamps
+  become: yes
+  sysctl: >
+    name=net.ipv4.tcp_timestamps
+    value=0
+    sysctl_set=yes
+
+- name: HA Proxy | Set TCP IPv4 Sack
+  become: yes
+  sysctl: >
+    name=net.ipv4.tcp_sack
+    value=1
+    sysctl_set=yes
+
+- name: HA Proxy | Set TCP IPv4 Window Scaling
+  become: yes
+  sysctl: >
+    name=net.ipv4.tcp_window_scaling
+    value=1
+    sysctl_set=yes
+
+- name: HA Proxy | Set TCP IPv4 Fin Timeout
+  become: yes
+  sysctl: >
+    name=net.ipv4.tcp_fin_timeout
+    value=15
+    sysctl_set=yes
+
+- name: HA Proxy | Set TCP IPv4 Keep Alive Interval
+  become: yes
+  sysctl: >
+    name=net.ipv4.tcp_keepalive_intvl
+    value=30
+    sysctl_set=yes
+
+- name: HA Proxy | Set TCP IPv4 Reuse
+  become: yes
+  sysctl: >
+    name=net.ipv4.tcp_tw_reuse
+    value=1
+    sysctl_set=yes
+
+- name: HA Proxy | Set TCP IPv4 Read Memory
+  become: yes
+  sysctl: >
+    name=net.core.rmem_default
+    value=8388608
+    sysctl_set=yes
+
+- name: HA Proxy | Set TCP IPv4 Read Memory Max
+  become: yes
+  sysctl: >
+    name=net.core.rmem_max
+    value=8388608
+    sysctl_set=yes
+
+- name: HA Proxy | Set TCP IPv4 Write Memory
+  become: yes
+  sysctl: >
+    name=net.core.wmem_default
+    value=8388608
+    sysctl_set=yes
+
+- name: HA Proxy | Set TCP IPv4 Write Memory Max
+  become: yes
+  sysctl: >
+    name=net.core.wmem_max
+    value=8388608
+    sysctl_set=yes
+
+- name: HA Proxy | Set Net Core Max Backlog
+  become: yes
+  sysctl: >
+    name=net.core.netdev_max_backlog
+    value=10000
+    sysctl_set=yes
+
+- name: HA Proxy | Set Max Datagram Queue Length
+  become: yes
+  sysctl: >
+    name=net.unix.max_dgram_qlen
+    value=100
+    sysctl_set=yes
+
+- name: HA Proxy | Set Soft File Limit
+  pam_limits: domain=* limit_type=soft limit_item=nofile value=1000000
+ 
+- name: HA Proxy | Set Hard File Limit
+  pam_limits: domain=* limit_type=hard limit_item=nofile value=1500000
+
+- name: HA Proxy | Set Soft Proc Limit
+  pam_limits: domain=* limit_type=soft limit_item=nproc value=10000
+
+- name: HA Proxy | Set Hard Proc Limit
+  pam_limits: domain=* limit_type=hard limit_item=nproc value=15000
+
+
