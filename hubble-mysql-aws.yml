@@ -1,0 +1,11 @@
+---
+- hosts: hubble-mysql-aws
+  become: true
+  vars:
+    mysql_server: 1
+    server_id: 150
+    env: hubble
+  roles:
+    - quasar.base
+    - hubble.percona-57
+    - mysql-57-users
