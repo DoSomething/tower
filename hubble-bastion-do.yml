@@ -14,3 +14,4 @@
     - quasar.base
     - quasar-hosts
     - hubble.proxy-users
+    - quasar.haproxy

@@ -15,3 +15,4 @@ roles/*
 !roles/requirements.yml
 !roles/dosomething.*
 !roles/quasar.*
+!roles/hubble.*

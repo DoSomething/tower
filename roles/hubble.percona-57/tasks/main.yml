@@ -1,0 +1,74 @@
+- name: Copy Percona Xenial Deb Repo File Into Place
+  copy: src=percona-release_0.1-4.xenial_all.deb dest=/tmp/percona-release_0.1-4.xenial_all.deb owner=root group=root mode=755
+
+- name: Install Percona Repo
+  command: dpkg -i /tmp/percona-release_0.1-4.xenial_all.deb
+
+- name: Install Percona 5.7 Server
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - percona-server-server-5.7
+    - python-mysqldb
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Add MySQL Extra Config
+  template: src=data-mysql.cnf.j2 dest=/etc/mysql/conf.d/data-mysql.cnf owner=root group=root mode=644
+  notify: restart mysql
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Modify Nofile Soft Limit for More Resources
+  pam_limits: domain=* limit_type=soft limit_item=nofile value=100000
+  notify: restart mysql
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Modify Nofile Hard Limit for More Resources
+  pam_limits: domain=* limit_type=hard limit_item=nofile value=125000
+  notify: restart mysql
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Install Percona 5.7 Client
+  apt: name={{ item }} state=present
+  with_items:
+    - percona-server-client-5.7
+    - libmysqlclient-dev
+  when: mysql_client is defined and mysql_client == 1
+
+- name: Set Sysctl Value | Update TCP SYN Backlog
+  sysctl: name="net.ipv4.tcp_max_syn_backlog" value=4096 reload=yes
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Set Sysctl Value | Update somaxconn
+  sysctl: name="net.core.somaxconn" value=1024 reload=yes
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Set Sysctl Value | Update Net Core Read Values
+  sysctl: name="net.core.rmem_max" value=16777216 reload=yes
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Set Sysctl Value | Update Net Core Write Values
+  sysctl: name="net.core.wmem_max" value=16777216 reload=yes
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Set Sysctl Value | Update TCP Read Values
+  sysctl: name="net.ipv4.tcp_rmem" value="4096 87380 16777216" reload=yes
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Set Sysctl Value | Update TCP Write Values
+  sysctl: name="net.ipv4.tcp_wmem" value="4096 87380 16777216" reload=yes
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Set Sysctl Value | Update Interface Buffering
+  sysctl: name="net.core.netdev_max_backlog" value=2560 reload=yes
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Set Sysctl Value | Update TCP Keep-Alive
+  sysctl: name="net.ipv4.tcp_keepalive_time" value=30 reload=yes
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Set Sysctl Value | Update TCP Keep-Alive
+  sysctl: name="net.ipv4.tcp_keepalive_intvl" value=1 reload=yes
+  when: mysql_server is defined and mysql_server == 1
+
+- name: Set Sysctl Value | Update TCP Keep-Alive
+  sysctl: name="net.ipv4.tcp_keepalive_probes" value=2 reload=yes
+  when: mysql_server is defined and mysql_server == 1

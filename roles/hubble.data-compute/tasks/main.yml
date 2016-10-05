@@ -1,0 +1,42 @@
+- name: Install Data 1.0 Apt Packages
+  apt: name={{ item }} state=present
+  with_items:
+    - python-pip
+    - python-virtualenv
+    - python-dev
+    - build-essential
+    - libmysqlclient-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - zlib1g-dev
+    - libncurses5-dev
+
+- name: Install Data 1.0 Pip Packages
+  pip: name={{ item }} state=present
+  with_items:
+    - beautifulsoup4
+    - Flask
+    - Flask-Cache
+    - Flask-Login
+    - Flask-SQLAlchemy
+    - python-gflags
+    - google-api-python-client
+    - MySQL-python
+    - readline
+    - requests
+    - SQLAlchemy
+    - lxml
+
+## The following has a dependency on the `base-os` role "appuser"
+#  being defined.
+
+# Create QA User owned script run-path
+
+- name: Create etl-scripts Run Directory
+  file: path=/etl-scripts state=directory owner=quantum group=quantum mode=750
+  when: appuser is defined and appuser == "QA"
+
+ 
+- name: Create etl-scripts Run Directory
+  file: path=/etl-scripts state=directory owner=quasar group=quasar mode=750
+  when: appuser is defined and appuser == "PROD"

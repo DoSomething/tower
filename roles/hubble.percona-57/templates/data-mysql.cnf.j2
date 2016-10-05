@@ -1,0 +1,47 @@
+[mysqld]
+default-time-zone='+00:00'
+
+# Instead of skip-networking the default is now to listen only on
+# localhost which is more compatible and is not less secure.
+bind-address = {{ ansible_default_ipv4.address }}
+open_files_limit = 32000
+
+# The following can be used as easy to replay backup logs or for replication.
+# note: if you are setting up a replication slave, see README.Debian about
+#       other settings you may need to change.
+server-id	= {{ server_id }}
+binlog-format  = mixed
+log_bin	= /var/lib/mysql/{{ ansible_hostname}}-bin
+log_bin_index	= /var/lib/mysql/{{ ansible_hostname }}-bin.index
+relay-log	= /var/lib/mysql/{{ ansible_hostname }}-relay-bin
+expire_logs_days = 3
+log-slave-updates = 1
+read-only	= 0
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+# Tuning Section
+innodb_file_per_table
+max_allowed_packet = 1024M
+skip_name_resolve
+innodb_flush_log_at_trx_commit = 2
+innodb_buffer_pool_size = {{ (ansible_memtotal_mb*0.75)|int|abs }}M
+innodb_log_file_size = 384M
+innodb_log_buffer_size = 8M
+secure_file_priv = /tmp
+key_buffer_size = 1G
+table_open_cache = 32000
+connect_timeout = 28800
+net_read_timeout = 600
+net_write_timeout = 600
+query_cache_size = 0M
+max_connections = 1000
+connect_timeout = 28800
+net_read_timeout = 600
+net_write_timeout = 600
+tmp_table_size = 512M
+max_heap_table_size = 512M
+
+# Only Replicate "dosomething" DB from Drupal Master DB
+replicate-do-db=dosomething
+# Ignore Drupal Cache Form Table
+replicate-ignore-table=dosomething.cache_form

@@ -1,0 +1,11 @@
+---
+- hosts: hubble-compute-do
+  become: true
+  vars:
+    mysql_client: 1
+    appuser: PROD
+  roles:
+    - quasar.base
+    - hubble.percona-57-trusty
+    - hubble.data-compute
+    - quasar.jenkins
