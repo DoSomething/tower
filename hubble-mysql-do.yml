@@ -1,0 +1,11 @@
+---
+- hosts: hubble-mysql-do
+  become: true
+  vars:
+    mysql_server: 1
+    server_id: 200
+    env: hubble
+  roles:
+    - quasar.base
+    - hubble.percona-57-trusty
+    - mysql-57-users-do

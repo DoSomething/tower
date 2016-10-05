@@ -1,0 +1,17 @@
+---
+
+- hosts: hubble-jump-do
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get -y install python-simplejson
+    - name: Gather Facts
+      setup:
+  gather_facts: no
+  become: yes
+  vars:
+     servername: hubble-jump-do
+  roles:
+    - quasar.base
+    - quasar-hosts
+    - hubble.proxy-users
+    - quasar.haproxy
