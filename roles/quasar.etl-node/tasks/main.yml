@@ -20,11 +20,11 @@
 
 # Create QA User owned script run-path
 
-- name: Create etl-scripts Run Directory
-  file: path=/etl-scripts state=directory owner=quantum group=quantum mode=750
+- name: Create ETL Run Directory - QA
+  file: path=/opt/quasar state=directory owner=quantum group=quantum mode=750
   when: appuser is defined and appuser == "QA"
 
 
-- name: Create etl-scripts Run Directory
-  file: path=/etl-scripts state=directory owner=quasar group=quasar mode=750
+- name: Create ETL Run Directory - PROD
+  file: path=/opt/quasar state=directory owner=quasar group=quasar mode=750
   when: appuser is defined and appuser == "PROD"
