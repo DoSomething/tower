@@ -10,4 +10,5 @@ galaxy_info:
     - Xenial
   categories:
   - misc
-dependencies: []
+dependencies:
+  - quasar.base
