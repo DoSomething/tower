@@ -4,6 +4,9 @@ sysadmins:
   - mrich
   - mholford
 
+machine_account:
+  - jenkins
+
 users:
 
 qa_users:

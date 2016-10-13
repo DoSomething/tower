@@ -1,0 +1,30 @@
+- name: Install Quasar ETL Apt Prerequisites
+  apt: name={{ item }} state=present
+  with_items:
+    - python3-pip
+    - libncurses5-dev
+    - libpq-dev
+
+- name: Install Quasar ETL Pip Packages
+  pip: name={{ item }} state=present executable=pip3
+  with_items:
+    - beautifulsoup4
+    - SQLAlchemy
+    - requests
+    - lxml
+    - readline
+    - sqlalchemy-redshift
+
+## The following has a dependency on the `base-os` role "appuser"
+#  being defined.
+
+# Create QA User owned script run-path
+
+- name: Create etl-scripts Run Directory
+  file: path=/etl-scripts state=directory owner=quantum group=quantum mode=750
+  when: appuser is defined and appuser == "QA"
+
+
+- name: Create etl-scripts Run Directory
+  file: path=/etl-scripts state=directory owner=quasar group=quasar mode=750
+  when: appuser is defined and appuser == "PROD"

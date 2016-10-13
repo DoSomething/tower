@@ -13,7 +13,7 @@
   sysctl: >
     name=net.ipv4.tcp_keepalive_time
     value=60
-    sysctl_set=yes  
+    sysctl_set=yes
 
 - name: System | Set TCP IPv4 Keep Alive Interval
   become: yes
@@ -85,6 +85,27 @@
   template: src=sysadmin_user.j2 dest=/etc/sudoers.d/{{ item }}_sysadmin owner=root group=root mode=440
   with_items:
     - "{{sysadmins}}"
+
+## Machine Users
+
+- name: User Setup | Add Machine User
+  user: name={{ item }} groups=sudo shell=/bin/bash
+  with_items: "{{machine_account}}"
+
+- name: User Setup | Create Machine User SSH Directory
+  file: dest=/home/{{ item }}/.ssh owner={{ item }} group={{ item }} mode=750 state=directory
+  with_items: "{{machine_account}}"
+
+- name: User Setup | Setup Machine User Public Key
+  authorized_key:
+     user={{ item }}
+     key="{{ lookup('file', item + '-id_rsa.pub') }}"
+  with_items: "{{machine_account}}"
+
+- name: Setup Sudoers for Machine User
+  template: src=sysadmin_user.j2 dest=/etc/sudoers.d/{{ item }}_sysadmin owner=root group=root mode=440
+  with_items:
+    - "{{machine_account}}"
 
 ## App Users
 # This section creates App users when specified
