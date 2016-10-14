@@ -1,0 +1,10 @@
+---
+
+- hosts: quasar-etl
+  gather_facts: yes
+  become: yes
+  vars:
+     servername: quasar-etl
+  roles:
+    - quasar-hosts
+    - quasar.etl-node
