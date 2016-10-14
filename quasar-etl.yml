@@ -1,10 +1,21 @@
 ---
 
-- hosts: quasar-etl
+- hosts: quasar-etl-1
   gather_facts: yes
   become: yes
   vars:
-     servername: quasar-etl
+     servername: quasar-etl-1
+     appuser: PROD
+  roles:
+    - quasar-hosts
+    - quasar.etl-node
+
+- hosts: quasar-etl-2
+  gather_facts: yes
+  become: yes
+  vars:
+     servername: quasar-etl-2
+     appuser: PROD
   roles:
     - quasar-hosts
     - quasar.etl-node
