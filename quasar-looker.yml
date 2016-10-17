@@ -1,0 +1,10 @@
+---
+
+- hosts: quasar-jenkins
+  gather_facts: yes
+  become: yes
+  vars:
+     servername: quasar-looker
+  roles:
+    - quasar-hosts
+    - quasar.looker
