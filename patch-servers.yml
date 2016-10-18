@@ -1,0 +1,6 @@
+---
+
+- name: Patch Servers
+  hosts: QA-Webservers
+  roles:
+    - role: dosomething.patch-servers
