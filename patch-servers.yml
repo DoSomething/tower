@@ -4,3 +4,4 @@
   hosts: QA-Webservers
   roles:
     - role: dosomething.patch-servers
+  become: yes
