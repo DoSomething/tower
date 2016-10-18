@@ -5,17 +5,17 @@
   file: path=/home/looker/looker owner=looker group=looker state=directory
 
 - name: Set Looker TCP Keep-Alive Time
-  sysctl: 
+  sysctl:
     name: net.ipv4.tcp_keepalive_time
     value: 200
-    
+
 - name: Set Looker TCP Keep-Alive Interval
-  sysctl: 
+  sysctl:
     name: net.ipv4.tcp_keepalive_intvl
     value: 200
 
 - name: Set Looker TCP Keep-Alive Probes
-  sysctl: 
+  sysctl:
     name: net.ipv4.tcp_keepalive_probes
     value: 5
 
