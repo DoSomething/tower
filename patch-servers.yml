@@ -1,7 +1,8 @@
 ---
 
 - name: Patch Servers
-  hosts: QA-Webservers
+  hosts: Thor
   roles:
     - role: dosomething.patch-servers
   become: yes
+  serial: 1
