@@ -1,6 +1,6 @@
 ---
 
-- hosts: quasar-jenkins
+- hosts: quasar-looker
   gather_facts: yes
   become: yes
   vars:
