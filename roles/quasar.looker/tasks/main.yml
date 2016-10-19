@@ -19,12 +19,16 @@
     name: net.ipv4.tcp_keepalive_probes
     value: 5
 
+- name: Set Looker Soft File Limit
+  pam_limits:
+    domain: looker
+    limit_type: soft
+    limit_item: nofile
+    value: 4096
+
 - name: Set Looker File Limits
   pam_limits:
     domain: looker
-    limit_type: {{ item }}
+    limit_type: hard
     limit_item: nofile
     value: 4096
-  with_items:
-    - soft
-    - hard
