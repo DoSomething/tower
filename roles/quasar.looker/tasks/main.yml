@@ -1,0 +1,30 @@
+- name: Create Looker User
+  user: name=looker
+
+- name: Create Looker App Directory
+  file: path=/home/looker/looker owner=looker group=looker state=directory
+
+- name: Set Looker TCP Keep-Alive Time
+  sysctl:
+    name: net.ipv4.tcp_keepalive_time
+    value: 200
+
+- name: Set Looker TCP Keep-Alive Interval
+  sysctl:
+    name: net.ipv4.tcp_keepalive_intvl
+    value: 200
+
+- name: Set Looker TCP Keep-Alive Probes
+  sysctl:
+    name: net.ipv4.tcp_keepalive_probes
+    value: 5
+
+- name: Set Looker File Limits
+  pam_limits:
+    domain: looker
+    limit_type: {{ item }}
+    limit_item: nofile
+    value: 4096
+  with_items:
+    - soft
+    - hard
