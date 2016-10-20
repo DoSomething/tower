@@ -21,6 +21,7 @@
     line="{{ item }}"
   with_items:
     - "10.0.2.2 northstar.dev"
+    - "10.0.2.2 rogue.dev"
 
 - name: Install NFS tools
   become: yes
