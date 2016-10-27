@@ -1,7 +1,7 @@
 ---
 
 - name: Patch Servers
-  hosts: QA-Webservers
+  hosts: Admin
   roles:
     - role: dosomething.patch-servers
   become: yes
