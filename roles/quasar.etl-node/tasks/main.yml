@@ -14,6 +14,7 @@
     - lxml
     - readline
     - sqlalchemy-redshift
+    - psycopg2
 
 ## The following has a dependency on the `base-os` role "appuser"
 #  being defined.
