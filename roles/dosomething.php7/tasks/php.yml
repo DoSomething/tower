@@ -1,6 +1,7 @@
 ---
 
 - name: PHP | Add Ondrej Multi-Version PPA
+  become: yes
   apt_repository: repo='ppa:ondrej/php' update_cache=yes
 
 - name: PHP | Install PHP
