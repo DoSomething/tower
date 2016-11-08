@@ -9,7 +9,7 @@
   become: yes
   with_items:
     - php7.0
-    - php7.0-bcmatch
+    - php7.0-bcmath
     - php7.0-bz2
     - php7.0-cli
     - php7.0-curl
