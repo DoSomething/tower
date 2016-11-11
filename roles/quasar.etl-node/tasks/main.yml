@@ -15,6 +15,7 @@
     - readline
     - sqlalchemy-redshift
     - psycopg2
+    - awscli
 
 ## The following has a dependency on the `base-os` role "appuser"
 #  being defined.
