@@ -4,6 +4,7 @@
     - python3-pip
     - libncurses5-dev
     - libpq-dev
+    - postgresql-client
 
 - name: Install Quasar ETL Pip Packages
   pip: name={{ item }} state=present executable=pip3
