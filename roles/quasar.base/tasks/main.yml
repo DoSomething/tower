@@ -129,3 +129,25 @@
   user: name={{ item }} shell=/bin/bash
   with_items: "{{prod_users}}"
   when: appuser is defined and appuser == "PROD"
+
+## Data Users
+# This section is for the DS Data team and only
+# for use for people who need direct access to our
+# internal data stores via SSH proxy.
+
+- name: User Setup | Add Limited Users
+  user: name={{ item }} shell=/bin/bash
+  with_items: "{{data_users}}"
+  when: data_proxy is defined and data_proxy == true
+
+- name: User Setup | Create Limited User SSH Directory
+  file: dest=/home/{{ item }}/.ssh owner={{ item }} group={{ item }} mode=750 state=directory
+  with_items: "{{data_users}}"
+  when: data_proxy is defined and data_proxy == true
+
+- name: User Setup | Setup Limited User Public Keys
+  authorized_key: >
+     user={{ item }}
+     key="{{ lookup('file', item + '-id_rsa.pub') }}"
+  with_items: "{{data_users}}"
+  when: data_proxy is defined and data_proxy == true

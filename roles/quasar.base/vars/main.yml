@@ -15,4 +15,8 @@ qa_users:
 prod_users:
   - quasar
 
+data_users:
+  - jbladt
+  - nmccormick
+
 timezone: UTC

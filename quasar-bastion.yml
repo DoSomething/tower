@@ -5,6 +5,7 @@
   become: yes
   vars:
      servername: quasar-jump
+     data_proxy: true
   roles:
     - quasar.base
     - quasar-hosts
