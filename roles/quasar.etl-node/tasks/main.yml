@@ -5,6 +5,7 @@
     - libncurses5-dev
     - libpq-dev
     - postgresql-client
+    - libmysqlclient-dev
 
 - name: Install Quasar ETL Pip Packages
   pip: name={{ item }} state=present executable=pip3
@@ -17,6 +18,7 @@
     - sqlalchemy-redshift
     - psycopg2
     - awscli
+    - MySQL-python
 
 ## The following has a dependency on the `base-os` role "appuser"
 #  being defined.
