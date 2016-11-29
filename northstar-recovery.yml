@@ -1,0 +1,14 @@
+---
+
+# Spin up new Mongo cluster from AMI
+- ec2:
+    key_name: dosomething-mrich
+    instance_type: t2.medium
+    image: ami-26300e31
+    wait: yes
+    group: webserver
+    count: 3
+    vpc_subnet_id: subnet-961e38e1 #Thor VPC, Private Subnet
+  register: ec2
+
+- debug: var=ec2
