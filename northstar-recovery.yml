@@ -26,7 +26,7 @@
         wait: yes
         count: 1
         vpc_subnet_id: subnet-6aacde23 #TMI VPC, Private Subnet
-        private_ip: 172.30.6.20
+        private_ip: 172.30.8.20
       register: northstar
 
     - debug: var=mongos
