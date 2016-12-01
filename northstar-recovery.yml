@@ -7,14 +7,27 @@
     - name: Spin up new Mongo cluster from AMI
       ec2:
         key_name: dosomething-mrich
-        group: lemp
+        group: FD-Mongo
         instance_type: t2.medium
-        image: ami-26300e31
+        image: ami-e4f6cff3
         region: us-east-1
         wait: yes
-        group: webserver
         count: 3
-        vpc_subnet_id: subnet-961e38e1 #Thor VPC, Private Subnet
-      register: ec2
+        vpc_subnet_id: subnet-6aacde23 #TMI VPC, Private Subnet
+      register: mongos
 
-    - debug: var=ec2
+    - name: Spin up new Northstar instance from AMI
+      ec2:
+        key_name: dosomething-mrich
+        group: web
+        instance_type: t2.small
+        image: ami-c3e5dcd4
+        region: us-east-1
+        wait: yes
+        count: 1
+        vpc_subnet_id: subnet-6aacde23 #TMI VPC, Private Subnet
+        private_ip: 172.30.6.20
+      register: northstar
+
+    - debug: var=mongos
+    - debug: var=northstar
