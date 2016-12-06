@@ -4,6 +4,3 @@
   hosts: northstar-app
   roles:
     - role: dosomething.base
-    - role: dosomething.php7
-    - role: dosomething.web
-    - role: dosomething.nodejs
