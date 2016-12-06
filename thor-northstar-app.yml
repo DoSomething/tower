@@ -1,7 +1,7 @@
 ---
 
 - name: Setup Thor Northstar App
-  hosts: Thor-Northstar-FD
+  hosts: northstar-app
   roles:
     - role: dosomething.base
     - role: dosomething.php7
