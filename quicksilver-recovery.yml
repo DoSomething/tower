@@ -1,0 +1,60 @@
+---
+- name: Create Quicksilver Environment
+  hosts: localhost
+  gather_facts: False
+
+  tasks:
+    - name: Spin up new Mongo cluster from AMI
+      ec2:
+        key_name: dosomething-mrich
+        group: FD-Mongo
+        instance_type: t2.medium
+        image: ami-0aa6a01d
+        region: us-east-1
+        wait: yes
+        count: 3
+        vpc_subnet_id: subnet-6aacde23 #TMI VPC, Private Subnet
+      register: mongos
+
+    - name: Spin up new Rabbit cluster from AMI
+      ec2:
+        key_name: dosomething-mrich
+        group: sg-5cc08b21
+        instance_type: t2.small
+        image: ami-a299abca
+        region: us-east-1
+        wait: yes
+        count: 3
+        vpc_subnet_id: subnet-6aacde23 #TMI VPC, Private Subnet
+      register: rabbits
+
+    - name: Spin up new Quicksilver PHP instance from AMI
+      ec2:
+        key_name: dosomething-mrich
+        group: web
+        instance_type: t2.small
+        image: ami-3df6f02a
+        region: us-east-1
+        wait: yes
+        count: 1
+        vpc_subnet_id: subnet-6aacde23 #TMI VPC, Private Subnet
+        private_ip: 172.30.8.20
+      register: qs-node
+
+    - name: Spin up new Quicksilver Node instance from AMI
+      ec2:
+        key_name: dosomething-mrich
+        group: sg-d4bdfbb0
+        instance_type: t2.small
+        image: ami-76e3e561
+        region: us-east-1
+        wait: yes
+        count: 1
+        vpc_subnet_id: subnet-6aacde23 #TMI VPC, Private Subnet
+        private_ip: 172.30.8.21
+      register: qs-php
+
+    - debug: var=mongos
+    - debug: var=rabbits
+    - debug: var=qs-php
+    - debug: var=qs-node
