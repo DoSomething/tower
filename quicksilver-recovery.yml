@@ -21,7 +21,7 @@
         key_name: dosomething-mrich
         group_id: sg-5cc08b21
         instance_type: t2.small
-        image: ami-a299abca
+        image: ami-27898830
         region: us-east-1
         wait: yes
         count: 3
