@@ -19,7 +19,7 @@
     - name: Spin up new Rabbit cluster from AMI
       ec2:
         key_name: dosomething-mrich
-        group: sg-5cc08b21
+        group_id: sg-5cc08b21
         instance_type: t2.small
         image: ami-a299abca
         region: us-east-1
@@ -41,10 +41,10 @@
         private_ip: 172.30.8.20
       register: qs-node
 
-    - name: Spin up new Quicksilver Node instance from AMI
+    - name: Spin up new Quicksilver NodeJS instance from AMI
       ec2:
         key_name: dosomething-mrich
-        group: sg-d4bdfbb0
+        group_id: sg-da8fdba7
         instance_type: t2.small
         image: ami-76e3e561
         region: us-east-1
