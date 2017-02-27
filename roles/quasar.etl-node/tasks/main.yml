@@ -20,6 +20,8 @@
     - psycopg2
     - awscli
     - mysqlclient
+    - oauthlib
+    - requests-oauthlib
 
 ## The following has a dependency on the `base-os` role "appuser"
 #  being defined.
