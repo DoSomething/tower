@@ -3,6 +3,7 @@ sysadmins:
   - sheydari
   - mrich
   - mholford
+  - pnasrat
 
 machine_account:
   - jenkins
