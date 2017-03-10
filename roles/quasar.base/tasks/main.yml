@@ -133,12 +133,14 @@
 - name: User Setup | Create Prod App User SSH Directory
   file: dest=/home/{{ item }}/.ssh owner={{ item }} group={{ item }} mode=750 state=directory
   with_items: "{{prod_users}}"
+  when: appuser is defined and appuser == "PROD"
 
 - name: User Setup | Setup Prod App User Public Key
   authorized_key:
      user={{ item }}
      key="{{ lookup('file', item + '-id_rsa.pub') }}"
   with_items: "{{prod_users}}"
+  when: appuser is defined and appuser == "PROD"
 
 ## Data Users
 # This section is for the DS Data team and only
