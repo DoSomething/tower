@@ -17,5 +17,5 @@
         name=/var/www/www.dosomething.org/shared/files
         src='fs-3a64a373.efs.us-east-1.amazonaws.com:/'
         fstype=nfs
-        opts=nolock
+        opts=hard rsize=1048576 wsize=1048576 timeo=600 retrans=2
         state=mounted
