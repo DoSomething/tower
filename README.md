@@ -21,6 +21,8 @@ Usage
 
 ### Vagrant
 
+- Install vagrant and virtualbox provider
+- `vagrant plugin install vagrant-host-shell`
 - Clone the repository
 - Create `.vault.txt` with shared password to decrypt Ansible Vaults
 - Run `vagrant up`
