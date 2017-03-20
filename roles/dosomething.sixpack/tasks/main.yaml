@@ -1,0 +1,12 @@
+- name: Install Sixpack Apt Prerequisites
+  apt: name={{ item }} state=present
+  become: yes
+  with_items:
+    - python-pip
+    - python-dev
+
+- name: Install Sixpack Pip Packages
+  pip: name={{ item }} state=present executable=pip
+  become: yes
+  with_items:
+    - sixpack
