@@ -1,0 +1,6 @@
+---
+
+- name: Setup Thor Sixpack Server
+  hosts: 172.20.100.38 # TODO(pnasrat) move to using Environment + Tag
+  roles:
+    - role: dosomething.sixpack
