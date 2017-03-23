@@ -12,10 +12,31 @@
     - sixpack
     - gunicorn
 
-- name: Ensures sixpack configuration dir exists
+- name: Ensures sixpack directories exists
   become: yes
   file: path=/etc/sixpack state=directory
+  file:
+    path: /home/dosomething/sixpack
+    state: directory
+    mode: 0755
+    owner: dosomething
+    group: dosomething
 
 - name: Install Sixpack configuration
   become: yes
   template: src=sixpack.yaml.j2 dest=/etc/sixpack/config.yml owner=root group=root mode=644
+
+- name: Configure gunicorn
+  become: yes
+  template: src={{ item }} dest=/{{ item }} owner=root group=root mode=644
+  with_items: 
+    - etc/systemd/system/gunicorn.service
+    - etc/systemd/system/gunicorn.socket
+    - etc/tmpfiles.d/gunicorn.conf
+
+- name: Enable gunicorn
+  become: yes
+  systemd:
+    name: gunicorn.socket
+    enabled: yes
+
