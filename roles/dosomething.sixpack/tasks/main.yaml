@@ -12,6 +12,10 @@
     - sixpack
     - gunicorn
 
+- name: Ensures sixpack configuration dir exists
+  become: yes
+  file: path=/etc/sixpack state=directory
+
 - name: Install Sixpack configuration
   become: yes
   template: src=sixpack.yaml.j2 dest=/etc/sixpack/config.yml owner=root group=root mode=644
