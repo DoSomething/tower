@@ -1,3 +1,4 @@
 ---
 dependencies:
   - { role: "dosomething.base" }
+  - { role: "dosomething.redis"}

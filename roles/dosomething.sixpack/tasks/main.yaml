@@ -5,8 +5,13 @@
     - python-pip
     - python-dev
 
-- name: Install Sixpack Pip Packages
+- name: Install Sixpack pip Packages
   pip: name={{ item }} state=present executable=pip
   become: yes
   with_items:
     - sixpack
+    - gunicorn
+
+- name: Install Sixpack configuration
+  become: yes
+  template: src=sixpack.yaml.j2 dest=/etc/sixpack/config.yml owner=root group=root mode=644
