@@ -34,6 +34,12 @@
     - etc/systemd/system/gunicorn.socket
     - etc/tmpfiles.d/gunicorn.conf
 
+- name: Configure nginx
+  become: yes
+  template: src={{ item }} dest=/{{ item }} owner=root group=root mode=644
+  with_items:
+    - etc/nginx/conf.d/sixpack.conf
+
 - name: Enable gunicorn
   become: yes
   systemd:
