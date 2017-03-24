@@ -1,0 +1,19 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+PIDFile=/run/gunicorn/pid
+User=dosomething
+Group=dosomething
+RuntimeDirectory=gunicorn
+WorkingDirectory=/home/dosomething/sixpack
+ExecStart=/usr/local/bin/gunicorn --pid /run/gunicorn/pid   \
+          --bind unix:/run/gunicorn/socket sixpack.server:start
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
