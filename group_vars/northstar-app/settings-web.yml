@@ -17,5 +17,5 @@ php_fpm_settings:
   - { option: pm.max_spare_servers,  value: 4 }
 
 php_extensions:
-  - php5-mysql
-  - php5-gd
+  - php7.0-mysql
+  - php7.0-gd

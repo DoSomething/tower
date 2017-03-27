@@ -15,6 +15,7 @@
     exclusive=yes
   with_items:
     - "{{ devops_users }}"
+  no_log: yes
 
 - name: Setup Sudoers for DevOps Users
   become: yes

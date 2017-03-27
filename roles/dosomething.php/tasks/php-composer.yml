@@ -15,3 +15,11 @@
   register: composer_update
   changed_when: '"You are already using composer" not in composer_update.stderr'
   when: composer_self_update
+
+- name: Update Composer
+  become: yes
+  lineinfile:
+    create=yes
+    dest=/etc/profile.d/composer.sh
+    line="export COMPOSER_DISABLE_XDEBUG_WARN=1"
+  when: composer_disable_xdebug

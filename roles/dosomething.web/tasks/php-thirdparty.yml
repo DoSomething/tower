@@ -34,7 +34,7 @@
 - name: PHP Third Party | New Relic | Setup New Relic PHP Agent License
   become: yes
   lineinfile: >
-    dest=/etc/php5/fpm/conf.d/20-newrelic.ini
+    dest=/etc/php/7.0/fpm/conf.d/20-newrelic.ini
     regexp="^newrelic.license"
     line='newrelic.license = "{{ php_thirdparty_newrelic_license }}"'
   notify: restart php-fpm

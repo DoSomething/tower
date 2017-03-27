@@ -1,4 +1,5 @@
 ---
 
 - include: php.yml
+  tags: ["php"]
 - include: php-composer.yml

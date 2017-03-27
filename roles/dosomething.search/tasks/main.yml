@@ -3,6 +3,7 @@
 - name: Update Java
   become: yes
   apt: name=openjdk-7-jdk state=latest
+  no_log: yes
 
 - name: Check if Solr installed
   stat: path=/opt/solr-{{ solr_version }}
