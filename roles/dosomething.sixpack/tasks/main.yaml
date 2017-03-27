@@ -14,13 +14,15 @@
 
 - name: Ensures sixpack directories exists
   become: yes
-  file: path=/etc/sixpack state=directory
   file:
-    path: /home/dosomething/sixpack
+    path: "{{ item }}"
     state: directory
     mode: 0755
     owner: dosomething
     group: dosomething
+  with_items:
+   - /etc/sixpack
+   - /home/dosomething/sixpack
 
 - name: Install Sixpack configuration
   become: yes
@@ -40,9 +42,9 @@
   with_items:
     - etc/nginx/conf.d/sixpack.conf
 
-- name: Enable gunicorn
+- name: Enable gunicorn and nginx
   become: yes
-  systemd:
-    name: gunicorn.socket
-    enabled: yes
-
+  service: name={{ item }} enabled=yes state=restarted
+  with_items:
+    - gunicorn
+    - nginx
