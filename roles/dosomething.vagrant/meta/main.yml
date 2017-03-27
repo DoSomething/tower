@@ -21,5 +21,3 @@ dependencies:
   - { role: "dosomething.phoenix-dev" }
   - { role: "dosomething.rabbitmq" }
   - { role: "dosomething.sixpack" }
-  - { role: "dosomething.mb-node" }
-  - { role: "dosomething.mb-php" }
