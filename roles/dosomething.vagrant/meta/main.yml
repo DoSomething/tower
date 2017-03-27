@@ -20,4 +20,4 @@ dependencies:
   - { role: "dosomething.phoenix" }
   - { role: "dosomething.phoenix-dev" }
   - { role: "dosomething.rabbitmq" }
-  - { role: "dosomething.sixpack" }
+  - { role: "dosomething.sixpack", when: ansible_os_family == 'Ubuntu' and ansible_distribution_release == 'xenial' }
