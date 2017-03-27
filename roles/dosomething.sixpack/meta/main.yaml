@@ -2,3 +2,4 @@
 dependencies:
   - { role: "dosomething.base" }
   - { role: "dosomething.redis"}
+  - { role: "dosomething.nginx-mainline" }
