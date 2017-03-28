@@ -1,6 +1,7 @@
 ---
 
 - name: Create the app user
+  remote_user: ubuntu
   become: yes
   user: >
     name={{ app_user }}
@@ -9,6 +10,7 @@
 
 - name: SSH | Install public keys
   become: yes
+  remote_user: ubuntu
   authorized_key: >
     user={{ app_user }}
     key="{{ lookup('file', 'files/app_user/ssh/authorized_keys') }}"
