@@ -9,6 +9,7 @@ User=dosomething
 Group=dosomething
 RuntimeDirectory=gunicorn
 WorkingDirectory=/home/dosomething/sixpack
+Environment=SIXPACK_CONFIG=/etc/sixpack/config.yml
 ExecStart=/usr/local/bin/gunicorn --pid /run/gunicorn/pid   \
           --bind unix:/run/gunicorn/socket sixpack.server:start
 ExecReload=/bin/kill -s HUP $MAINPID
