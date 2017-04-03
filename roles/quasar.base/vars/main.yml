@@ -19,5 +19,6 @@ prod_users:
 data_users:
   - jbladt
   - nmccormick
+  - jjensen
 
 timezone: UTC
