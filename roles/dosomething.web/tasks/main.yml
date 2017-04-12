@@ -1,5 +1,10 @@
 ---
 
+- name: Include sensitive vars
+  include_vars:
+    file: vars/secret.yml
+    name: secret
+
 - include: php.yml
 - include: php-thirdparty.yml
 - include: php-composer.yml

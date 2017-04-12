@@ -18,3 +18,5 @@ php_extensions_defaults:
   - php7.1-curl
 
 site_url: next.dosomething.org
+
+newrelic_appname: "\"Phoenix Next\""
