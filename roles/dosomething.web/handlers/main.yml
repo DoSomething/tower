@@ -7,7 +7,7 @@
 # service: name=php5-fpm state=restarted
 - name: restart php-fpm
   become: yes
-  command: service php5-fpm restart
+  command: service php7.1-fpm restart
 
 - name: restart nginx
   become: yes

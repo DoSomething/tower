@@ -1,7 +1,61 @@
 ---
 
+- name: Ensures application directories exist
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: dosomething
+    group: dosomething
+  with_items:
+   - /var/www/{{ site_url }}/releases
+   - /var/www/{{ site_url }}/shared/logs
+   - /var/www/{{ site_url }}/shared/system
+
 - name: Install Web Server nginx
   apt: name=nginx state=latest
+  become: yes
+
+- name: Set Nginx user
+  become: yes
+  lineinfile:
+    dest: /etc/nginx/nginx.conf
+    regexp: "^user"
+    line: "user {{ nginx_user }};"
+    state: present
+
+- name: nginx | Add nginx application settings
+  become: yes
+  template: src={{ item }} dest=/{{ item }} owner=root group=root mode=644
+  with_items:
+    - etc/nginx/sites-available/phoenix-next
+
+- name: Ensures nginx ssl directory exists
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+  with_items:
+   - /etc/nginx/ssl
+
+- name: nginx | generate ssl forward secrecy key
+  command: openssl dhparam -out /etc/nginx/dhparams.pem 2048 creates=/etc/nginx/dhparams.pem
+  become: yes
+
+- name: nginx | Copy keys to server
+  copy: src=templates/{{ item }} dest=/{{ item }} owner=root group=root mode=644
+  become: yes
+  with_items:
+    - etc/nginx/ssl/server.key
+    - etc/nginx/ssl/server.crt
+
+- name: Activate the default site
+  file: src=/etc/nginx/sites-available/phoenix-next
+        dest=/etc/nginx/sites-enabled/phoenix-next
+        state=link
   become: yes
 
 - name: Nginx | Disable default vhost

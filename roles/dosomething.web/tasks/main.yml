@@ -4,3 +4,9 @@
 - include: php-thirdparty.yml
 - include: php-composer.yml
 - include: web-server.yml
+
+- name: Install bundler gem for deploys
+  gem:
+    name: bundler
+    state: present
+  become: yes
