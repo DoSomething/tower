@@ -1,0 +1,70 @@
+############################# Filebeat ######################################
+filebeat:
+  # List of prospectors to fetch data.
+  prospectors:
+    # Each - is a prospector. Below are the prospector specific configurations
+    -
+      paths:
+         - /var/log/auth.log
+         - /var/log/syslog
+
+      input_type: log
+      document_type: syslog
+
+
+    # Additional prospector
+    -
+      paths:
+         - /var/log/nginx/access.log
+         - /var/log/nginx/{{ site_url }}.log
+
+      input_type: log
+      document_type: nginx-access
+    -
+      paths:
+         - /var/log/nginx/error.log
+
+      input_type: log
+      document_type: nginx-error
+    -
+      paths:
+         - /var/www/{{ site_url }}/shared/logs/laravel.log
+
+      input_type: log
+      document_type: laravel
+
+  registry_file: /var/lib/filebeat/registry
+
+output:
+
+
+  ### Logstash as output
+  logstash:
+    # The Logstash hosts
+    hosts: ["10.100.20.26:5044"]
+    bulk_max_size: 10
+    max_retries: 0
+
+    # Optional TLS. By default is off.
+    tls:
+      # List of root certificates for HTTPS server verifications
+      certificate_authorities: ["/etc/pki/tls/certs/logstash-forwarder.crt"]
+
+logging:
+
+  # Write all logging output to files. Beats automatically rotate files if rotateeverybytes
+  # limit is reached.
+  to_files: true
+
+  # To enable logging to files, to_files option has to be set to true
+  files:
+    # The directory where the log files will written to.
+    path: /var/log/logstash
+
+    # The name of the files where the logs are written to.
+    name: filebeat-logstash.log
+
+    # Configure log file size limit. If limit is reached, log file will be
+    # automatically rotated
+    rotateeverybytes: 10485760 # = 10MB
+  #level: debug
