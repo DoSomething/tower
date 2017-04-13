@@ -35,3 +35,4 @@
 - service:
     name: filebeat
     state: started
+  become: yes
