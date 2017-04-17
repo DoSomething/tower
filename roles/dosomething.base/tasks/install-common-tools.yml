@@ -12,3 +12,5 @@
     - screen
     - bind9utils
     - sysstat
+    - ruby
+    - ruby-bundler

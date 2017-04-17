@@ -1,6 +1,38 @@
 ---
 
+- name: Include sensitive vars
+  include_vars:
+    file: vars/secret.yml
+    name: secret
+
 - include: php.yml
 - include: php-thirdparty.yml
 - include: php-composer.yml
 - include: web-server.yml
+
+- name: Install bundler gem for deploys
+  gem:
+    name: bundler
+    state: present
+  become: yes
+
+- apt_key:
+    url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    state: present
+  become: yes
+
+- apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/5.x/apt stable main
+    state: present
+  become: yes
+
+- name: Update repositories cache and install filebeat package
+  apt:
+    name: filebeat
+    update_cache: yes
+  become: yes
+
+- service:
+    name: filebeat
+    state: started
+  become: yes

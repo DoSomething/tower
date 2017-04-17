@@ -1,12 +1,28 @@
 ---
 
+- name: PHP | Add Ondrej Multi-Version PPA
+  apt_repository: repo='ppa:ondrej/php' update_cache=yes
+  become: yes
+
 - name: PHP | Install PHP
   apt: name={{ item }} state=latest
   become: yes
   with_items:
-    - php5
-    - php5-fpm
-    - php5-cli
+    - php7.1
+    - php7.1-fpm
+    - php7.1-cli
+    - php7.1-mcrypt
+    - php7.1-dev
+    - php7.1-common
+    - php7.1-gd
+    - php7.1-mysql
+    - php7.1-curl
+    - php7.1-json
+    - php7.1-readline
+    - php7.1-mbstring
+    - php7.1-mongodb
+    - php7.1-xml
+    - php7.1-zip
 
 - name: PHP | Install extensions
   apt: name={{ item }} state=latest
@@ -17,7 +33,7 @@
 - name: PHP | Alter php.ini
   become: yes
   ini_file: >
-    dest=/etc/php5/fpm/php.ini
+    dest=/etc/php/7.1/fpm/php.ini
     section={{ item.section }}
     option={{ item.option }}
     value={{ item.value }}
@@ -28,7 +44,7 @@
 - name: PHP | Setup FPM pool
   become: yes
   ini_file: >
-    dest=/etc/php5/fpm/pool.d/www.conf
+    dest=/etc/php/7.1/fpm/pool.d/www.conf
     section=www
     option={{ item.option }}
     value={{ item.value }}

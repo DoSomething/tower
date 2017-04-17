@@ -27,17 +27,25 @@
   lineinfile: >
     dest=/etc/newrelic/nrsysmond.cfg
     regexp="^license_key"
-    line='license_key={{ php_thirdparty_newrelic_license }}'
+    line='license_key={{ secret.php_thirdparty_newrelic_license }}'
   notify: restart newrelic-sysmond
-  when: php_thirdparty_newrelic and php_thirdparty_newrelic_license
+  when: secret.php_thirdparty_newrelic_license
 
 - name: PHP Third Party | New Relic | Setup New Relic PHP Agent License
   become: yes
-  lineinfile: >
-    dest=/etc/php5/fpm/conf.d/20-newrelic.ini
-    regexp="^newrelic.license"
-    line='newrelic.license = "{{ php_thirdparty_newrelic_license }}"'
-    create=true
-    state=present
+  ini_file:
+    dest: /etc/php/7.1/fpm/conf.d/20-newrelic.ini
+    section: newrelic
+    option: newrelic.license
+    value: "{{ secret.php_thirdparty_newrelic_license }}"
   notify: restart php-fpm
-  when: php_thirdparty_newrelic and php_thirdparty_newrelic_license
+  when: php_thirdparty_newrelic and secret.php_thirdparty_newrelic_license
+
+- name: PHP Third Party | New Relic | Setup New Relic appname
+  become: yes
+  ini_file:
+    dest: /etc/php/7.1/fpm/conf.d/20-newrelic.ini
+    section: newrelic
+    option: newrelic.appname
+    value: "{{ newrelic_appname }}"
+  notify: restart php-fpm

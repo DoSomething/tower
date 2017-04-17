@@ -7,7 +7,7 @@ Role Variables
 --------------
 ### Composer
 #### Composer path
-A path to install composer.  
+A path to install composer.
 Defaults to `/usr/local/bin`.
 
 ```yml
@@ -16,7 +16,7 @@ composer_path: '/usr/bin'
 
 #### Composer self update
 
-Run `composer self-update`.  
+Run `composer self-update`.
 Defaults to `no`.
 
 ```yml
@@ -54,11 +54,11 @@ php_fpm_settings:
 ```
 
 #### FPM Listen
-A path to PHP-fpm socket or an address to bind server to.  
+A path to PHP-fpm socket or an address to bind server to.
 Defaults to `/var/run/php5-fpm.sock`.
 
 ```yml
-php_fpm_listen: /var/run/php5-fpm.sock
+php_fpm_listen: /run/php/php7.1-fpm.sock
 ```
 
 ### PHP Extensions
@@ -67,14 +67,14 @@ override `php_extensions`:
 
 ```yml
 php_extensions:
-  - php5-mysql
-  - php5-gd
+  - php7.1-mysql
+  - php7.1-gd
 ```
 
 ### PHP Third Party Extensions
 #### New Relic
 Install [PHP New Relic](https://docs.newrelic.com/docs/agents/php-agent/getting-started/new-relic-php)
-extension and the system deamon.  
+extension and the system deamon.
 Defaults to `no`.
 
 ```yml
@@ -82,7 +82,7 @@ php_thirdparty_newrelic: yes
 ```
 
 Setup New Relic license.
-40-character hexadecimal string provided by New Relic.  
+40-character hexadecimal string provided by New Relic.
 Defaults to an empty string.
 
 ```yml

@@ -1,0 +1,8 @@
+---
+
+- name: Setup Phoenix-Next WebApp
+  hosts: phoenix-next
+  roles:
+    - role: dosomething.web
+    - role: dosomething.nodejs
+

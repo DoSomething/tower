@@ -3,9 +3,20 @@
 
 # PHP
 php_fpm_defaults:
-  - { option: listen,                 value: "{{ php_fpm_listen }}" }
-  - { option: listen.allowed_clients, value: "127.0.0.1" }
+  - { option: listen, value: "{{ php_fpm_listen }}" }
+  - { option: user, value: dosomething }
+  - { option: group, value: dosomething }
+  - { option: listen.owner, value: dosomething }
+  - { option: listen.group, value: dosomething }
+  - { option: listen.mode, value: "0660" }
+
+# Nginx
+nginx_user: dosomething
 
 # PHP Extensions
 php_extensions_defaults:
-  - php5-curl
+  - php7.1-curl
+
+site_url: next.dosomething.org
+
+newrelic_appname: "\"Phoenix Next\""
