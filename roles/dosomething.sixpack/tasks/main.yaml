@@ -19,7 +19,7 @@
 
 - name: Install Sixpack pip Packages
   pip:
-    name: {{ item }}
+    name: "{{ item }}"
     virtualenv: /home/dosomething/venv
   with_items:
     - sixpack
