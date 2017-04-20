@@ -35,7 +35,7 @@
 
 - name: Configure sixpack gunicorn
   become: yes
-  template: src={{ item }} dest=/{{ item }} owner=root group=root mode=644
+  template: src={{ item.src }} dest=/{{ item.dest }} owner=root group=root mode=644
   vars:
     venv_home: /home/dosomething/venv
     sixpack_service: sixpack
