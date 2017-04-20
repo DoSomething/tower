@@ -36,6 +36,10 @@
 - name: Configure sixpack gunicorn
   become: yes
   template: src={{ item }} dest=/{{ item }} owner=root group=root mode=644
+  vars:
+    venv_home: /home/dosomething/venv
+    sixpack_service: sixpack
+    sixpack_service_exec: sixpack.server:start
   with_items:
     - src: etc/systemd/system/gunicorn.socket
       dest: /etc/systemd/system/{{ sixpack_service }}.socket
