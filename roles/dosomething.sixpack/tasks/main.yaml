@@ -4,13 +4,7 @@
   with_items:
     - python-pip
     - python-dev
-
-- name: Install Sixpack pip Packages
-  pip: name={{ item }} state=present executable=pip
-  become: yes
-  with_items:
-    - sixpack
-    - gunicorn
+    - python-virtualenv
 
 - name: Ensures sixpack directories exists
   become: yes
@@ -23,6 +17,14 @@
   with_items:
    - /home/dosomething/sixpack
 
+- name: Install Sixpack pip Packages
+  pip:
+    name: {{ item }}
+    virtualenv: /home/dosomething/venv
+  with_items:
+    - sixpack
+    - gunicorn
+
 - name: Install Sixpack configuration dir
   become: yes
   file: path=/etc/sixpack state=directory mode=755 owner=root group=root
@@ -31,13 +33,31 @@
   become: yes
   template: src=sixpack.yaml.j2 dest=/etc/sixpack/config.yml owner=root group=root mode=644
 
-- name: Configure gunicorn
+- name: Configure sixpack gunicorn
   become: yes
   template: src={{ item }} dest=/{{ item }} owner=root group=root mode=644
-  with_items: 
-    - etc/systemd/system/gunicorn.service
-    - etc/systemd/system/gunicorn.socket
-    - etc/tmpfiles.d/gunicorn.conf
+  with_items:
+    - src: etc/systemd/system/gunicorn.socket
+      dest: /etc/systemd/system/{{ sixpack_service }}.socket
+    - src: etc/systemd/system/gunicorn.service
+      dest: /etc/systemd/system/{{ sixpack_service }}.service
+    - src: etc/systemd/system/gunicorn.service
+      dest: /etc/systemd/system/{{ sixpack_service }}.service
+
+- name: Configure sixpackweb gunicorn
+  become: yes
+  template: src={{ item.src }} dest=/{{ item.dest }} owner=root group=root mode=644
+  vars:
+    venv_home: /home/dosomething/venv
+    sixpack_service: sixpackweb
+    sixpack_service_exec: sixpack.web:start
+  with_items:
+    - src: etc/systemd/system/gunicorn.socket
+      dest: /etc/systemd/system/{{ sixpack_service }}.socket
+    - src: etc/systemd/system/gunicorn.service
+      dest: /etc/systemd/system/{{ sixpack_service }}.service
+    - src: etc/systemd/system/gunicorn.service
+      dest: /etc/systemd/system/{{ sixpack_service }}.service
 
 - name: Configure nginx
   become: yes
@@ -45,9 +65,17 @@
   with_items:
     - etc/nginx/conf.d/sixpack.conf
 
-- name: Enable gunicorn and nginx
+- name: Enable sixpack sockets
+  become: yes
+  systemd: name={{ item }} enabled=yes
+  with_items:
+    - sixpack.socket
+    - sixpackweb.socket
+
+- name: Enable sixpack, sixpackweb and nginx
   become: yes
   service: name={{ item }} enabled=yes state=restarted
   with_items:
-    - gunicorn
+    - sixpack
+    - sixpackweb
     - nginx

@@ -1,8 +1,8 @@
 [Unit]
-Description=gunicorn socket
+Description=gunicorn socket for {{ sixpack_service }}
 
 [Socket]
-ListenStream=/run/gunicorn/socket
+ListenStream=/run/{{ sixpack_service }}/socket
 
 [Install]
 WantedBy=sockets.target
