@@ -1,0 +1,6 @@
+---
+
+- name: Setup Thor Sixpack Server
+  hosts: tag_Environment_Production:&tag_Role_Sixpack
+  roles:
+    - role: dosomething.sixpack
