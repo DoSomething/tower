@@ -1,7 +1,7 @@
 ---
 
 - name: Setup Staging Server
-  hosts: staging
+  hosts: tag_Name_Staging
   roles:
     - role: dosomething.web
     - role: dosomething.search
