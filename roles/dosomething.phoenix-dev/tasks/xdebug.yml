@@ -7,8 +7,8 @@
 - name: Xdebug | enable
   become: yes
   file:
-    src: /etc/php7.1/mods-available/xdebug.ini
-    dest: /etc/php7.1/fpm/conf.d/20-xdebug.ini
+    src: /etc/php/7.1/mods-available/xdebug.ini
+    dest: /etc/php/7.1/fpm/conf.d/20-xdebug.ini
     state: link
 
 - name: Xdebug | Setup
