@@ -25,6 +25,12 @@
     - sixpack
     - gunicorn
 
+- name: Install correct version of Flask-Assets
+  pip:
+    name: Flask-Assets
+    version: 0.12
+    virtualenv: /home/dosomething/venv
+
 - name: Install Sixpack configuration dir
   become: yes
   file: path=/etc/sixpack state=directory mode=755 owner=root group=root
@@ -63,11 +69,16 @@
     - src: etc/systemd/system/gunicorn.service
       dest: /etc/systemd/system/{{ sixpack_service }}.service
 
+- name: Copy sixpack htpasswd fie
+  become: yes
+  copy: src={{ item }} dest=/{{ item }} owner=root group=root mode=644
+  with_items:
+    - etc/nginx/sixpackweb.htpasswd
+
 - name: Configure nginx
   become: yes
   template: src={{ item }} dest=/{{ item }} owner=root group=root mode=644
   with_items:
-    - etc/nginx/sixpackweb.htpasswd
     - etc/nginx/conf.d/sixpack.conf
 
 - name: Enable sixpack sockets
