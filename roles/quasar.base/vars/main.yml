@@ -17,8 +17,6 @@ prod_users:
   - quasar
 
 data_users:
-  - jbladt
-  - nmccormick
   - jjensen
 
 timezone: UTC
