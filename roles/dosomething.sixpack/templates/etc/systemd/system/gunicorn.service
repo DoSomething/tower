@@ -10,7 +10,9 @@ Group=dosomething
 RuntimeDirectory={{ sixpack_service }}
 WorkingDirectory=/home/dosomething/sixpack
 Environment=SIXPACK_CONFIG=/etc/sixpack/config.yml
-ExecStart={{ venv_home }}/bin/gunicorn --pid /run/{{ sixpack_service }}/pid   \
+Environment=NEW_RELIC_CONFIG_FILE=/home/dosomething/sixpack/newrelic.ini
+ExecStart={{ venv_home }}/bin/newrelic-admin run-program  \
+          {{ venv_home }}/bin/gunicorn --pid /run/{{ sixpack_service }}/pid   \
           --bind unix:/run/{{ sixpack_service }}/socket {{ sixpack_service_exec }}
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID

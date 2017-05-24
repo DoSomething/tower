@@ -1,3 +1,9 @@
+---
+- name: Include sensitive vars
+  include_vars:
+    file: vars/secret.yml
+    name: secret
+
 - name: Install Sixpack Apt Prerequisites
   apt: name={{ item }} state=present
   become: yes
@@ -33,6 +39,19 @@
     version: 0.12
     virtualenv: /home/dosomething/venv
     virtualenv_python: python2.7
+
+- name: Install newrelic python agent
+  remote_user: "{{ app_user }}"
+  pip:
+    name: newrelic
+    virtualenv: /home/dosomething/venv
+    virtualenv_python: python2.7
+
+- name: Install newrelic.ini
+  remote_user: "{{ app_user }}"
+  template: src=newrelic.ini.j2
+    src: newrelic.ini.j2
+    dest: /home/dosomething/sixpack/newrelic.ini
 
 - name: Install Sixpack configuration dir
   become: yes
@@ -86,7 +105,7 @@
 
 - name: Enable sixpack sockets
   become: yes
-  systemd: name={{ item }} enabled=yes state=started
+  systemd: name={{ item }} enabled=yes state=restarted
   with_items:
     - sixpack.socket
     - sixpackweb.socket
