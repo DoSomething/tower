@@ -1,9 +1,9 @@
 ---
 
 - include: configure-system.yml
+- include: setup-user.yml
 - include: update-system.yml
 - include: install-common-tools.yml
 - include: setup-ntp.yml
   when: ntp_servers
-- include: setup-user.yml
 - include: setup-devops-users.yml
