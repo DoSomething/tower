@@ -18,5 +18,7 @@ prod_users:
 
 data_users:
   - jjensen
+  - jli
+  - shasan
 
 timezone: UTC
