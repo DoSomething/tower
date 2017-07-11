@@ -1,0 +1,12 @@
+---
+
+- hosts: quasar-etl-stage
+  gather_facts: yes
+  become: yes
+  vars:
+     servername: quasar-etl-stage
+     appuser: PROD
+  roles:
+    - quasar-hosts
+    - quasar.etl-node
+    - quasar.jenkins
