@@ -1,11 +1,20 @@
 ---
 
 - hosts: quasar-etl-stage
-  gather_facts: yes
+  gather_facts: false
   become: yes
   vars:
      servername: quasar-etl-stage
      appuser: PROD
+  pre_tasks:
+    - name: Install python2 for Ansible
+      raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+      register: output
+      changed_when:
+      - output.stdout != ""
+      - output.stdout != "\r\n"
+    - name: Gathering Facts
+      setup:
   roles:
     - quasar-hosts
     - quasar.etl-node
