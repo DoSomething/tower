@@ -1,0 +1,19 @@
+---
+
+- hosts: quasar-pritunl-1
+  gather_facts: false
+  become: yes
+  vars:
+     servername: quasar-pritunl-1
+  pre_tasks:
+    - name: Install python2 for Ansible
+      raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+      register: output
+      changed_when:
+      - output.stdout != ""
+      - output.stdout != "\r\n"
+    - name: Gathering Facts
+      setup:
+  roles:
+    - quasar.base
+    - quasar-hosts
