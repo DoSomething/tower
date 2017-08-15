@@ -1,0 +1,8 @@
+---
+
+- name: Patch Servers
+  hosts: Admin
+  roles:
+    - role: dosomething.patch-servers
+  become: yes
+  serial: 1
